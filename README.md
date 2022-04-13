@@ -27,5 +27,6 @@ The application was created with Java, Java FX, and utlilizes a mySQL database.
 
 ## Added Features 
 Fact of the day 
+ - Each day the user us greeted with a positve fact to encourage a positive outlook 
 Repeated words 
 - should Myrimidon notice a pattern in the language used while journaling, a setting can be activated to display this to the user. 
