@@ -1,0 +1,12 @@
+* {
+    -fx-font-family: "Roboto";
+}
+
+#title {
+    -fx-background-color: "#FFF6EA";
+    -fx-font-size: 20px;
+}
+
+#formContainer {
+    -fx-background-color: "#F7E9D7";
+}
