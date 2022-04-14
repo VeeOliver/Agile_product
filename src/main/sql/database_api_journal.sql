@@ -6,7 +6,8 @@
 
 SELECT
     determineTimeOfDay(Journal_entry.date) AS timeOfDay,
-    Journal_entry.entry
+    Journal_entry.journal_entry,
+    ournal_entry.date AS date
 FROM Journal_entry
 WHERE DATE(Journal_entry.date) LIKE ? AND Journal_entry.personnummer LIKE ?
 ORDER BY Journal_entry.date;
@@ -17,7 +18,7 @@ ORDER BY Journal_entry.date;
 
 SELECT
     determineTimeOfDay(Journal_entry.date) AS timeOfDay,
-    Journal_entry.entry,
+    Journal_entry.journal_entry,
     DATE(Journal_entry.date) AS date
 FROM Journal_entry
 NATURAL JOIN Mood ON personnummer
@@ -30,7 +31,7 @@ ORDER BY Journal_entry.date;
 
 SELECT
     determineTimeOfDay(Journal_entry.date) AS timeOfDay,
-    Journal_entry.entry,
+    Journal_entry.journal_entry,
     DATE(Journal_entry.date) AS date
 FROM Journal_entry
 NATURAL JOIN Tension ON personnummer
