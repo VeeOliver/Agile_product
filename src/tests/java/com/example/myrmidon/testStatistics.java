@@ -1,4 +1,4 @@
-package tests;
+package java.com.example.myrmidon;
 
 public class testStatistics {
 

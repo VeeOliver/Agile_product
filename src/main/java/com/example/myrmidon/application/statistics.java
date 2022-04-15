@@ -1,4 +1,4 @@
-package application;
+package com.example.myrmidon.application;
 
 public class statistics {
 
