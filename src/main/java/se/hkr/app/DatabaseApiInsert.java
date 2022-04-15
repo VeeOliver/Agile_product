@@ -1,4 +1,5 @@
-package com.example.myrmidon;
+package se.hkr.app;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

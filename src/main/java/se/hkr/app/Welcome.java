@@ -1,4 +1,4 @@
-package com.example.myrmidon;
+package se.hkr.app;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

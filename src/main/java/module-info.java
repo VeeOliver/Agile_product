@@ -1,4 +1,4 @@
-module com.example.myrmidon {
+module Myrmidon {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
@@ -12,7 +12,7 @@ module com.example.myrmidon {
     requires java.sql;
     requires mysql.connector.java;
     requires javatuples;
+    exports se.hkr.app;
+    opens se.hkr.app to javafx.fxml;
 
-    opens com.example.myrmidon to javafx.fxml;
-    exports com.example.myrmidon;
 }

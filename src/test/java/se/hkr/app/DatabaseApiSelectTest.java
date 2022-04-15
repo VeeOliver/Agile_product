@@ -1,4 +1,6 @@
-package com.example.myrmidon;
+package se.hkr.app;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -52,7 +54,7 @@ class DatabaseApiSelectTest {
         when(con.prepareStatement(any(String.class))).thenReturn(stmt);
         when(stmt.executeQuery()).thenReturn(rs);
         ResultSet res = DatabaseApiSelect.getDataByTimePeriod(con, "sql", LocalDate.now(), LocalDate.now(),
-                                                       "12345678?1234");
+                "12345678?1234");
         assertInstanceOf(ResultSet.class, res);
     }
 
@@ -60,7 +62,7 @@ class DatabaseApiSelectTest {
     @DisplayName("Test if getDataByTimePeriod returns null after failed database access")
     void getDataByTimePeriodFailsReturnsNull() {
         ResultSet res = DatabaseApiSelect.getDataByTimePeriod(null,"sql", LocalDate.now(), LocalDate.now(),
-                                                        "12345678?1234");
+                "12345678?1234");
         assertNull(res);
     }
 
@@ -70,7 +72,7 @@ class DatabaseApiSelectTest {
         when(con.prepareStatement(any(String.class))).thenReturn(stmt);
         when(stmt.executeQuery()).thenReturn(rs);
         ResultSet res = DatabaseApiSelect.getDataByRatingRange(con, "sql", 2, 4,
-                                                        "12345678?1234");
+                "12345678?1234");
         assertInstanceOf(ResultSet.class, res);
     }
 
@@ -78,7 +80,7 @@ class DatabaseApiSelectTest {
     @DisplayName("Test if getDataByRatingRange returns null after failed database access.")
     void getDataByRatingRangeFailsReturnsNull() {
         ResultSet res = DatabaseApiSelect.getDataByRatingRange(null,"sql", 2, 4,
-                                                        "12345678?1234");
+                "12345678?1234");
         assertNull(res);
     }
 

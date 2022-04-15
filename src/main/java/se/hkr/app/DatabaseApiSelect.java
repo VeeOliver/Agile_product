@@ -1,4 +1,5 @@
-package com.example.myrmidon;
+package se.hkr.app;
+
 
 import org.javatuples.Triplet;
 
@@ -151,3 +152,4 @@ public class DatabaseApiSelect {
             WHERE Tension.rating >= ? AND Tension.rating < ? AND Journal_entry.personnummer LIKE ?
             ORDER BY Journal_entry.date;""";
 }
+

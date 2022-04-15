@@ -1,4 +1,4 @@
-package com.example.myrmidon;
+package se.hkr.app;
 
 public class User {
     String email, password;

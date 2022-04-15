@@ -1,4 +1,4 @@
-package com.example.myrmidon;
+package se.hkr.app;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,14 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Objects;
 
 public class WelcomeController {
     @ FXML
@@ -34,12 +35,13 @@ public class WelcomeController {
     @FXML
     DatePicker registerBirthField;
 
+
     public void onLoginBtnClick(ActionEvent event) throws IOException {
         if (checkLoginCredentials(emailField.getText(), passwordField.getText())) {
-            Parent root = FXMLLoader.load(getClass().getResource("menu-view.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("menu-view.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
-            String css = this.getClass().getResource("tabs.css").toExternalForm();
+            String css = Objects.requireNonNull(this.getClass().getResource("tabs.css")).toExternalForm();
             scene.getStylesheets().add(css);
             stage.setScene(scene);
             stage.show();
@@ -50,7 +52,7 @@ public class WelcomeController {
     }
 
 
-    public void onRegisterBtnClick(ActionEvent event) throws IOException {
+    public void onRegisterBtnClick() {
         if (registerPasswordField.getText().equals(registerRepPasswordField.getText()) && !checkAvailability(Data.users, registerEmailField.getText())) {
             registerUser();
             successRegistration();
@@ -64,7 +66,7 @@ public class WelcomeController {
 
 
     Boolean checkLoginCredentials (String email, String password) {
-        Boolean value = false;
+        boolean value = false;
         for (User user : Data.users) {
             value = user.email.equals(email) && user.password.equals(password);
             if (value) break;
@@ -92,7 +94,7 @@ public class WelcomeController {
 
 
     Boolean checkAvailability(ArrayList<User> list, String email) {
-        return list.stream().filter(o -> o.email.equals(email)).findFirst().isPresent();
+        return list.stream().anyMatch(o -> o.email.equals(email));
     }
 
 
@@ -131,4 +133,6 @@ public class WelcomeController {
         emailField.setText("");
         passwordField.setText("");
     }
+
 }
+

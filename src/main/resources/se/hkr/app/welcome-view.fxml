@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myrmidon.WelcomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.WelcomeController">
    <children>
       <Label fx:id="title" alignment="CENTER" layoutX="-1.0" prefHeight="484.0" prefWidth="245.0" text="Welcome To Myrmidon" textFill="#bf9270" />
       <Pane fx:id="formContainer" layoutX="244.0" prefHeight="484.0" prefWidth="522.0">
