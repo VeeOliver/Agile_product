@@ -6,7 +6,8 @@
 
 SELECT
     determineTimeOfDay(Tension.date) AS timeOfDay,
-    AVG(Tension.rating) AS tension
+    AVG(Tension.rating) AS tension,
+    MAX(DATE(Tension.date)) AS date
 FROM Tension
 WHERE DATE(Tension.date) LIKE ? AND Tension.personnummer LIKE ?
 GROUP BY timeOfDay;
@@ -16,9 +17,10 @@ GROUP BY timeOfDay;
 
 SELECT
     determineTimeOfDay(Tension.date) AS timeOfDay,
-    AVG(Tension.rating) AS tension
+    AVG(Tension.rating) AS tension,
+    MAX(DATE(Mood.date)) AS endOfPeriod
 FROM Tension
-WHERE DATE(Tension.date) >= ? AND Tension.date < ? AND Tension.personnummer LIKE ?
+WHERE DATE(Tension.date) >= ? AND DATE(Tension.date) < ? AND Tension.personnummer LIKE ?
 GROUP BY timeOfDay;
 
 

@@ -1,6 +1,5 @@
-package java.com.example.myrmidon;
+package com.example.myrmidon;
 
-import com.example.myrmidon.DatabaseConnection;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

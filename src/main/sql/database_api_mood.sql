@@ -5,7 +5,8 @@
 -- Parameters: Date as 'YYYY-MM-DD', personnummer
 SELECT
     determineTimeOfDay(Mood.date) AS timeOfDay,
-    AVG(Mood.rating) AS mood    
+    AVG(Mood.rating) AS mood,
+    MAX(DATE(Mood.date)) AS date
 FROM Mood
 WHERE DATE(Mood.date) LIKE ? AND Mood.personnummer LIKE ?
 GROUP BY timeOfDay;
@@ -16,9 +17,10 @@ GROUP BY timeOfDay;
 
 SELECT
     determineTimeOfDay(Mood.date) AS timeOfDay,
-    AVG(Mood.rating) AS mood    
+    AVG(Mood.rating) AS mood,
+    MAX(DATE(Mood.date)) AS endOfPeriod
 FROM Mood
-WHERE DATE(Mood.date) >= ? AND Mood.date < ? AND Mood.personnummer LIKE ?
+WHERE DATE(Mood.date) >= ? AND DATE(Mood.date) < ? AND Mood.personnummer LIKE ?
 GROUP BY timeOfDay;
 
 

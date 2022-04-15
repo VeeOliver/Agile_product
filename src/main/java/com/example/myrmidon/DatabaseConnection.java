@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static DatabaseConnection instance;
     private final String userName = "myrmidon_admin";
     private final String password = "myr_ADM123";
     private final String databaseName = "myrmidon";
@@ -14,6 +13,7 @@ public class DatabaseConnection {
             "?user=" + userName +
             "&password=" + password;
     private Connection con;
+    private static DatabaseConnection instance;
 
     private DatabaseConnection() {
     }
@@ -47,7 +47,6 @@ public class DatabaseConnection {
     public Connection getCon() {
         return getInstance().con;
     }
-
     public String getDsn() {
         return getInstance().dsn;
     }

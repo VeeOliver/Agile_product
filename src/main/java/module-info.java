@@ -11,6 +11,7 @@ module com.example.myrmidon {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires mysql.connector.java;
+    requires javatuples;
 
     opens com.example.myrmidon to javafx.fxml;
     exports com.example.myrmidon;
