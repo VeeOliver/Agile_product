@@ -1,4 +1,4 @@
-package application;
+package com.example.myrmidon;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;

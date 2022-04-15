@@ -1,4 +1,4 @@
-package application;
+package com.example.myrmidon;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

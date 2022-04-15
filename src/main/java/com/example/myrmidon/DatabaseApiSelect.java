@@ -1,4 +1,4 @@
-package application;
+package com.example.myrmidon;
 
 import org.javatuples.Triplet;
 
