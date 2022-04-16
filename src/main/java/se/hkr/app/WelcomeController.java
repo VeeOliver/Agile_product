@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import net.synedra.validatorfx.Validator;
+
 
 public class WelcomeController {
     @ FXML
