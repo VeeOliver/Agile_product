@@ -308,35 +308,17 @@
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.15</version>
-            <configuration>
-                <printSummary>true</printSummary>
-                <includes>
-                    <include>**/se.hkr.app.*IT.java</include>
-                </includes>
-                <excludes>
-                    <exclude>se.hkr.app.*Test.java</exclude>
-                </excludes>
-            </configuration>
+            <version>3.0.0-M6</version>
             <executions>
                 <execution>
-                    <id>integration-test</id>
                     <goals>
                         <goal>integration-test</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>verify</id>
-                    <goals>
                         <goal>verify</goal>
                     </goals>
                 </execution>
             </executions>
         </plugin>
-
-
         </plugins>
-
     </build>
 
     <reporting>
