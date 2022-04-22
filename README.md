@@ -1,4 +1,5 @@
 # Myrmidon 
+[![tests](https://github.com/VeeOliver/Agile_product/actions/workflows/test.yaml/badge.svg)](https://github.com/VeeOliver/Agile_product/actions/workflows/test.yaml)
 Myrmidon is an application created with both mental health and the sustainable development goals in mind. With a focus on quick access and an easy to use interface, Myrmidon will track your moods and your tension levels throughout your day. There are 4 main features to Myrmidon that are at the center of its functionality.
 1. Mood Tracking
 2. Tension Tracking
