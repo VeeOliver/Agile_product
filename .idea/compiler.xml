@@ -9,5 +9,8 @@
         <module name="Myrmidon" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Myrmidon" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
