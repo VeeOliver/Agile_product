@@ -9,8 +9,7 @@ module Myrmidon {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
-    requires java.sql;
-    requires mysql.connector.java;
+    requires transitive java.sql;
     requires javatuples;
     exports se.hkr.app;
     opens se.hkr.app to javafx.fxml;
