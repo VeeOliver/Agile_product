@@ -3,6 +3,8 @@ package se.hkr.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.sql.Connection;
+
 import org.junit.jupiter.api.Test;
 
 public class ExampleIT {
@@ -18,8 +20,8 @@ public class ExampleIT {
     }
 
     @Test
-    public void testIntegrationTestFalse() {
-        int res = 1;
-        assertEquals(0, res);
+    public void tryConnectionToDocker() {
+        Connection con = DatabaseConnection.getInstance("0.0.0.0:10000").connect();
+        
     }
 }
