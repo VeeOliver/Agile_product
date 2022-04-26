@@ -6,25 +6,76 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Authentication {
 
-    Boolean checkLoginCredentials(String email, String password) {
+    ResultSet users = getUsers(DatabaseConnection.getInstance().connect(), "select * from user");
+
+    // --- Hashing method ---
+
+    String value = "this is a test";
+
+	String sha1 = "";
+
+    // --- Login methods ---
+
+    Boolean checkLoginCredentials(String email, String password) throws SQLException {
         boolean value = false;
-        for (User user : Data.users) {
-            value = user.email.equals(email) && user.password.equals(password);
-            if (value)
-                break;
+        while (users.next()) {
+            String userEmail = users.getString("email");
+            String userPassword = users.getString("password");
+            value = userEmail.equals(email) && userPassword.equals(password);
+            System.out.println(userEmail);
+            System.out.println(userPassword);
+            if (value) break;
         }
         return value;
+    }
+
+    ResultSet getUsers(Connection con, String sql) {
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            return stmt.executeQuery();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    ArrayList<String> getUserData(String dataName) {
+        ArrayList<String> data = new ArrayList<>();
+        try {
+            while(users.next()) {
+                String el = users.getString(dataName);
+                data.add(el);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    void printUsers() {
+        try {
+            while(users.next()) {
+                String personnummer = users.getString("personnummer");
+                String name = users.getString("name");
+                String email = users.getString("email");
+                String password = users.getString("password");
+                System.out.printf("Personnummer: %s, Name: %s, Email: %s, Password %s%n", personnummer, name, email, password);
+            }
+        } catch(SQLException e) {
+            System.out.println(e);
+        }        
     }
 
     void logError() {
@@ -35,9 +86,16 @@ public class Authentication {
         alert.showAndWait();
     }
 
-    void resetLogFields(TextField emailField, PasswordField passwordField) {
-        emailField.setText("");
-        passwordField.setText("");
+    // --- Registration methods ---
+
+    Boolean checkAvailability(ArrayList<String> list, String personnummer) {
+        return list.stream().anyMatch(el -> el.equals(personnummer));
+    }
+
+    void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField, PasswordField registerPasswordField) {
+        Connection con = DatabaseConnection.getInstance().connect();
+        DatabaseApiInsert.createUserEntry(con, registerPersonnummer.getText(), registerName.getText(),
+                registerEmailField.getText(), registerPasswordField.getText());
     }
 
     void successRegistration() {
@@ -46,15 +104,6 @@ public class Authentication {
         alert.setHeaderText("Registration Successful!");
         alert.setContentText("You registered, now Log in.");
         alert.showAndWait();
-    }
-
-    Boolean checkAvailability(ArrayList<User> list, String email) {
-        return list.stream().anyMatch(o -> o.email.equals(email));
-    }
-
-    void registerUser(TextField registerEmailField, PasswordField registerPasswordField) {
-        Data.users.add(new User(registerEmailField.getText(), registerPasswordField.getText()));
-        Data.users.forEach(user -> System.out.println(user.email + " " + user.password));
     }
 
     void registerPasswordError() {
@@ -73,11 +122,18 @@ public class Authentication {
         alert.showAndWait();
     }
 
-    void resetRegField(TextField registerEmailField, PasswordField registerPasswordField, PasswordField registerRepPasswordField, DatePicker registerBirthField) {
+    void resetRegField(TextField registerPersonnummer, TextField registerName, TextField registerEmailField, PasswordField registerPasswordField,
+            PasswordField registerRepPasswordField) {
+        registerPersonnummer.setText("");
+        registerName.setText("");
         registerEmailField.setText("");
         registerPasswordField.setText("");
         registerRepPasswordField.setText("");
-        registerBirthField.setValue(null);
+    }
+
+    void resetLogFields(TextField emailField, PasswordField passwordField) {
+        emailField.setText("");
+        passwordField.setText("");
     }
 
     void switchToWelcome(ActionEvent event) throws IOException {

@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class WelcomeController {
@@ -22,7 +23,7 @@ public class WelcomeController {
     Authentication auth = new Authentication();
 
     // Login Button
-    public void onLoginBtnClick(ActionEvent event) throws IOException {
+    public void onLoginBtnClick(ActionEvent event) throws IOException, SQLException {
         if (auth.checkLoginCredentials(emailField.getText(), passwordField.getText())) {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("menu-view.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -46,5 +47,6 @@ public class WelcomeController {
         scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
+        auth.printUsers();
     }
 }
