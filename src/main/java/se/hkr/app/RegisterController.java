@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class RegisterController {
     @FXML
@@ -25,8 +26,8 @@ public class RegisterController {
     Authentication auth = new Authentication();
 
     // Register Button
-    public void onRegisterBtnClick(ActionEvent event) throws IOException {
-        Boolean availability = auth.checkAvailability(auth.getUserData("personnummer"), registerPersonnummer.getText());
+    public void onRegisterBtnClick(ActionEvent event) throws IOException, SQLException {
+        Boolean availability = auth.checkAvailability(registerPersonnummer.getText());
 
         if (registerPasswordField.getText().equals(registerRepPasswordField.getText()) && !availability) {
             auth.registerUser(registerPersonnummer, registerName, registerEmailField, registerPasswordField);
