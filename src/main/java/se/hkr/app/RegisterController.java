@@ -2,18 +2,16 @@ package se.hkr.app;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.io.IOException;
 
-
 public class RegisterController {
     @FXML
-    TextField emailField;
+    TextField registerPersonnummer;
 
     @FXML
-    PasswordField passwordField;
+    TextField registerName;
 
     @FXML
     TextField registerEmailField;
@@ -24,24 +22,23 @@ public class RegisterController {
     @FXML
     PasswordField registerRepPasswordField;
 
-    @FXML
-    DatePicker registerBirthField;
-
     Authentication auth = new Authentication();
 
     // Register Button
     public void onRegisterBtnClick(ActionEvent event) throws IOException {
-        if (registerPasswordField.getText().equals(registerRepPasswordField.getText())
-                && !auth.checkAvailability(Data.users, registerEmailField.getText())) {
-            auth.registerUser(registerEmailField, registerPasswordField);
+        Boolean availability = auth.checkAvailability(auth.getUserData("personnummer"), registerPersonnummer.getText());
+
+        if (registerPasswordField.getText().equals(registerRepPasswordField.getText()) && !availability) {
+            auth.registerUser(registerPersonnummer, registerName, registerEmailField, registerPasswordField);
+            auth.printUsers();
             auth.successRegistration();
-        } else if (auth.checkAvailability(Data.users, registerEmailField.getText())) {
+            auth.switchToWelcome(event);
+        } else if (availability) {
             auth.registerError();
         } else {
             auth.registerPasswordError();
         }
-        auth.resetRegField(registerEmailField, registerPasswordField, registerRepPasswordField, registerBirthField);
-        auth.switchToWelcome(event);
+        auth.resetRegField(registerPersonnummer, registerName, registerEmailField, registerPasswordField, registerRepPasswordField);
     }
 
     // Back Button
