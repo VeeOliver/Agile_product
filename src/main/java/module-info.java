@@ -8,7 +8,6 @@ module Myrmidon {
     requires validatorfx;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
     requires transitive java.sql;
     requires javatuples;
     exports se.hkr.app;
