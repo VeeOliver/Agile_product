@@ -21,7 +21,9 @@ public class User {
         return single_instance;
     }
 
-
+    public static User getInstance() {
+        return single_instance;
+    }
 
     public String getPersonnummer() {
         return Personnummer;
@@ -36,7 +38,7 @@ public class User {
     }
 
     public void setPersonnummer(String personnummer) {
-        Personnummer = personnummer;
+        this.Personnummer = personnummer;
     }
 
     public String getName() {
@@ -44,6 +46,6 @@ public class User {
     }
 
     public void setName(String name) {
-        Name = name;
+        this.Name = name;
     }
 }
