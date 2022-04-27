@@ -159,19 +159,10 @@ public class Authentication {
 
     }
 
-    Boolean notEmptyFields(String personnummer, String name, String email, String password, String repPassword) {
-        ArrayList<String> fields = new ArrayList<>(Arrays.asList(personnummer, name, email, password, repPassword));
-        return fields.contains("");
+    boolean equalPassword(String pass1, String pass2){
+        return Objects.equals(pass1, pass2);
     }
-
-    void emptyFieldsError() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Format error");
-        alert.setHeaderText("Format error");
-        alert.setContentText("You can't leave a field empty!");
-        alert.showAndWait();
-    }
-
+    
     void switchToWelcome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
