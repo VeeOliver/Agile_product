@@ -16,14 +16,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class Authentication {
 
-   // ResultSet users = getUsers(DatabaseConnection.getInstance().connect(), "select * from user");
+    // ResultSet users = getUsers(DatabaseConnection.getInstance().connect(),
+    // "select * from user");
 
     // --- Login methods ---
-
 
     Boolean checkLoginCredentials(String email, String password) throws SQLException {
         boolean value = false;
@@ -36,8 +38,7 @@ public class Authentication {
         if (!userData.next()) {
             System.out.println(false);
             return false;
-        }
-        else {
+        } else {
             String Personnummer = userData.getString(1);
             email = userData.getString(2);
             String Name = userData.getString(3);
@@ -48,27 +49,28 @@ public class Authentication {
         }
     }
     /*
-    ResultSet getUsers(Connection con, String sql) {
-        try {
-            PreparedStatement stmt = con.prepareStatement(sql);
-            return stmt.executeQuery();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    ArrayList<String> getUserData(String dataName) {
-        ArrayList<String> data = new ArrayList<>();
-        try {
-            while(users.next()) {
-                String el = users.getString(dataName);
-                data.add(el);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return data;
-    } */
+     * ResultSet getUsers(Connection con, String sql) {
+     * try {
+     * PreparedStatement stmt = con.prepareStatement(sql);
+     * return stmt.executeQuery();
+     * } catch (Exception e) {
+     * return null;
+     * }
+     * }
+     * 
+     * ArrayList<String> getUserData(String dataName) {
+     * ArrayList<String> data = new ArrayList<>();
+     * try {
+     * while(users.next()) {
+     * String el = users.getString(dataName);
+     * data.add(el);
+     * }
+     * } catch (SQLException e) {
+     * e.printStackTrace();
+     * }
+     * return data;
+     * }
+     */
 
     void logError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -90,8 +92,7 @@ public class Authentication {
         ResultSet queryResult = stmt.executeQuery();
         if (queryResult.next()) {
             ;
-        }
-        else{
+        } else {
             personnummerAvailable = true;
         }
 
@@ -101,18 +102,17 @@ public class Authentication {
         queryResult = stmt.executeQuery();
         if (queryResult.next()) {
             ;
-        }
-        else{
+        } else {
             emailAvailable = true;
         }
         Boolean a[] = new Boolean[2];
         a[0] = emailAvailable;
         a[1] = personnummerAvailable;
         return a;
-        }
+    }
 
-
-    void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField, PasswordField registerPasswordField) {
+    void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
+            PasswordField registerPasswordField) {
         Connection con = DatabaseConnection.getInstance().connect();
         DatabaseApiInsert.createUserEntry(con, registerPersonnummer.getText(), registerName.getText(),
                 registerEmailField.getText(), registerPasswordField.getText());
@@ -142,7 +142,8 @@ public class Authentication {
         alert.showAndWait();
     }
 
-    void resetRegField(TextField registerPersonnummer, TextField registerName, TextField registerEmailField, PasswordField registerPasswordField,
+    void resetRegField(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
+            PasswordField registerPasswordField,
             PasswordField registerRepPasswordField) {
         registerPersonnummer.setText("");
         registerName.setText("");
@@ -156,14 +157,35 @@ public class Authentication {
         passwordField.setText("");
     }
 
-    Boolean validEmail(String Email){
-
+    Boolean validEmail(String Email) {
         return Email.matches("\t^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$");
     }
 
-    Boolean validPersonnummer(String personnummer){
-
+    Boolean validPersonnummer(String personnummer) {
         return personnummer.matches("^(19|20)?[0-9]{6}[- ]?[0-9]{4}$");
+    }
+
+    Boolean notEmptyFields(String registerPersonnummer, String registerName, String registerEmailField,
+            String registerPasswordField,
+            String registerRepPasswordField) {
+        List<String> list = new ArrayList<>();
+        return false;
+    }
+
+    void emailFormatError(String email) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Registration error");
+        alert.setHeaderText("Registration error");
+        alert.setContentText("Invalid format for email");
+        alert.showAndWait();
+    }
+
+    void personFormatError(String personnummer) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Format error");
+        alert.setHeaderText("Format error");
+        alert.setContentText("Invalid format for personnummer");
+        alert.showAndWait();
     }
 
     void switchToWelcome(ActionEvent event) throws IOException {
