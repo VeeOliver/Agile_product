@@ -30,32 +30,32 @@
                                 <Slider fx:id="moodSlider" layoutX="166.0" layoutY="174.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="435.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
                                 <Slider fx:id="tensionSlider" layoutX="170.0" layoutY="332.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="428.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
                                 <Button fx:id="submitMT" layoutX="301.0" layoutY="437.0" mnemonicParsing="false" onAction="#onSubmitMT" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #32328E;" text="Submit" textFill="#fcfaf8" />
-                                <Label fx:id="moodLabel" layoutX="354.0" layoutY="119.0" text="Mood">
+                                <Label layoutX="354.0" layoutY="119.0" text="Mood">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="343.0" layoutY="288.0" text="Tension" textFill="#0a0a0a">
                                     <font>
                                         <Font name="Lucida Grande" size="24.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="tensionLabel" layoutX="343.0" layoutY="288.0" text="Tension" textFill="#0a0a0a">
-                                    <font>
-                                        <Font name="Lucida Grande" size="24.0" />
-                                    </font>
-                                </Label>
-                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="WHITE" />
+                                <Button layoutX="23.0" layoutY="469.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="WHITE" />
                                 <ImageView fitHeight="86.0" fitWidth="451.0" layoutX="158.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@imgs/Scale_white_background_2.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fitHeight="46.0" fitWidth="448.0" layoutX="164.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="96.0" fitWidth="441.0" layoutX="163.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@imgs/Scale_white_background_2.png" />
+                                        <Image url="@imgs/tension_scale.png" />
                                     </image>
                                 </ImageView>
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Journal">
+                <Tab text="Jounal">
                     <content>
                         <AnchorPane fx:id="journalContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                             <children>
@@ -64,9 +64,9 @@
                                         <Font size="30.0" />
                                     </font>
                                 </Label>
-                                <TextArea fx:id="journalEntry" layoutX="115.0" layoutY="78.0" prefHeight="301.0" prefWidth="536.0" promptText="Write your thoughts here..." />
-                                <Button fx:id="journalSubmit" layoutX="287.0" layoutY="401.0" mnemonicParsing="false" onAction="#onSubmitJournalEntry" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E;" text="Submit" textFill="WHITE" />
-                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="WHITE" />
+                                <TextArea layoutX="115.0" layoutY="78.0" prefHeight="301.0" prefWidth="536.0" />
+                                <Button layoutX="287.0" layoutY="401.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E;" text="Submit" textFill="WHITE" />
+                                <Button layoutX="599.0" layoutY="32.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="WHITE" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -83,14 +83,14 @@
                                         <NumberAxis side="LEFT" />
                                     </yAxis>
                                 </StackedBarChart>
-                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="#fcfcfc" />
+                                <Button layoutX="622.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="#fcfcfc" />
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
             </tabs>
         </TabPane>
-        <Label fx:id="headerMenu" layoutX="72.0" layoutY="14.0" text="MYRMIDON" textFill="#f8f7f7">
+        <Label layoutX="72.0" layoutY="14.0" text="MYRMIDON" textFill="#f8f7f7">
             <font>
                 <Font name="Optima Regular" size="27.0" />
             </font>
