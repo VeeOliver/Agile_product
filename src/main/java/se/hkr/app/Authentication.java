@@ -19,17 +19,17 @@ import java.util.Objects;
 
 public class Authentication {
 
-    ResultSet users = getUsers(DatabaseConnection.getInstance().connect(), "select * from user");
+   // ResultSet users = getUsers(DatabaseConnection.getInstance().connect(), "select * from user");
 
     // --- Hashing method ---
 
-    String value = "this is a test";
+   // String value = "this is a test";
 
-	String sha1 = "";
+	// String sha1 = "";
 
     // --- Login methods ---
 
-    Boolean checkLoginCredentials(String email, String password) throws SQLException {
+ /*   Boolean checkLoginCredentials(String email, String password) throws SQLException {
         boolean value = false;
         while (users.next()) {
             String userEmail = users.getString("email");
@@ -41,7 +41,29 @@ public class Authentication {
         }
         return value;
     }
+*/
 
+    Boolean checkLoginCredentials(String email, String password) throws SQLException {
+        boolean value = false;
+        Connection con = DatabaseConnection.getInstance().connect();
+        PreparedStatement stmt = con.prepareStatement(DatabaseApiSelect.getLogin);
+        stmt.setString(1, email);
+        stmt.setString(2, password);
+
+        ResultSet userData = stmt.executeQuery();
+        if (!userData.next()) {
+            return false;
+        }
+        else {
+            String Personnummer = userData.getString(1);
+            email = userData.getString(2);
+            String Name = userData.getString(3);
+            User.getInstance(Personnummer, email, Name);
+            return true;
+
+        }
+    }
+    /*
     ResultSet getUsers(Connection con, String sql) {
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -62,8 +84,8 @@ public class Authentication {
             e.printStackTrace();
         }
         return data;
-    }
-
+    } */
+/*
     void printUsers() {
         try {
             while(users.next()) {
@@ -84,13 +106,24 @@ public class Authentication {
         alert.setHeaderText("Username or password incorrect");
         alert.setContentText("Did you register ?");
         alert.showAndWait();
-    }
+    } */
 
     // --- Registration methods ---
 
-    Boolean checkAvailability(ArrayList<String> list, String personnummer) {
-        return list.stream().anyMatch(el -> el.equals(personnummer));
-    }
+    Boolean checkAvailability(String personnummer) throws SQLException {
+        boolean value = false;
+        Connection con = DatabaseConnection.getInstance().connect();
+        PreparedStatement stmt = con.prepareStatement(DatabaseApiSelect.getPersonnummer);
+        stmt.setString(1, personnummer);
+
+        ResultSet queryResult = stmt.executeQuery();
+        if (!queryResult.next()) {
+            return false;
+        }
+            return true;
+        }
+
+
 
     void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField, PasswordField registerPasswordField) {
         Connection con = DatabaseConnection.getInstance().connect();
