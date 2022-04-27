@@ -65,3 +65,87 @@
     </Tab>
   </tabs>
 </TabPane>
+
+<AnchorPane prefHeight="568.0" prefWidth="766.0" style="-fx-background-color: #32328E;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.MenuController">
+   <children>
+      <TabPane layoutY="66.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Mood">
+            <content>
+              <AnchorPane fx:id="moodContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                     <children>
+                        <Label fx:id="moodTitle" alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="45.0" prefWidth="393.0" text="How do you feel today ?">
+                           <font>
+                              <Font name="Lucida Grande" size="30.0" />
+                           </font>
+                        </Label>
+                        <Slider layoutX="163.0" layoutY="174.0" majorTickUnit="1.0" max="9.0" minorTickCount="0" prefHeight="26.0" prefWidth="435.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="5.0" />
+                        <Slider layoutX="170.0" layoutY="332.0" majorTickUnit="1.0" max="9.0" minorTickCount="0" prefHeight="26.0" prefWidth="428.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="5.0" />
+                        <Button layoutX="319.0" layoutY="437.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #32328E;" text="Submit" textFill="#fcfaf8" />
+                        <Label layoutX="354.0" layoutY="119.0" text="Mood">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="343.0" layoutY="288.0" text="Tension" textFill="#0a0a0a">
+                           <font>
+                              <Font name="Lucida Grande" size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="23.0" layoutY="469.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="WHITE" />
+                        <ImageView fitHeight="86.0" fitWidth="451.0" layoutX="158.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imgs/Scale_white_background_2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="46.0" fitWidth="448.0" layoutX="164.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imgs/Scale_white_background_2.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Jounal">
+            <content>
+              <AnchorPane fx:id="journalContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                     <children>
+                        <Label fx:id="journalTitle" layoutX="335.0" layoutY="22.0" text="Journal">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <TextArea layoutX="115.0" layoutY="78.0" prefHeight="301.0" prefWidth="536.0" />
+                        <Button layoutX="287.0" layoutY="401.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E;" text="Submit" textFill="WHITE" />
+                        <Button layoutX="599.0" layoutY="32.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="History">
+            <content>
+              <AnchorPane fx:id="historyContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                     <children>
+                        <StackedBarChart layoutX="72.0" layoutY="27.0" prefHeight="400.0" prefWidth="622.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </StackedBarChart>
+                        <Button layoutX="622.0" layoutY="14.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="#fcfcfc" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="72.0" layoutY="14.0" text="MYRMIDON" textFill="#f8f7f7">
+         <font>
+            <Font name="Optima Regular" size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
