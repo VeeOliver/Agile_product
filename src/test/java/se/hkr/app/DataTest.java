@@ -73,7 +73,7 @@ class DataTest {
     @Test
     void submissionCompleteNoteWorks() {
         try (MockedStatic<Data> msAlert = Mockito.mockStatic(Data.class)) {
-            msAlert.when(() -> Data.submissionCompleteNote()).equals(alert);
+            msAlert.when(() -> Data.submissionCompleteNote()).thenCallRealMethod();
         }
 
     }
@@ -81,12 +81,12 @@ class DataTest {
     @Test
     void journalSubmittedNoteWorks() {
         try (MockedStatic<Data> msAlert = Mockito.mockStatic(Data.class)) {
-            msAlert.when(() -> Data.journalSubmittedNote()).equals(alert);
+            msAlert.when(() -> Data.journalSubmittedNote()).thenCallRealMethod();
         }
     }
 
     @Test
     void clearOutJournalEntryWorks() {
-        
+
     }
 }
