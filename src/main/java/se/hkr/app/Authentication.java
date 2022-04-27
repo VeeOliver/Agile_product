@@ -93,7 +93,6 @@ public class Authentication {
         }
 
 
-
     void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField, PasswordField registerPasswordField) {
         Connection con = DatabaseConnection.getInstance().connect();
         DatabaseApiInsert.createUserEntry(con, registerPersonnummer.getText(), registerName.getText(),
