@@ -174,6 +174,11 @@ public class Authentication {
        return password.matches( "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
 
     }
+
+    boolean equalPassword(String pass1, String pass2){
+        return Objects.equals(pass1, pass2);
+    }
+    
     void switchToWelcome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
