@@ -20,7 +20,7 @@
 }
 
 #tensionLabel{
--fx-font-family: "Lucida Grande";
+    -fx-font-family: "Lucida Grande";
     -fx-text-fill: black;
     -fx-font-size: 24px;
 }

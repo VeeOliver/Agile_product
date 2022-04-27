@@ -63,25 +63,16 @@ public class Authentication {
         stmt.setString(1, personnummer);
 
         ResultSet queryResult = stmt.executeQuery();
-        if (queryResult.next()) {
-            ;
-        } else {
-            personnummerAvailable = true;
-        }
+        if (!queryResult.next()) personnummerAvailable = true;
 
         stmt = con.prepareStatement(DatabaseApiSelect.getEmail);
         stmt.setString(1, email);
 
         queryResult = stmt.executeQuery();
-        if (queryResult.next()) {
-            ;
-        } else {
-            emailAvailable = true;
-        }
-        Boolean a[] = new Boolean[2];
-        a[0] = emailAvailable;
-        a[1] = personnummerAvailable;
-        return a;
+        if (!queryResult.next()) emailAvailable = true;
+
+        Boolean arr[] = { emailAvailable, personnummerAvailable };
+        return arr;
     }
 
     void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
@@ -96,14 +87,6 @@ public class Authentication {
         alert.setTitle("Registration Successful!");
         alert.setHeaderText("Registration Successful!");
         alert.setContentText("You registered, now Log in.");
-        alert.showAndWait();
-    }
-
-    void registerPasswordError() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Password error");
-        alert.setHeaderText("Password error");
-        alert.setContentText("The two password are not identical");
         alert.showAndWait();
     }
 
@@ -130,39 +113,68 @@ public class Authentication {
         passwordField.setText("");
     }
 
-    Boolean validEmail(String Email) {
-        return Email.matches("\t^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$");
-    }
+    // Registration Fields RegEx
 
-    void emailFormatError(String email) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Registration error");
-        alert.setHeaderText("Registration error");
-        alert.setContentText("Invalid format for email");
-        alert.showAndWait();
+    Boolean validEmail(String Email) {
+        return Email.matches("^(.+)@(.+)$");
     }
 
     Boolean validPersonnummer(String personnummer) {
         return personnummer.matches("^(19|20)?[0-9]{6}[- ]?[0-9]{4}$");
     }
 
-    void personFormatError(String personnummer) {
+    Boolean validPassword(String password) {
+        return password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()-[{}]:;',?/*~$^+=<>]).{8,20}$");
+    }
+
+    Boolean equalPassword(String pass1, String pass2) {
+        return Objects.equals(pass1, pass2);
+    }
+
+    boolean validName(String name) {
+        return name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
+    }
+
+    Boolean checkFormatError(String personnummer, String name, String email, String password, String repPassword) {
+        ArrayList<Boolean> fields = new ArrayList<>(Arrays.asList(
+                validPersonnummer(personnummer),
+                validName(name),
+                validEmail(email),
+                validPassword(password),
+                equalPassword(password, repPassword)));
+
+        return fields.contains(false);
+    }
+
+    void showFormatError(String personnummer, String name, String email, String password, String repPassword) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Format error");
-        alert.setHeaderText("Format error");
-        alert.setContentText("Invalid format for personnummer");
+        alert.setTitle("Registration error");
+        alert.setHeaderText("Registration error");
+
+        ArrayList<Boolean> fields = new ArrayList<>(Arrays.asList(
+                validPersonnummer(personnummer),
+                validName(name),
+                validEmail(email),
+                validPassword(password),
+                equalPassword(password, repPassword)));
+
+        String falseField = "";
+
+        if (!fields.get(0))
+            falseField += "\nPersonnummer should be in format: DDMMYY-XXXX";
+        if (!fields.get(1))
+            falseField += "\nInvalid format for name";
+        if (!fields.get(2))
+            falseField += "\nEmail should be in format: user@domain.com";
+        if (!fields.get(3))
+            falseField += "\nInvalid format for password";
+        if (!fields.get(4))
+            falseField += "\nPassword not identical";
+
+        alert.setContentText(falseField);
         alert.showAndWait();
     }
 
-    boolean validPassword(String password) {
-        return password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
-
-    }
-
-    boolean equalPassword(String pass1, String pass2){
-        return Objects.equals(pass1, pass2);
-    }
-    
     void switchToWelcome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
