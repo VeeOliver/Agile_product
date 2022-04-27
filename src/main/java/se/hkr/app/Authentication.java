@@ -195,7 +195,7 @@ public class Authentication {
 
 =======
     boolean validPassword(String password){
-       return password.matches( "");
+       return password.matches( "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
 
     }
 >>>>>>> 70dec7a1d85527b8169f405be8a0521604448716
