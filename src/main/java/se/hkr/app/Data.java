@@ -10,6 +10,7 @@ public class Data {
     static public ArrayList<User> users = new ArrayList<>();
 
 
+    public static
     public static void insertMood(String moodRating,  User user) {
         int moodNum = Integer.parseInt(moodRating);
         String userId = user.email;

@@ -21,4 +21,15 @@ public class MenuController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void onSubmitMT(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("menu-view.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        String css = this.getClass().getResource("tabs.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }

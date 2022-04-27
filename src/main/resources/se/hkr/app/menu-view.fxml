@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="568.0" prefWidth="766.0" style="-fx-background-color: #32328E;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.MenuController">
    <children>
       <TabPane layoutY="66.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
@@ -28,9 +27,9 @@
                               <Font name="Lucida Grande" size="30.0" />
                            </font>
                         </Label>
-                        <Slider layoutX="163.0" layoutY="174.0" majorTickUnit="1.0" max="9.0" minorTickCount="0" prefHeight="26.0" prefWidth="435.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="5.0" />
-                        <Slider layoutX="170.0" layoutY="332.0" majorTickUnit="1.0" max="9.0" minorTickCount="0" prefHeight="26.0" prefWidth="428.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="5.0" />
-                        <Button layoutX="319.0" layoutY="437.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #32328E;" text="Submit" textFill="#fcfaf8" />
+                        <Slider fx:id="moodSlider" layoutX="163.0" layoutY="174.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="435.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
+                        <Slider layoutX="170.0" layoutY="332.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="428.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
+                        <Button fx:id="submitMT" layoutX="301.0" layoutY="437.0" mnemonicParsing="false" onAction="#onSubmitMT" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #32328E;" text="Submit" textFill="#fcfaf8" />
                         <Label layoutX="354.0" layoutY="119.0" text="Mood">
                            <font>
                               <Font size="24.0" />
