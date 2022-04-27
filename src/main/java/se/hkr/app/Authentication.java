@@ -22,27 +22,8 @@ public class Authentication {
 
    // ResultSet users = getUsers(DatabaseConnection.getInstance().connect(), "select * from user");
 
-    // --- Hashing method ---
-
-   // String value = "this is a test";
-
-	// String sha1 = "";
-
     // --- Login methods ---
 
- /*   Boolean checkLoginCredentials(String email, String password) throws SQLException {
-        boolean value = false;
-        while (users.next()) {
-            String userEmail = users.getString("email");
-            String userPassword = users.getString("password");
-            value = userEmail.equals(email) && userPassword.equals(password);
-            System.out.println(userEmail);
-            System.out.println(userPassword);
-            if (value) break;
-        }
-        return value;
-    }
-*/
 
     Boolean checkLoginCredentials(String email, String password) throws SQLException {
         boolean value = false;
@@ -53,6 +34,7 @@ public class Authentication {
 
         ResultSet userData = stmt.executeQuery();
         if (!userData.next()) {
+            System.out.println(false);
             return false;
         }
         else {
@@ -60,6 +42,7 @@ public class Authentication {
             email = userData.getString(2);
             String Name = userData.getString(3);
             User.getInstance(Personnummer, email, Name);
+            System.out.println(true);
             return true;
 
         }
@@ -86,22 +69,6 @@ public class Authentication {
         }
         return data;
     } */
-/*
-    void printUsers() {
-        try {
-            while(users.next()) {
-                String personnummer = users.getString("personnummer");
-                String name = users.getString("name");
-                String email = users.getString("email");
-                String password = users.getString("password");
-                System.out.printf("Personnummer: %s, Name: %s, Email: %s, Password %s%n", personnummer, name, email, password);
-            }
-        } catch(SQLException e) {
-            System.out.println(e);
-        }        
-    }
-
- */
 
     void logError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -143,7 +110,6 @@ public class Authentication {
         a[1] = personnummerAvailable;
         return a;
         }
-
 
 
     void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField, PasswordField registerPasswordField) {
