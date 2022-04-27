@@ -21,8 +21,6 @@ public class User {
         return single_instance;
     }
 
-
-
     public String getPersonnummer() {
         return Personnummer;
     }
