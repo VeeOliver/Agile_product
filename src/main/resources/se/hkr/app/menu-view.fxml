@@ -64,8 +64,8 @@
                                         <Font size="30.0" />
                                     </font>
                                 </Label>
-                                <TextArea layoutX="115.0" layoutY="78.0" prefHeight="301.0" prefWidth="536.0" />
-                                <Button layoutX="287.0" layoutY="401.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E;" text="Submit" textFill="WHITE" />
+                                <TextArea fx:id="journalEntry" layoutX="115.0" layoutY="78.0" prefHeight="301.0" prefWidth="536.0" promptText="Write your thoughts here..." />
+                                <Button fx:id="journalSubmit" layoutX="287.0" layoutY="401.0" mnemonicParsing="false" onAction="#onSubmitJournalEntry" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E;" text="Submit" textFill="WHITE" />
                                 <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="WHITE" />
                             </children>
                         </AnchorPane>
