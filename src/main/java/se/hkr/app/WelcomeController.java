@@ -47,6 +47,6 @@ public class WelcomeController {
         scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
-        auth.printUsers();
+        // auth.printUsers();
     }
 }

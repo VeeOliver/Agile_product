@@ -100,13 +100,15 @@ public class Authentication {
         }        
     }
 
+ */
+
     void logError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Authentication error");
         alert.setHeaderText("Username or password incorrect");
         alert.setContentText("Did you register ?");
         alert.showAndWait();
-    } */
+    }
 
     // --- Registration methods ---
 
@@ -178,5 +180,4 @@ public class Authentication {
         stage.setScene(scene);
         stage.show();
     }
-
 }

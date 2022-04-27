@@ -31,7 +31,7 @@ public class RegisterController {
 
         if (registerPasswordField.getText().equals(registerRepPasswordField.getText()) && !availability) {
             auth.registerUser(registerPersonnummer, registerName, registerEmailField, registerPasswordField);
-            auth.printUsers();
+            // auth.printUsers();
             auth.successRegistration();
             auth.switchToWelcome(event);
         } else if (availability) {
