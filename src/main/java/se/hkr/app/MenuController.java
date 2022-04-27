@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,6 +21,9 @@ public class MenuController {
 
     @FXML
     Slider tensionSlider;
+
+    @FXML
+    TextArea journalEntry;
 
 
 
@@ -39,7 +43,15 @@ public class MenuController {
         User user = User.getInstance();
         Data.insertMood(mood,user);
         Data.insertTension(tension, user);
+        Data.submissionCompleteNote();
 
     }
 
+    public void onSubmitJournalEntry(ActionEvent event) throws IOException {
+        String savedJournalEntry = journalEntry.getText().replaceAll("\n", System.getProperty("line.separator"));
+        User user = User.getInstance("","","");
+        Data.insertJournal(savedJournalEntry, user);
+        Data.journalSubmittedNote();
+        Data.clearOutJournalEntry(journalEntry);
+        }
 }

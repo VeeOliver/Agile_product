@@ -1,5 +1,6 @@
-* {
-    -fx-font-family: "Lucida Grande";
+
+#headerMenu {
+ -fx-font-family: "Optima Regular";
 }
 
 #moodContainer {
@@ -7,12 +8,26 @@
 }
 
 #moodTitle {
-    -fx-text-fill: "#bf9270";
+    -fx-font-family: "Lucida Grande";
+    -fx-text-fill: black;
     -fx-font-size: 30px;
 }
 
+#moodLabel{
+-fx-font-family: "Lucida Grande";
+    -fx-text-fill: black;
+    -fx-font-size: 24px;
+}
+
+#tensionLabel{
+-fx-font-family: "Lucida Grande";
+    -fx-text-fill: black;
+    -fx-font-size: 24px;
+}
+
 #journalTitle {
-    -fx-text-fill: "#bf9270";
+    -fx-font-family: "Lucida Grande";
+    -fx-text-fill: black;
     -fx-font-size: 30px;
 }
 
