@@ -40,7 +40,7 @@ public class MenuController {
     public void onSubmitMT(ActionEvent event) throws IOException {
         double mood = moodSlider.getValue();
         double tension = tensionSlider.getValue();
-        User user = User.getInstance("", "", "");
+        User user = User.getInstance();
         Data.insertMood(mood,user);
         Data.insertTension(tension, user);
         Data.submissionCompleteNote();
