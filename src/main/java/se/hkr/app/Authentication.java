@@ -156,6 +156,16 @@ public class Authentication {
         passwordField.setText("");
     }
 
+    Boolean validEmail(String Email){
+
+        return Email.matches("\t^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$");
+    }
+
+    Boolean validPersonnummer(String personnummer){
+
+        return personnummer.matches("^(19|20)?[0-9]{6}[- ]?[0-9]{4}$");
+    }
+
     void switchToWelcome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
