@@ -11,20 +11,20 @@ public class Data {
 
     public static void insertMood(double moodRating,  User user) {
         int moodNum = (int) moodRating;
-        String userId = user.getPersonnumer();
+        String userId = user.getPersonnummer();
         DatabaseApiInsert.createMoodEntry(DatabaseConnection.getInstance().connect(), moodNum, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
     }
 
     public static void insertTension(double tensionRating, User user) {
         int tensionNum = (int) tensionRating;
-        String userId = user.getPersonnumer();
+        String userId = user.getPersonnummer();
         DatabaseApiInsert.createTensionEntry(DatabaseConnection.getInstance().connect(), tensionNum, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
     }
 
     public static void insertJournal(String journalText, User user) {
-        String userId = user.getPersonnumer();
+        String userId = user.getPersonnummer();
         DatabaseApiInsert.createJournalEntry(DatabaseConnection.getInstance().connect(), journalText, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
     }
