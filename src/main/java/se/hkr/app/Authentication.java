@@ -10,20 +10,15 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Authentication {
-
-    // ResultSet users = getUsers(DatabaseConnection.getInstance().connect(),
-    // "select * from user");
 
     // --- Login methods ---
 
@@ -49,29 +44,6 @@ public class Authentication {
 
         }
     }
-    /*
-     * ResultSet getUsers(Connection con, String sql) {
-     * try {
-     * PreparedStatement stmt = con.prepareStatement(sql);
-     * return stmt.executeQuery();
-     * } catch (Exception e) {
-     * return null;
-     * }
-     * }
-     * 
-     * ArrayList<String> getUserData(String dataName) {
-     * ArrayList<String> data = new ArrayList<>();
-     * try {
-     * while(users.next()) {
-     * String el = users.getString(dataName);
-     * data.add(el);
-     * }
-     * } catch (SQLException e) {
-     * e.printStackTrace();
-     * }
-     * return data;
-     * }
-     */
 
     void logError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -162,27 +134,16 @@ public class Authentication {
         return Email.matches("\t^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$");
     }
 
-    Boolean validPersonnummer(String personnummer) {
-        return personnummer.matches("^(19|20)?[0-9]{6}[- ]?[0-9]{4}$");
-    }
-    boolean validName(String name){
-        return name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
-    }
-
-<<<<<<< HEAD
-    Boolean notEmptyFields(String registerPersonnummer, String registerName, String registerEmailField,
-            String registerPasswordField,
-            String registerRepPasswordField) {
-        List<String> list = new ArrayList<>();
-        return false;
-    }
-
     void emailFormatError(String email) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Registration error");
         alert.setHeaderText("Registration error");
         alert.setContentText("Invalid format for email");
         alert.showAndWait();
+    }
+
+    Boolean validPersonnummer(String personnummer) {
+        return personnummer.matches("^(19|20)?[0-9]{6}[- ]?[0-9]{4}$");
     }
 
     void personFormatError(String personnummer) {
@@ -193,12 +154,23 @@ public class Authentication {
         alert.showAndWait();
     }
 
-=======
-    boolean validPassword(String password){
-       return password.matches( "");
-
+    boolean validName(String name){
+        return name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
     }
->>>>>>> 70dec7a1d85527b8169f405be8a0521604448716
+
+    Boolean notEmptyFields(String personnummer, String name, String email, String password, String repPassword) {
+        ArrayList<String> fields = new ArrayList<>(Arrays.asList(personnummer, name, email, password, repPassword));
+        return fields.contains("");
+    }
+
+    void emptyFieldsError() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Format error");
+        alert.setHeaderText("Format error");
+        alert.setContentText("You can't leave a field empty!");
+        alert.showAndWait();
+    }
+
     void switchToWelcome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -28,9 +28,14 @@ public class RegisterController {
 
     // Register Button
     public void onRegisterBtnClick(ActionEvent event) throws IOException, SQLException {
-        Boolean[] availability = auth.checkAvailability(registerPersonnummer.getText(),registerEmailField.getText());
+        Boolean[] availability = auth.checkAvailability(registerPersonnummer.getText(), registerEmailField.getText());
 
-        if (registerPasswordField.getText().equals(registerRepPasswordField.getText()) && availability[0] && availability[1]) {
+        // Check format errors
+        
+
+        // Check availability
+        if (registerPasswordField.getText().equals(registerRepPasswordField.getText()) && availability[0]
+                && availability[1]) {
             auth.registerUser(registerPersonnummer, registerName, registerEmailField, registerPasswordField);
             auth.successRegistration();
             auth.switchToWelcome(event);
@@ -39,7 +44,8 @@ public class RegisterController {
         } else {
             auth.registerPasswordError();
         }
-        auth.resetRegField(registerPersonnummer, registerName, registerEmailField, registerPasswordField, registerRepPasswordField);
+        auth.resetRegField(registerPersonnummer, registerName, registerEmailField, registerPasswordField,
+                registerRepPasswordField);
     }
 
     // Back Button
