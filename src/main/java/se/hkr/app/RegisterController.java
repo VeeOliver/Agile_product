@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class RegisterController {
+
     @FXML
     TextField registerPersonnummer;
 
