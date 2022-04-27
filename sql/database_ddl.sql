@@ -36,7 +36,7 @@ CREATE TABLE Mood (
 
 CREATE TABLE Journal_entry (
     journal_entry_id INT AUTO_INCREMENT,
-    journal_entry VARCHAR(255) NOT NULL,
+    journal_entry VARCHAR(1000) NOT NULL,
     date DATETIME NOT NULL,
     personnummer CHAR(13) NOT NULL,
     PRIMARY KEY (journal_entry_id),

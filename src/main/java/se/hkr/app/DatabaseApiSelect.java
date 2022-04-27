@@ -155,13 +155,13 @@ public class DatabaseApiSelect {
     // Check login
     public static String getLogin = """
             SELECT
-                email, personnummer, name
+                personnummer, email, name
             FROM User
             WHERE email= ? and password = SHA1( ? );
             """;
     public static String getPersonnummer = """
-            SELECT email FROM User WHERE  personnummer = ?""";
+            SELECT email FROM User WHERE  personnummer = ? """;
 
     public static String getEmail = """
-            SELECT personnummer FROM User WHERE  email = ?""";
+            SELECT personnummer FROM User WHERE  email = ? """;
 }

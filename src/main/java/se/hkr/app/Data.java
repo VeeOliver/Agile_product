@@ -1,6 +1,10 @@
 package se.hkr.app;
 
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+import org.controlsfx.control.action.Action;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -27,6 +31,27 @@ public class Data {
         String userId = user.getPersonnummer();
         DatabaseApiInsert.createJournalEntry(DatabaseConnection.getInstance().connect(), journalText, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
+    }
+
+    public static void submissionCompleteNote(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Submitted");
+        alert.setHeaderText("Mood and Tension results have been submitted");
+        alert.setContentText("See you next time!");
+        alert.showAndWait();
+
+    }
+
+    public static void journalSubmittedNote(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Submitted");
+        alert.setHeaderText("Your journal has been saved!");
+        alert.setContentText("You're a wonderful author!");
+        alert.showAndWait();
+    }
+
+    public static void clearOutJournalEntry(TextArea journalEntry){
+        journalEntry.setText("");
     }
 
 } 
