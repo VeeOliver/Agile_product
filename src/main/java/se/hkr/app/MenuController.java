@@ -28,7 +28,7 @@ public class MenuController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         String css = this.getClass().getResource("welcome.css").toExternalForm();
-        scene.getStylesheets().add(css);
+        //scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
     }
@@ -36,7 +36,7 @@ public class MenuController {
     public void onSubmitMT(ActionEvent event) throws IOException {
         double mood = moodSlider.getValue();
         double tension = tensionSlider.getValue();
-        User user = User.getInstance();
+        User user = User.getInstance("", "", "");
         Data.insertMood(mood,user);
         Data.insertTension(tension, user);
 

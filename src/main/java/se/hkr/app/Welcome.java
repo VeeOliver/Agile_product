@@ -6,8 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.attribute.UserDefinedFileAttributeView;
-import java.util.ArrayList;
 
 public class Welcome extends Application {
     @Override

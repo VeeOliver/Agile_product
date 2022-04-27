@@ -151,5 +151,17 @@ public class DatabaseApiSelect {
             NATURAL JOIN Tension ON personnummer
             WHERE Tension.rating >= ? AND Tension.rating < ? AND Journal_entry.personnummer LIKE ?
             ORDER BY Journal_entry.date;""";
-}
 
+    // Check login
+    public static String getLogin = """
+            SELECT
+                email, personnummer, name
+            FROM User
+            WHERE email= ? and password = SHA1( ? );
+            """;
+    public static String getPersonnummer = """
+            SELECT email FROM User WHERE  personnummer = ?""";
+
+    public static String getEmail = """
+            SELECT personnummer FROM User WHERE  email = ?""";
+}

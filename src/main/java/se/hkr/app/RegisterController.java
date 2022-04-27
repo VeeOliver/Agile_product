@@ -2,19 +2,18 @@ package se.hkr.app;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.io.IOException;
-
+import java.sql.SQLException;
 
 public class RegisterController {
 
     @FXML
-    TextField emailField;
+    TextField registerPersonnummer;
 
     @FXML
-    PasswordField passwordField;
+    TextField registerName;
 
     @FXML
     TextField registerEmailField;
@@ -25,24 +24,23 @@ public class RegisterController {
     @FXML
     PasswordField registerRepPasswordField;
 
-    @FXML
-    DatePicker registerBirthField;
-
     Authentication auth = new Authentication();
 
     // Register Button
-    public void onRegisterBtnClick(ActionEvent event) throws IOException {
-        if (registerPasswordField.getText().equals(registerRepPasswordField.getText())
-                && !auth.checkAvailability(Data.users, registerEmailField.getText())) {
-            auth.registerUser(registerEmailField, registerPasswordField);
+    public void onRegisterBtnClick(ActionEvent event) throws IOException, SQLException {
+        Boolean[] availability = auth.checkAvailability(registerPersonnummer.getText(),registerEmailField.getText());
+
+        if (registerPasswordField.getText().equals(registerRepPasswordField.getText()) && availability[0] && availability[1]) {
+            auth.registerUser(registerPersonnummer, registerName, registerEmailField, registerPasswordField);
+            // auth.printUsers();
             auth.successRegistration();
-        } else if (auth.checkAvailability(Data.users, registerEmailField.getText())) {
+            auth.switchToWelcome(event);
+        } else if (!availability[1] || !availability[0]) {
             auth.registerError();
         } else {
             auth.registerPasswordError();
         }
-        auth.resetRegField(registerEmailField, registerPasswordField, registerRepPasswordField, registerBirthField);
-        auth.switchToWelcome(event);
+        auth.resetRegField(registerPersonnummer, registerName, registerEmailField, registerPasswordField, registerRepPasswordField);
     }
 
     // Back Button
