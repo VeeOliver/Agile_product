@@ -21,11 +21,6 @@ public class User {
         return single_instance;
     }
 
-<<<<<<< HEAD
-    public String getPersonnummer(){
-        return this.Personnummer;
-=======
-
     public String getPersonnummer() {
         return Personnummer;
     }
@@ -48,6 +43,5 @@ public class User {
 
     public void setName(String name) {
         Name = name;
->>>>>>> a8539cd249c99ca1cc4e361672bdea4f1f5fa7d9
     }
 }

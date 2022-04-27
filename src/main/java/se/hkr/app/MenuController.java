@@ -39,7 +39,9 @@ public class MenuController {
         User user = User.getInstance("", "", "");
         Data.insertMood(mood,user);
         Data.insertTension(tension, user);
+        Data.submissionCompleteNote();
 
     }
+
 
 }

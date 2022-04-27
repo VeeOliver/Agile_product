@@ -1,6 +1,9 @@
 package se.hkr.app;
 
 
+import javafx.scene.control.Alert;
+import org.controlsfx.control.action.Action;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -27,6 +30,15 @@ public class Data {
         String userId = user.getPersonnummer();
         DatabaseApiInsert.createJournalEntry(DatabaseConnection.getInstance().connect(), journalText, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
+    }
+
+    public static void submissionCompleteNote(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Submitted");
+        alert.setHeaderText("Mood and Tension results have been submitted");
+        alert.setContentText("See you next time!");
+        alert.showAndWait();
+
     }
 
 } 
