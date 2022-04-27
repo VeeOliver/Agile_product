@@ -46,9 +46,9 @@
                                         <Image url="@imgs/Scale_white_background_2.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fitHeight="46.0" fitWidth="448.0" layoutX="164.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fitHeight="66.0" fitWidth="466.0" layoutX="162.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@imgs/Scale_white_background_2.png" />
+                                        <Image url="@imgs/tension_scale.png" />
                                     </image>
                                 </ImageView>
                             </children>
