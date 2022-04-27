@@ -9,6 +9,7 @@ import java.io.IOException;
 
 
 public class RegisterController {
+
     @FXML
     TextField emailField;
 
