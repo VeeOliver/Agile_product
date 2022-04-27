@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.MenuController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.MenuController">
   <tabs>
     <Tab text="Mood">
       <content>
@@ -16,8 +23,8 @@
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <Slider layoutX="224.0" layoutY="181.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="14.0" prefWidth="317.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
-                  <Slider layoutX="224.0" layoutY="264.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="14.0" prefWidth="322.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+                  <Slider fx:id="moodSlider" layoutX="224.0" layoutY="181.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="14.0" prefWidth="317.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
+                  <Slider fx:id="tensionSlider" layoutX="224.0" layoutY="264.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="14.0" prefWidth="322.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="5.0" />
                   <Button layoutX="296.0" layoutY="361.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="177.0" text="Submit" textFill="#bf9270" />
                   <Label layoutX="367.0" layoutY="147.0" text="Mood" textFill="#bf9270" />
                   <Label layoutX="364.0" layoutY="239.0" text="Tension" textFill="#bf9270" />

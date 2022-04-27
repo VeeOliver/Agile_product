@@ -157,8 +157,8 @@ public class DatabaseApiSelect {
             SELECT
                 email, personnummer, name
             FROM User
-            WHERE email= ? and password = SHA-1( ? );
+            WHERE email= ? and password = SHA1( ? );
             """;
     public static String getPersonnummer = """
-            SELECT email FROM User WHERE  personnumer = ?""";
+            SELECT email FROM User WHERE  personnummer = ?""";
 }
