@@ -1,9 +1,9 @@
 * {
-    -fx-font-family: "Roboto";
+    -fx-font-family: "Lucida Grande";
 }
 
 #moodContainer {
-    -fx-background-color: "#FFF6EA";
+    -fx-background-color: white;
 }
 
 #moodTitle {
@@ -17,9 +17,9 @@
 }
 
 #journalContainer {
-    -fx-background-color: "#FFF6EA";
+    -fx-background-color: white;
 }
 
 #historyContainer {
-    -fx-background-color: "#FFF6EA";
+    -fx-background-color: white;
 }
