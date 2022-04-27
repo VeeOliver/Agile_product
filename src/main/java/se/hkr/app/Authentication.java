@@ -10,6 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -112,17 +113,35 @@ public class Authentication {
 
     // --- Registration methods ---
 
-    Boolean checkAvailability(String personnummer) throws SQLException {
-        boolean value = false;
+    Boolean[] checkAvailability(String personnummer, String email) throws SQLException {
+        boolean emailAvailable = false;
+        boolean personnummerAvailable = false;
         Connection con = DatabaseConnection.getInstance().connect();
         PreparedStatement stmt = con.prepareStatement(DatabaseApiSelect.getPersonnummer);
         stmt.setString(1, personnummer);
 
         ResultSet queryResult = stmt.executeQuery();
-        if (!queryResult.next()) {
-            return false;
+        if (queryResult.next()) {
+            ;
         }
-            return true;
+        else{
+            personnummerAvailable = true;
+        }
+
+        stmt = con.prepareStatement(DatabaseApiSelect.getEmail);
+        stmt.setString(1, email);
+
+        queryResult = stmt.executeQuery();
+        if (queryResult.next()) {
+            ;
+        }
+        else{
+            emailAvailable = true;
+        }
+        Boolean a[] = new Boolean[2];
+        a[0] = emailAvailable;
+        a[1] = personnummerAvailable;
+        return a;
         }
 
 
