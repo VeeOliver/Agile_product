@@ -1,12 +1,12 @@
 
 #appName {
-    -fx-font-family: "Optima"
+    -fx-font-family: "Optima";
 }
 #background {
     --fx-background-color: white;
 }
 #title {
-    -fx-font-family: "Lucida Grande"
+    -fx-font-family: "Lucida Grande";
     -fx-background-color: white;
     -fx-font-size: 20px;
 }
@@ -16,5 +16,5 @@
 }
 
 #header {
-    -fx-background-color: "#32328E"
+    -fx-background-color: "#32328E";
 }
