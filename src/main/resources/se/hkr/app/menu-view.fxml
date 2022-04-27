@@ -79,8 +79,8 @@
                               <Font name="Lucida Grande" size="30.0" />
                            </font>
                         </Label>
-                        <Slider fx:id="moodSlider" layoutX="163.0" layoutY="174.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="435.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
-                        <Slider layoutX="170.0" layoutY="332.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="428.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
+                        <Slider fx:id="moodSlider" layoutX="166.0" layoutY="174.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="435.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
+                        <Slider fx:id="tensionSlider" layoutX="170.0" layoutY="332.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="428.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
                         <Button fx:id="submitMT" layoutX="301.0" layoutY="437.0" mnemonicParsing="false" onAction="#onSubmitMT" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #32328E;" text="Submit" textFill="#fcfaf8" />
                         <Label layoutX="354.0" layoutY="119.0" text="Mood">
                            <font>
