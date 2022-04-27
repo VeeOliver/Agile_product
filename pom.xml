@@ -161,6 +161,12 @@
             <artifactId>mariadb-java-client</artifactId>
             <version>3.0.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>testfx-junit</artifactId>
+            <version>4.0.15-alpha</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <testResources>
