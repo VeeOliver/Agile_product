@@ -56,20 +56,18 @@ public class Authentication {
     // --- Registration methods ---
 
     Boolean[] checkAvailability(String personnummer, String email) throws SQLException {
-        boolean emailAvailable = false;
-        boolean personnummerAvailable = false;
+        Boolean emailAvailable = false;
+        Boolean personnummerAvailable = false;
         Connection con = DatabaseConnection.getInstance().connect();
-        PreparedStatement stmt = con.prepareStatement(DatabaseApiSelect.getPersonnummer);
-        stmt.setString(1, personnummer);
 
-        ResultSet queryResult = stmt.executeQuery();
-        if (!queryResult.next()) personnummerAvailable = true;
-
-        stmt = con.prepareStatement(DatabaseApiSelect.getEmail);
-        stmt.setString(1, email);
-
-        queryResult = stmt.executeQuery();
-        if (!queryResult.next()) emailAvailable = true;
+        ResultSet queryResult = DatabaseApiSelect.checkPersonnummer(con,personnummer );
+        if (!queryResult.next()){
+            personnummerAvailable = true;
+        }
+        queryResult = DatabaseApiSelect.checkEmail(con, email);
+        if(!queryResult.next()){
+            emailAvailable = true;
+        }
 
         Boolean arr[] = { emailAvailable, personnummerAvailable };
         return arr;
