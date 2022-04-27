@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import javax.xml.transform.Result;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.sql.Connection;
@@ -85,25 +87,12 @@ public class Authentication {
         boolean emailAvailable = false;
         boolean personnummerAvailable = false;
         Connection con = DatabaseConnection.getInstance().connect();
-        PreparedStatement stmt = con.prepareStatement(DatabaseApiSelect.getPersonnummer);
-        stmt.setString(1, personnummer);
-
-        ResultSet queryResult = stmt.executeQuery();
-        if (queryResult.next()) {
-            ;
-        }
-        else{
+        ResultSet queryResult = DatabaseApiSelect.checkPersonnummer(con,personnummer );
+        if (!queryResult.next()){
             personnummerAvailable = true;
         }
-
-        stmt = con.prepareStatement(DatabaseApiSelect.getEmail);
-        stmt.setString(1, email);
-
-        queryResult = stmt.executeQuery();
-        if (queryResult.next()) {
-            ;
-        }
-        else{
+        queryResult = DatabaseApiSelect.checkEmail(con, email);
+        if(!queryResult.next()){
             emailAvailable = true;
         }
         Boolean a[] = new Boolean[2];
