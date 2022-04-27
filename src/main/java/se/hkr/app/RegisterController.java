@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class RegisterController {
+
     @FXML
     TextField registerPersonnummer;
 
@@ -27,14 +28,14 @@ public class RegisterController {
 
     // Register Button
     public void onRegisterBtnClick(ActionEvent event) throws IOException, SQLException {
-        Boolean availability = auth.checkAvailability(registerPersonnummer.getText());
+        Boolean[] availability = auth.checkAvailability(registerPersonnummer.getText(),registerEmailField.getText());
 
-        if (registerPasswordField.getText().equals(registerRepPasswordField.getText()) && !availability) {
+        if (registerPasswordField.getText().equals(registerRepPasswordField.getText()) && availability[0] && availability[1]) {
             auth.registerUser(registerPersonnummer, registerName, registerEmailField, registerPasswordField);
-            auth.printUsers();
+            // auth.printUsers();
             auth.successRegistration();
             auth.switchToWelcome(event);
-        } else if (availability) {
+        } else if (!availability[1] || !availability[0]) {
             auth.registerError();
         } else {
             auth.registerPasswordError();
