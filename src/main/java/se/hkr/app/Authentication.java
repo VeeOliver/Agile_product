@@ -154,8 +154,9 @@ public class Authentication {
         alert.showAndWait();
     }
 
-    boolean validName(String name){
-        return name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
+    boolean validPassword(String password) {
+        return password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
+
     }
 
     Boolean notEmptyFields(String personnummer, String name, String email, String password, String repPassword) {
