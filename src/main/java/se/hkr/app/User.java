@@ -21,4 +21,28 @@ public class User {
         return single_instance;
     }
 
+
+    public String getPersonnummer() {
+        return Personnummer;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPersonnummer(String personnummer) {
+        Personnummer = personnummer;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 }
