@@ -34,15 +34,16 @@ public class Authentication {
 
         ResultSet userData = stmt.executeQuery();
         if (!userData.next()) {
-            System.out.println(false);
             return false;
         }
         else {
             String Personnummer = userData.getString(1);
             email = userData.getString(2);
             String Name = userData.getString(3);
-            User.getInstance(Personnummer, email, Name);
-            System.out.println(true);
+            User user = User.getInstance(Personnummer, email, Name);
+            user.setEmail(email);
+            user.setName(Name);
+            user.setPersonnummer(Personnummer);
             return true;
 
         }
@@ -165,7 +166,14 @@ public class Authentication {
 
         return personnummer.matches("^(19|20)?[0-9]{6}[- ]?[0-9]{4}$");
     }
+    boolean validName(String name){
+        return name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
+    }
 
+    boolean validPassword(String password){
+       return password.matches( "");
+
+    }
     void switchToWelcome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
