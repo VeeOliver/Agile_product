@@ -171,7 +171,7 @@ public class Authentication {
     }
 
     boolean validPassword(String password){
-       return password.matches( "");
+       return password.matches( "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$");
 
     }
     void switchToWelcome(ActionEvent event) throws IOException {
