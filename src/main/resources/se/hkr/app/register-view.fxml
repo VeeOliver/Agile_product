@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
@@ -13,7 +14,7 @@
    <children>
       <Pane fx:id="formContainer" layoutY="77.0" prefHeight="407.0" prefWidth="766.0">
          <children>
-            <Label fx:id="registerTitle" layoutX="349.0" layoutY="52.0" text="Register" textFill="#282625">
+            <Label fx:id="registerTitle" layoutX="343.0" layoutY="54.0" prefHeight="41.0" prefWidth="78.0" text="Register" textFill="#282625">
                <font>
                   <Font size="18.0" />
                </font></Label>
@@ -25,15 +26,20 @@
             <Button layoutX="354.0" layoutY="330.0" mnemonicParsing="false" onAction="#onBackBtnClick" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #32328E;" text="Back" textFill="#f8f6f5" />
             <TextField fx:id="registerPersonnummer" focusTraversable="false" layoutX="284.0" layoutY="106.0" prefHeight="25.0" prefWidth="195.0" promptText="Personnummer" />
             <TextField fx:id="registerName" focusTraversable="false" layoutX="284.0" layoutY="146.0" prefHeight="25.0" prefWidth="195.0" promptText="Name" />
+            <ImageView fitHeight="204.0" fitWidth="195.0" layoutX="65.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/Graphic_Achilles.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="header" nodeOrientation="LEFT_TO_RIGHT" prefHeight="77.0" prefWidth="766.0" style="-fx-background-color: #32328E;" stylesheets="@welcome.css">
          <children>
-            <Label fx:id="appName" layoutX="79.0" layoutY="19.0" prefHeight="39.0" prefWidth="167.0" text="MYRMIDON " textAlignment="CENTER" textFill="#f8f7f7">
-               <font>
-                  <Font name="Optima Regular" size="27.0" />
-               </font>
-            </Label>
+            <ImageView fx:id="appName" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/Myrmidon_full_trailing.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>
