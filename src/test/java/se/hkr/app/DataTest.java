@@ -15,6 +15,7 @@ import org.testfx.framework.junit.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
 
 import java.sql.Connection;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,16 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DataTest {
+    @Test
+    @DisplayName("Test instantiation and getters of Data object.")
+    public void testDataInstantiationAndGetters() {
+        LocalDate date = LocalDate.of(2022, 01, 01);
+        String daytime = "Morning";
+        Data testData = new Data(date, daytime);
+        assertInstanceOf(Data.class, testData);
+        assertEquals(date, testData.getDate());
+        assertEquals(daytime, testData.getDaytime());
+    }
 
     @Mock
     Connection con;

@@ -307,6 +307,58 @@
                 </execution>
             </executions>
         </plugin>
+        <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.39.1</version>
+            <configuration>
+                <dockerHost>http://localhost:2375</dockerHost>
+                <images>
+                    <image>
+                        <name>mariadb:latest</name>
+                        <alias>databaseIT</alias>
+                        <build>
+                            <from>mariadb:latest</from>
+                            <ports>
+                                <port>10000:3306/tcp</port>
+                            </ports>
+                            <workdir>/Agile_product</workdir>
+                            <runCmds>
+                                <run>copy /sql/database_ddl.sql /docker-entrypoint-initdb.d</run>
+                                <run>copy /sql/sample_data_insert.sql /docker-entrypoint-initdb.d</run>
+                            </runCmds>
+                        </build>
+                        <run>
+                            <env>
+                                <MARIADB_ROOT_PASSWORD>iAmAPassword</MARIADB_ROOT_PASSWORD>
+                                <MARIADB_ROOT_HOST>localhost</MARIADB_ROOT_HOST>
+                                <MARIADB_DATABASE>Myrmidon</MARIADB_DATABASE>
+                                <MARIADB_USER>myrmidon_admin</MARIADB_USER>
+                                <MARIADB_PASSWORD>myr_ADM123</MARIADB_PASSWORD>
+                            </env>
+                            <restartPolicy>always</restartPolicy>
+                        </run>
+                    </image>
+                </images>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>start</id>
+                    <phase>pre-integration-test</phase>
+                    <goals>
+                        <goal>build</goal>
+                        <goal>start</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>stop</id>
+                    <phase>post-integration-test</phase>
+                    <goals>
+                        <goal>stop</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
         </plugins>
     </build>
 
