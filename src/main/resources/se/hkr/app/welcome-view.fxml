@@ -27,9 +27,9 @@
                   <Font name="Lucida Grande" size="24.0" />
                </font>
             </Label>
-            <ImageView fitHeight="160.0" fitWidth="159.0" layoutX="491.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="184.0" fitWidth="261.0" layoutX="476.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@imgs/Achilles_the_ant.png" />
+                  <Image url="@imgs/Graphic_Achilles.png" />
                </image>
             </ImageView>
          </children>
