@@ -10,6 +10,8 @@ module Myrmidon {
     requires org.kordamp.bootstrapfx.core;
     requires transitive java.sql;
     requires javatuples;
+    requires org.knowm.xchart;
+    requires javafx.swing;
     exports se.hkr.app;
     opens se.hkr.app to javafx.fxml;
 
