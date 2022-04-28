@@ -1,12 +1,16 @@
-* {
-    -fx-font-family: "Roboto";
-}
 
+#appName {
+    -fx-font-family: "Optima";
+}
+#background {
+    --fx-background-color: white;
+}
 #title {
-    -fx-background-color: "#FFF6EA";
+    -fx-font-family: "Lucida Grande";
+    -fx-background-color: white;
     -fx-font-size: 20px;
 }
 
 #formContainer {
-    -fx-background-color: "#F7E9D7";
+    -fx-background-color: white;
 }

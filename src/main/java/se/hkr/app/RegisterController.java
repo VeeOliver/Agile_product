@@ -2,18 +2,18 @@ package se.hkr.app;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.io.IOException;
-
+import java.sql.SQLException;
 
 public class RegisterController {
-    @FXML
-    TextField emailField;
 
     @FXML
-    PasswordField passwordField;
+    TextField registerPersonnummer;
+
+    @FXML
+    TextField registerName;
 
     @FXML
     TextField registerEmailField;
@@ -24,29 +24,35 @@ public class RegisterController {
     @FXML
     PasswordField registerRepPasswordField;
 
-    @FXML
-    DatePicker registerBirthField;
-
     Authentication auth = new Authentication();
 
     // Register Button
-    public void onRegisterBtnClick(ActionEvent event) throws IOException {
-        if (registerPasswordField.getText().equals(registerRepPasswordField.getText())
-                && !auth.checkAvailability(Data.users, registerEmailField.getText())) {
-            auth.registerUser(registerEmailField, registerPasswordField);
-            auth.successRegistration();
-        } else if (auth.checkAvailability(Data.users, registerEmailField.getText())) {
-            auth.registerError();
+    public void onRegisterBtnClick(ActionEvent event) throws IOException, SQLException {
+        Boolean[] availability = auth.checkAvailability(registerPersonnummer.getText(), registerEmailField.getText());
+        Boolean formatError = auth.checkFormatError(registerPersonnummer.getText(), registerName.getText(),
+                registerEmailField.getText(), registerPasswordField.getText(), registerRepPasswordField.getText());
+        Boolean isAvailable = availability[0] && availability[1];
+
+        // Check format errors
+        if (formatError) {
+            auth.showFormatError(registerPersonnummer.getText(), registerName.getText(), registerEmailField.getText(),
+                    registerPasswordField.getText(), registerRepPasswordField.getText());
         } else {
-            auth.registerPasswordError();
+            // Check availability
+            if (isAvailable) {
+                auth.registerUser(registerPersonnummer, registerName, registerEmailField, registerPasswordField);
+                auth.successRegistration();
+                auth.switchToWelcome(event);
+            } else {
+                auth.registerError();
+            }
+            auth.resetRegField(registerPersonnummer, registerName, registerEmailField, registerPasswordField,
+                    registerRepPasswordField);
         }
-        auth.resetRegField(registerEmailField, registerPasswordField, registerRepPasswordField, registerBirthField);
-        auth.switchToWelcome(event);
     }
 
     // Back Button
     public void onBackBtnClick(ActionEvent event) throws IOException {
         auth.switchToWelcome(event);
     }
-
 }

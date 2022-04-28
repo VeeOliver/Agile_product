@@ -67,6 +67,28 @@ public class DatabaseApiSelect {
         }
     }
 
+    public static ResultSet checkPersonnummer(Connection con, String personnummer) throws SQLException {
+        String getPersonnummer = """
+            SELECT email FROM User WHERE  personnummer = ? """;
+        PreparedStatement stmt = con.prepareStatement(getPersonnummer);
+        stmt.setString(1, personnummer);
+
+        return stmt.executeQuery();
+    }
+
+    public static ResultSet checkEmail(Connection con, String email) throws SQLException {
+        String getEmail = """
+            SELECT personnummer FROM User WHERE  email = ? """;
+        PreparedStatement stmt = con.prepareStatement(getEmail);
+        stmt.setString(1, email);
+
+        return stmt.executeQuery();
+    }
+
+
+
+
+
     // SQL statements for mood retrieval
     public static String moodOneDay = """
             SELECT
@@ -151,4 +173,14 @@ public class DatabaseApiSelect {
             NATURAL JOIN Tension ON personnummer
             WHERE Tension.rating >= ? AND Tension.rating < ? AND Journal_entry.personnummer LIKE ?
             ORDER BY Journal_entry.date;""";
+
+    // Check login
+    public static String getLogin = """
+            SELECT
+                personnummer, email, name
+            FROM User
+            WHERE email= ? and password = SHA1( ? );
+            """;
+
+
 }
