@@ -137,7 +137,7 @@ public class MenuController {
     private void showChart(Chart chart) {
         JPanel chartPanel = new XChartPanel<>(chart);
 
-        // for embeding swing in javafx
+        // for embedding swing in javafx
         SwingNode swingNode = new SwingNode();
         swingNode.setContent(chartPanel);
 
@@ -154,31 +154,53 @@ public class MenuController {
 
     private void buildPieChart() {
         // Create Chart
-        XYChart chart = new XYChartBuilder().width(766).height(516).title("Day Scale").build();
-
+        XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.GGPlot2).width(766).height(516).title("Day Scale").build();
+        Color DarkBlue = new Color(50, 82, 168);
+        Color lightGreen = new Color(0, 255, 0, 40);
         // Customize Chart
-        chart.getStyler().setLegendVisible(false);
+        chart.getStyler().setLegendVisible(true);
+        Color[] colorsSeries = new Color[]{DarkBlue, Color.CYAN, lightGreen};
+        chart.getStyler().setSeriesColors(colorsSeries);
+
 
         // Series
         List<Date> xData = new ArrayList<>();
+        List<Date> wData = new ArrayList<>();
         List<Double> yData = new ArrayList<>();
+        List<Double> zData = new ArrayList<>();
+        List<Double> AvgData = new ArrayList<>();
+
+        for(int j= 11; j > 1; j--){
+            zData.add((double) 3);
+        }
+
 
         Random random = new Random();
 
         DateFormat sdf = new SimpleDateFormat("MM-dd");
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date date = null;
-        for (int i = 1; i <= 14; i++) {
+        for (int i = 1; i <= 10; i++) {
             try {
                 date = sdf.parse("02-" + (4 * i + random.nextInt(2)));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             xData.add(date);
-            yData.add(Math.random() * i / -100000000);
+            wData.add(date);
+            yData.add((double) i);
+            xData.add(date);
+            yData.add((double) i+2);
+            AvgData.add((double) i+1);
         }
 
-        chart.addSeries("blah", xData, yData);
+        XYSeries moodSeries = chart.addSeries("Mood", xData, yData);
+        chart.addSeries("Average Mood", wData, AvgData);
+        moodSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Scatter);
+        XYSeries tensionSeries = chart.addSeries("Tension", wData, zData);
+        tensionSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Area);
+
+
 
         showChart(chart);
     }
