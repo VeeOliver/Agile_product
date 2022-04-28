@@ -159,6 +159,7 @@ public class MenuController {
         Color lightGreen = new Color(0, 255, 0, 40);
         // Customize Chart
         chart.getStyler().setLegendVisible(true);
+        chart.getStyler().setToolTipsEnabled(true);
         Color[] colorsSeries = new Color[]{DarkBlue, Color.CYAN, lightGreen};
         chart.getStyler().setSeriesColors(colorsSeries);
 
