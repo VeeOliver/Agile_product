@@ -22,7 +22,7 @@ public class Authentication {
 
     // --- Login methods ---
 
-    Boolean checkLoginCredentials(String email, String password) throws SQLException {
+    public Boolean checkLoginCredentials(String email, String password) throws SQLException {
         boolean value = false;
         Connection con = DatabaseConnection.getInstance().connect();
         PreparedStatement stmt = con.prepareStatement(DatabaseApiSelect.getLogin);
@@ -45,7 +45,7 @@ public class Authentication {
         }
     }
 
-    void logError() {
+    public void logError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Authentication error");
         alert.setHeaderText("Username or password incorrect");
@@ -55,7 +55,7 @@ public class Authentication {
 
     // --- Registration methods ---
 
-    Boolean[] checkAvailability(String personnummer, String email) throws SQLException {
+    public Boolean[] checkAvailability(String personnummer, String email) throws SQLException {
         Boolean emailAvailable = false;
         Boolean personnummerAvailable = false;
         Connection con = DatabaseConnection.getInstance().connect();
@@ -73,14 +73,14 @@ public class Authentication {
         return arr;
     }
 
-    void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
+    public void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
             PasswordField registerPasswordField) {
         Connection con = DatabaseConnection.getInstance().connect();
         DatabaseApiInsert.createUserEntry(con, registerPersonnummer.getText(), registerName.getText(),
                 registerEmailField.getText(), registerPasswordField.getText());
     }
 
-    void successRegistration() {
+    public void successRegistration() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Registration Successful!");
         alert.setHeaderText("Registration Successful!");
@@ -88,7 +88,7 @@ public class Authentication {
         alert.showAndWait();
     }
 
-    void registerError() {
+    public void registerError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Registration error");
         alert.setHeaderText("Registration error");
@@ -96,7 +96,7 @@ public class Authentication {
         alert.showAndWait();
     }
 
-    void resetRegField(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
+    public void resetRegField(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
             PasswordField registerPasswordField,
             PasswordField registerRepPasswordField) {
         registerPersonnummer.setText("");
@@ -106,34 +106,34 @@ public class Authentication {
         registerRepPasswordField.setText("");
     }
 
-    void resetLogFields(TextField emailField, PasswordField passwordField) {
+    public void resetLogFields(TextField emailField, PasswordField passwordField) {
         emailField.setText("");
         passwordField.setText("");
     }
 
     // Registration Fields RegEx
 
-    Boolean validEmail(String Email) {
+    public Boolean validEmail(String Email) {
         return Email.matches("^(.+)@(.+)$");
     }
 
-    Boolean validPersonnummer(String personnummer) {
+    public Boolean validPersonnummer(String personnummer) {
         return personnummer.matches("^(19|20)?[0-9]{6}[- ]?[0-9]{4}$");
     }
 
-    Boolean validPassword(String password) {
+    public Boolean validPassword(String password) {
         return password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()-[{}]:;',?/*~$^+=<>]).{8,20}$");
     }
 
-    Boolean equalPassword(String pass1, String pass2) {
+    public Boolean equalPassword(String pass1, String pass2) {
         return Objects.equals(pass1, pass2);
     }
 
-    boolean validName(String name) {
+    public boolean validName(String name) {
         return name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
     }
 
-    Boolean checkFormatError(String personnummer, String name, String email, String password, String repPassword) {
+    public Boolean checkFormatError(String personnummer, String name, String email, String password, String repPassword) {
         ArrayList<Boolean> fields = new ArrayList<>(Arrays.asList(
                 validPersonnummer(personnummer),
                 validName(name),
@@ -144,7 +144,7 @@ public class Authentication {
         return fields.contains(false);
     }
 
-    void showFormatError(String personnummer, String name, String email, String password, String repPassword) {
+    public void showFormatError(String personnummer, String name, String email, String password, String repPassword) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Registration error");
         alert.setHeaderText("Registration error");
@@ -173,7 +173,7 @@ public class Authentication {
         alert.showAndWait();
     }
 
-    void switchToWelcome(ActionEvent event) throws IOException {
+    public void switchToWelcome(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
