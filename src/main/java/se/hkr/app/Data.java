@@ -6,12 +6,28 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import org.controlsfx.control.action.Action;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 
 
 public class Data {
+    private LocalDate date;
+    private String daytime;
+
+    public Data(LocalDate date, String daytime) {
+        this.date = date;
+        this.daytime = daytime;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+    public String getDaytime() {
+        return this.daytime;
+    }
 
     static public ArrayList<User> users = new ArrayList<>();
 
