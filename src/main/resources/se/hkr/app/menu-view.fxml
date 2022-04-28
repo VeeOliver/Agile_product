@@ -90,10 +90,10 @@
                 </Tab>
             </tabs>
         </TabPane>
-        <Label fx:id="headerMenu" layoutX="72.0" layoutY="14.0" text="MYRMIDON" textFill="#f8f7f7">
-            <font>
-                <Font name="Optima Regular" size="27.0" />
-            </font>
-        </Label>
+      <ImageView fx:id="headerMenu" fitHeight="64.0" fitWidth="187.0" layoutX="14.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/Myrmidon_full_trailing.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>
