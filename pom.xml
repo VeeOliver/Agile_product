@@ -21,14 +21,11 @@
             <artifactId>maven-site-plugin</artifactId>
             <version>3.11.0</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>18</version>
         </dependency>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -60,17 +57,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-swing</artifactId>
             <version>18</version>
         </dependency>
-
-
-
-
-
         <dependency>
             <groupId>net.synedra</groupId>
             <artifactId>validatorfx</artifactId>
@@ -92,7 +83,6 @@
             <artifactId>bootstrapfx-core</artifactId>
             <version>0.4.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -167,6 +157,7 @@
             <version>0.39.1</version>
         </dependency>
     </dependencies>
+
     <build>
         <testResources>
             <testResource>
@@ -221,7 +212,6 @@
                     <excludes>**/module-info.java</excludes>
                 </configuration>
                 <version>3.1.2</version>
-
                 <dependencies>
                     <dependency>
                         <groupId>com.puppycrawl.tools</groupId>
@@ -234,112 +224,109 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>3.2.2</version>
-
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.11.0</version>
             </plugin>
-
-        <plugin>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.8</version>
-            <configuration>
-                <excludes>
-                    <exclude>/target/classes/module-info.class</exclude>
-                </excludes>
-            </configuration>
-
-            <executions>
-                <execution>
-                    <id>prepare-agent</id>
-                    <goals><goal>prepare-agent</goal></goals>
-                </execution>
-                <execution>
-                    <id>report</id>
-                    <phase>test</phase>
-                    <goals><goal>report</goal></goals>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <version>1.5</version>
-            <executions>
-                <execution>
-                    <id>add-test-source</id>
-                    <phase>process-resources</phase>
-                    <goals>
-                        <goal>add-test-source</goal>
-                    </goals>
-                    <configuration>
-                        <sources>
-                            <source>src/it/java</source>
-                        </sources>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-failsafe-plugin</artifactId>
-            <version>3.0.0-M6</version>
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>integration-test</goal>
-                        <goal>verify</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
-        <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-            <version>0.39.1</version>
-            <configuration>
-                <dockerHost>http://localhost:2375</dockerHost>
-                <sourceDirectory>/sql</sourceDirectory>
-                <images>
-                    <image>
-                        <name>itdatabase</name>
-                        <alias>ITdb</alias>
-                        <build>
-                            <contextDir>/</contextDir>
-                        </build>
-                        <run>
-                            <ports>
-                                <port>5000:3306/tcp</port>
-                            </ports>
-                            <wait>
-                                <log>(?s)init process done</log>
-                                <time>50000</time>
-                            </wait>
-                        </run>
-                    </image>
-                </images>
-            </configuration>
-            <executions>
-                <execution>
-                    <id>start</id>
-                    <phase>pre-integration-test</phase>
-                    <goals>
-                        <goal>build</goal>
-                        <goal>start</goal>
-                    </goals>
-                </execution>
-                <execution>
-                    <id>stop</id>
-                    <phase>post-integration-test</phase>
-                    <goals>
-                        <goal>stop</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <configuration>
+                    <excludes>
+                        <exclude>/target/classes/module-info.class</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals><goal>prepare-agent</goal></goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals><goal>report</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/it/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.0.0-M6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.39.1</version>
+                <configuration>
+                    <dockerHost>http://localhost:2375</dockerHost>
+                    <sourceDirectory>/sql</sourceDirectory>
+                    <images>
+                        <image>
+                            <name>itdatabase</name>
+                            <alias>ITdb</alias>
+                            <build>
+                                <contextDir>/</contextDir>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>5000:3306/tcp</port>
+                                </ports>
+                                <wait>
+                                    <log>(?s)init process done</log>
+                                    <time>50000</time>
+                                </wait>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
