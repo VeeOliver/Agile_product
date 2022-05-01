@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.nio.file.attribute.UserDefinedFileAttributeView;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Welcome extends Application {
@@ -24,6 +27,14 @@ public class Welcome extends Application {
 
 
     public static void main(String[] args) {
-        launch();
+        //launch();
+        Connection con = null;
+        try {
+            String url = "jdbc:mariadb://127.0.0.1:5000/?user=root&password=root";
+            con = DriverManager.getConnection(url);
+            System.out.println("success");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

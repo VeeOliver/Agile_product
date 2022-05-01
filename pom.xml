@@ -302,30 +302,22 @@
             <version>0.39.1</version>
             <configuration>
                 <dockerHost>http://localhost:2375</dockerHost>
+                <sourceDirectory>/sql</sourceDirectory>
                 <images>
                     <image>
-                        <name>mariadb:latest</name>
-                        <alias>databaseIT</alias>
+                        <name>itdatabase</name>
+                        <alias>ITdb</alias>
                         <build>
-                            <from>mariadb:latest</from>
-                            <ports>
-                                <port>10000:3306/tcp</port>
-                            </ports>
-                            <workdir>/Agile_product</workdir>
-                            <runCmds>
-                                <run>copy /sql/database_ddl.sql /docker-entrypoint-initdb.d</run>
-                                <run>copy /sql/sample_data_insert.sql /docker-entrypoint-initdb.d</run>
-                            </runCmds>
+                            <contextDir>/</contextDir>
                         </build>
                         <run>
-                            <env>
-                                <MARIADB_ROOT_PASSWORD>iAmAPassword</MARIADB_ROOT_PASSWORD>
-                                <MARIADB_ROOT_HOST>localhost</MARIADB_ROOT_HOST>
-                                <MARIADB_DATABASE>Myrmidon</MARIADB_DATABASE>
-                                <MARIADB_USER>myrmidon_admin</MARIADB_USER>
-                                <MARIADB_PASSWORD>myr_ADM123</MARIADB_PASSWORD>
-                            </env>
-                            <restartPolicy>always</restartPolicy>
+                            <ports>
+                                <port>5000:3306/tcp</port>
+                            </ports>
+                            <wait>
+                                <log>(?s)init process done</log>
+                                <time>50000</time>
+                            </wait>
                         </run>
                     </image>
                 </images>

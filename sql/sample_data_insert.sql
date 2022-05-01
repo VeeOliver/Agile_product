@@ -1,3 +1,5 @@
+USE myrmidon;
+
 -- Create sample user 1
 INSERT INTO User
 VALUES (
