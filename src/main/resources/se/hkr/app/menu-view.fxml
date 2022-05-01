@@ -16,9 +16,9 @@
 
 <AnchorPane prefHeight="568.0" prefWidth="766.0" style="-fx-background-color: #32328E;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.MenuController">
     <children>
-        <TabPane layoutY="66.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Mood">
+                <Tab style="-fx-background-radius: 0;" text="Mood">
                     <content>
                         <AnchorPane fx:id="moodContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                             <children>
@@ -29,7 +29,7 @@
                                 </Label>
                                 <Slider fx:id="moodSlider" layoutX="166.0" layoutY="174.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="435.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
                                 <Slider fx:id="tensionSlider" layoutX="170.0" layoutY="332.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="428.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
-                                <Button fx:id="submitMT" layoutX="301.0" layoutY="437.0" mnemonicParsing="false" onAction="#onSubmitMT" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #32328E;" text="Submit" textFill="#fcfaf8" />
+                                <Button fx:id="submitMT" layoutX="301.0" layoutY="437.0" mnemonicParsing="false" onAction="#onSubmitMT" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Submit" textFill="#fcfaf8" />
                                 <Label fx:id="moodLabel" layoutX="354.0" layoutY="119.0" text="Mood">
                                     <font>
                                         <Font name="Lucida Grande" size="24.0" />
@@ -40,7 +40,7 @@
                                         <Font name="Lucida Grande" size="24.0" />
                                     </font>
                                 </Label>
-                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="WHITE" />
+                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Logout" textFill="WHITE" />
                                 <ImageView fitHeight="86.0" fitWidth="451.0" layoutX="158.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@imgs/Scale_white_background_2.png" />
@@ -55,7 +55,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Journal">
+                <Tab style="-fx-background-radius: 0;" text="Journal">
                     <content>
                         <AnchorPane fx:id="journalContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                             <children>
@@ -65,17 +65,17 @@
                                     </font>
                                 </Label>
                                 <TextArea fx:id="journalEntry" layoutX="115.0" layoutY="78.0" prefHeight="301.0" prefWidth="536.0" promptText="Write your thoughts here..." />
-                                <Button fx:id="journalSubmit" layoutX="287.0" layoutY="401.0" mnemonicParsing="false" onAction="#onSubmitJournalEntry" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E;" text="Submit" textFill="WHITE" />
-                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="WHITE" />
+                                <Button fx:id="journalSubmit" layoutX="287.0" layoutY="401.0" mnemonicParsing="false" onAction="#onSubmitJournalEntry" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Submit" textFill="WHITE" />
+                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Logout" textFill="WHITE" />
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="History">
+                <Tab style="-fx-background-radius: 0;" text="History">
                     <content>
                         <AnchorPane fx:id="historyContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                             <children>
-                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E;" text="Logout" textFill="#fcfcfc" />
+                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Logout" textFill="#fcfcfc" />
                         <LineChart fx:id="graph" layoutX="133.0" layoutY="34.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
@@ -90,7 +90,7 @@
                 </Tab>
             </tabs>
         </TabPane>
-      <ImageView fx:id="headerMenu" fitHeight="64.0" fitWidth="187.0" layoutX="14.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="headerMenu" fitHeight="74.0" fitWidth="223.0" layoutX="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@imgs/Myrmidon_full_trailing.png" />
          </image>

@@ -19,11 +19,11 @@
                   <Font size="18.0" />
                </font></Label>
             <TextField fx:id="registerEmailField" focusTraversable="false" layoutX="284.0" layoutY="187.0" prefHeight="25.0" prefWidth="195.0" promptText="Email" />
-            <Button fx:id="registerBtn" layoutX="423.0" layoutY="330.0" mnemonicParsing="false" onAction="#onRegisterBtnClick" style="-fx-background-color: #32328E;" text="Register" textFill="#f8f6f5" />
+            <Button fx:id="registerBtn" layoutX="417.0" layoutY="330.0" mnemonicParsing="false" onAction="#onRegisterBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Register" textFill="#f8f6f5" />
             <PasswordField fx:id="registerPasswordField" focusTraversable="false" layoutX="284.0" layoutY="225.0" prefHeight="25.0" prefWidth="195.0" promptText="Password" />
             <PasswordField fx:id="registerRepPasswordField" focusTraversable="false" layoutX="284.0" layoutY="262.0" prefHeight="25.0" prefWidth="195.0" promptText="Repeat password" />
             <ImageView fitHeight="27.0" fitWidth="29.0" layoutX="118.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
-            <Button layoutX="354.0" layoutY="330.0" mnemonicParsing="false" onAction="#onBackBtnClick" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #32328E;" text="Back" textFill="#f8f6f5" />
+            <Button layoutX="343.0" layoutY="330.0" mnemonicParsing="false" onAction="#onBackBtnClick" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Back" textFill="#f8f6f5" />
             <TextField fx:id="registerPersonnummer" focusTraversable="false" layoutX="284.0" layoutY="106.0" prefHeight="25.0" prefWidth="195.0" promptText="Personnummer" />
             <TextField fx:id="registerName" focusTraversable="false" layoutX="284.0" layoutY="146.0" prefHeight="25.0" prefWidth="195.0" promptText="Name" />
             <ImageView fitHeight="204.0" fitWidth="195.0" layoutX="65.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
@@ -35,7 +35,7 @@
       </Pane>
       <Pane fx:id="header" nodeOrientation="LEFT_TO_RIGHT" prefHeight="77.0" prefWidth="766.0" style="-fx-background-color: #32328E;" stylesheets="@welcome.css">
          <children>
-            <ImageView fx:id="appName" fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="appName" fitHeight="74.0" fitWidth="223.0" layoutX="23.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imgs/Myrmidon_full_trailing.png" />
                </image>
