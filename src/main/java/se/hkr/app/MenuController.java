@@ -28,10 +28,18 @@ import org.knowm.xchart.style.markers.SeriesMarkers;
 import javax.swing.*;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
+
+import static se.hkr.app.DatabaseApiSelect.RetrieveMode.MOOD_TENSION;
 
 public class MenuController {
     @FXML
@@ -51,7 +59,11 @@ public class MenuController {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                buildPieChart();
+                try {
+                    buildPieChart();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
@@ -133,7 +145,7 @@ public class MenuController {
         Data.journalSubmittedNote();
         Data.clearOutJournalEntry(journalEntry);
         }
-
+// Charts
     private void showChart(Chart chart) {
         JPanel chartPanel = new XChartPanel<>(chart);
 
@@ -152,7 +164,84 @@ public class MenuController {
 
     }
 
-    private void buildPieChart() {
+
+
+    private List[] weeklyTension() throws SQLException {
+        Connection con = DatabaseConnection.getInstance().connect();
+
+
+        ArrayList<Data> mood;
+
+
+        mood = DatabaseApiSelect.getData(con,MOOD_TENSION,getDate7DaysAgo(),getCurrentDate(),User.getInstance().getPersonnummer());
+        System.out.println(getDate7DaysAgo());
+        System.out.println(getCurrentDate());
+        System.out.println(mood);
+        for(Data data : mood){
+            System.out.println(data.getDate());
+        }
+
+
+
+        return getTensionArray(mood);
+
+
+
+
+    }
+
+    private List<Double> getMoodArray(ArrayList<Data> data){
+
+        List<Double> Mood = new ArrayList<>();
+
+        for (Data entry : data) {
+            MoodTension mood2 = (MoodTension) entry;
+            Mood.add((double) mood2.getMood());
+        }
+        return Mood;
+    }
+    private List[] getTensionArray(ArrayList<Data> data){
+
+        List<Double> Tension= new ArrayList<>();
+        List<Date> date = new ArrayList<>();
+
+        for (Data entry : data) {
+            MoodTension tension2 = (MoodTension) entry;
+            Tension.add((double) tension2.getTension());
+            date.add(localDatetoDate(tension2.getDate()));
+        }
+        return new List[] { Tension, date };
+    }
+
+    private Date localDatetoDate(LocalDate local){
+            //default time zone
+            ZoneId defaultZoneId = ZoneId.systemDefault();
+
+            //local date + atStartOfDay() + default time zone + toInstant() = Date
+            Date date = Date.from(local.atStartOfDay(defaultZoneId).toInstant());
+
+            return date;
+    }
+
+
+
+    private LocalDate getCurrentDate(){
+
+        return convertToLocalDateViaMilisecond(new Date(System.currentTimeMillis()));
+
+    };
+
+    private LocalDate getDate7DaysAgo(){
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+        return convertToLocalDateViaMilisecond(new Date(System.currentTimeMillis() - (50 * DAY_IN_MS)));
+    }
+
+    public LocalDate convertToLocalDateViaMilisecond(Date dateToConvert) {
+        return Instant.ofEpochMilli(dateToConvert.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+    private void buildPieChart() throws SQLException {
         // Create Chart
         XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.GGPlot2).width(766).height(516).title("Day Scale").build();
         Color DarkBlue = new Color(50, 82, 168);
@@ -163,43 +252,29 @@ public class MenuController {
         Color[] colorsSeries = new Color[]{DarkBlue, Color.CYAN, lightGreen};
         chart.getStyler().setSeriesColors(colorsSeries);
 
-
         // Series
         List<Date> xData = new ArrayList<>();
-        List<Date> wData = new ArrayList<>();
+
         List<Double> yData = new ArrayList<>();
-        List<Double> zData = new ArrayList<>();
+
         List<Double> AvgData = new ArrayList<>();
 
-        for(int j= 11; j > 1; j--){
-            zData.add((double) 3);
+        List[] tension = weeklyTension();
+
+        List<Double> zData = tension[0];
+        List<Date> cData = tension[1];
+
+        List<Date> wData = new ArrayList<>();
+
+        for (Date entry : cData){
+            System.out.println(entry.toString());
         }
 
-
-        Random random = new Random();
-
-        DateFormat sdf = new SimpleDateFormat("MM-dd");
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        Date date = null;
-        for (int i = 1; i <= 10; i++) {
-            try {
-                date = sdf.parse("02-" + (4 * i + random.nextInt(2)));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            xData.add(date);
-            wData.add(date);
-            yData.add((double) i);
-            xData.add(date);
-            yData.add((double) i+2);
-            AvgData.add((double) i+1);
+        for(Double ten :zData){
+            System.out.println(ten);
         }
-
-        XYSeries moodSeries = chart.addSeries("Mood", xData, yData);
-        chart.addSeries("Average Mood", wData, AvgData);
-        moodSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Scatter);
-        XYSeries tensionSeries = chart.addSeries("Tension", wData, zData);
-        tensionSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Area);
+        XYSeries tensionSeries = chart.addSeries("Tension", cData, zData);
+        tensionSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Scatter);
 
 
 

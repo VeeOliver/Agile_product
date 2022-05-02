@@ -11,7 +11,7 @@ public class DatabaseApiSelect {
 
     public enum RetrieveMode {JOURNAL_ENTRY, MOOD_TENSION}
 
-    // Convert ResultSet to List of Data obects
+    // Convert ResultSet to List of Data objects
     public static ArrayList<Data> parseToDataList (ResultSet rs) {
         ArrayList<Data> returnList = new ArrayList<>();
         try {
