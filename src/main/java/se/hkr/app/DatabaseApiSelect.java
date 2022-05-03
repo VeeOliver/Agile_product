@@ -181,7 +181,6 @@ public class DatabaseApiSelect {
     ArrayList<java.util.Date> Dates = new ArrayList<>();
     ArrayList<ArrayList> Data = new ArrayList<>();
     String weekDate = getDateDaysAgo(7).toString();
-        System.out.println(weekDate);
         String sql;
 
                 sql = """
@@ -200,7 +199,6 @@ public class DatabaseApiSelect {
             Double mood = rs.getDouble(1);
             Double tension = rs.getDouble(2);
             java.util.Date date = rs.getDate(3);
-            System.out.println(date);
 
 
             Mood.add(mood);
@@ -220,7 +218,6 @@ public class DatabaseApiSelect {
         ArrayList<java.util.Date> Dates = new ArrayList<>();
         ArrayList<ArrayList> Data = new ArrayList<>();
         String weekDate = getDateDaysAgo(7).toString();
-        System.out.println(weekDate);
         String sql;
 
         sql = """
@@ -240,7 +237,6 @@ public class DatabaseApiSelect {
             Double mood = rs.getDouble(1);
             Double tension = rs.getDouble(2);
             java.util.Date date = rs.getDate(3);
-            System.out.println(date);
 
 
             Mood.add(mood);
