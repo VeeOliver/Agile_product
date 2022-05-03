@@ -196,10 +196,10 @@ public class MenuController {
 
 
     // Save chart to img
-        BitmapEncoder.saveBitmapWithDPI(chart, "./chart", BitmapEncoder.BitmapFormat.PNG, 300);
+        BitmapEncoder.saveBitmapWithDPI(chart, "./src/main/resources/se/hkr/app/imgs/chart", BitmapEncoder.BitmapFormat.PNG, 300);
 
 
-        showChart(chart);
+       // showChart(chart);
     }
 
 
