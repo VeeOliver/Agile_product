@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -60,21 +61,21 @@ public class Authentication {
         Boolean personnummerAvailable = false;
         Connection con = DatabaseConnection.getInstance().connect();
 
-        ResultSet queryResult = DatabaseApiSelect.checkPersonnummer(con,personnummer );
-        if (!queryResult.next()){
+        ResultSet queryResult = DatabaseApiSelect.checkPersonnummer(con, personnummer);
+        if (!queryResult.next()) {
             personnummerAvailable = true;
         }
         queryResult = DatabaseApiSelect.checkEmail(con, email);
-        if(!queryResult.next()){
+        if (!queryResult.next()) {
             emailAvailable = true;
         }
 
-        Boolean arr[] = { emailAvailable, personnummerAvailable };
+        Boolean arr[] = {emailAvailable, personnummerAvailable};
         return arr;
     }
 
     public void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
-            PasswordField registerPasswordField) {
+                             PasswordField registerPasswordField) {
         Connection con = DatabaseConnection.getInstance().connect();
         DatabaseApiInsert.createUserEntry(con, registerPersonnummer.getText(), registerName.getText(),
                 registerEmailField.getText(), registerPasswordField.getText());
@@ -97,8 +98,8 @@ public class Authentication {
     }
 
     public void resetRegField(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
-            PasswordField registerPasswordField,
-            PasswordField registerRepPasswordField) {
+                              PasswordField registerPasswordField,
+                              PasswordField registerRepPasswordField) {
         registerPersonnummer.setText("");
         registerName.setText("");
         registerEmailField.setText("");
