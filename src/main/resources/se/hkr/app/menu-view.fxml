@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="568.0" prefWidth="766.0" style="-fx-background-color: #32328E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.MenuController">
+<AnchorPane prefHeight="568.0" prefWidth="766.0" style="-fx-background-color: #32328E;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.MenuController">
     <children>
         <TabPane layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -80,20 +80,11 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="chart">
+                <Tab onSelectionChanged="#tensionChart" text="Chart">
                     <content>
                         <AnchorPane fx:id="ChartContainer" minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="400.0" style="-fx-background-color: white;">
                         <children>
-                            <MenuBar VBox.vgrow="NEVER">
-                                <menus>
-                                    <Menu mnemonicParsing="false" text="Choose">
-                                        <items>
-                                            <MenuItem mnemonicParsing="false" onAction="#moodChart" text="XY Chart" />
-                                            <MenuItem mnemonicParsing="false" onAction="#tensionChart" text="Pie Chart" />
-                                        </items>
-                                    </Menu>
-                                </menus>
-                            </MenuBar>
+                            
                             <AnchorPane fx:id="chartArea" />
                         </children>
                         </AnchorPane>

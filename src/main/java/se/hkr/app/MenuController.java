@@ -42,15 +42,6 @@ import java.util.*;
 import static se.hkr.app.DatabaseApiSelect.RetrieveMode.MOOD_TENSION;
 
 public class MenuController {
-    @FXML
-    public void moodChart() {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                buildXYChart();
-            }
-        });
-    }
 
 
 
@@ -208,15 +199,5 @@ public class MenuController {
         showChart(chart);
     }
 
-    private void buildXYChart() {
-        double[] xData = new double[] { 0.0, 1.0, 2.0 };
-        double[] yData = new double[] { 2.0, 1.0, 0.0 };
-
-        // Create Chart
-        XYChart chart = new XYChartBuilder().width(766).height(516).title("Day Scale").build();
-        chart.addSeries("blah", xData, yData);
-
-        showChart(chart);
-    }
 
 }
