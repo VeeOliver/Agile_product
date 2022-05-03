@@ -8,9 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.junit.Test;
-
-import net.sf.saxon.expr.instruct.ResultDocument;
+import org.junit.jupiter.api.Test;
 
 public class ExampleIT {
     /*
@@ -40,7 +38,28 @@ public class ExampleIT {
         while (rs.next()) {
             fact = rs.getString(1);
         }
-        assertEquals("Cows have best friends.",fact);
+        dbCon.disconnect();
+        assertEquals("Cows have best friends.", fact);
+        assertNotNull(con);
+    }
+
+    @Test
+    public void tryConnectionToDockerUser() throws SQLException {
+        DatabaseConnection dbCon = DatabaseConnection.getInstance("127.0.0.1:5000");
+        Connection con = dbCon.connect();
+        String sql = """
+                SELECT * 
+                FROM User
+                WHERE personnummer LIKE '111111-1111';
+                """;
+        PreparedStatement stmt = con.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        String name = "";
+        while (rs.next()) {
+            name = rs.getString(2);
+        }
+        dbCon.disconnect();
+        assertEquals("Test User 1", name);
         assertNotNull(con);
     }
 }
