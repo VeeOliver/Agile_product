@@ -52,7 +52,7 @@ public class MenuController {
             public void run() {
                 try {
                     buildPieChart();
-                } catch (SQLException e) {
+                } catch (SQLException | IOException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -155,7 +155,7 @@ public class MenuController {
 
     }
 
-    private void buildPieChart() throws SQLException {
+    private void buildPieChart() throws SQLException, IOException {
         // Create Chart
         XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.XChart).width(766).height(516).title("Day Scale").build();
         // Colors
@@ -164,7 +164,7 @@ public class MenuController {
         Color purple = new Color(239, 7, 239, 151);
         // Customize Chart
         chart.getStyler().setLegendVisible(true);
-        chart.getStyler().setToolTipsEnabled(true);
+        chart.getStyler().setToolTipsEnabled(false);
         Color[] colorsSeries = new Color[]{DarkBlue,purple, lightGreen, Color.CYAN};
         chart.getStyler().setSeriesColors(colorsSeries);
 
@@ -194,6 +194,9 @@ public class MenuController {
 
 
 
+
+    // Save chart to img
+        BitmapEncoder.saveBitmapWithDPI(chart, "./chart", BitmapEncoder.BitmapFormat.PNG, 300);
 
 
         showChart(chart);
