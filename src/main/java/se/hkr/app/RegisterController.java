@@ -2,9 +2,14 @@ package se.hkr.app;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
 import java.io.IOException;
+import java.lang.annotation.Target;
 import java.sql.SQLException;
 
 public class RegisterController {
@@ -23,6 +28,9 @@ public class RegisterController {
 
     @FXML
     PasswordField registerRepPasswordField;
+
+    @FXML
+    Button registerBtn;
 
     Authentication auth = new Authentication();
 
@@ -55,4 +63,27 @@ public class RegisterController {
     public void onBackBtnClick(ActionEvent event) throws IOException {
         auth.switchToWelcome(event);
     }
+
+    // change field with tab
+    public void onTabKeySwitchField(KeyEvent e) throws IOException {
+        TextField t = (TextField) e.getSource();
+        boolean correctKey = (e.getCode() == KeyCode.TAB);
+        if (correctKey) {
+            switch (t.getId()) {
+                case "registerPersonnummer" -> registerName.requestFocus();
+                case "registerName" -> registerEmailField.requestFocus();
+                case "registerEmailField" -> registerPasswordField.requestFocus();
+                case "registerPasswordField" -> registerRepPasswordField.requestFocus();
+            }
+        }
+    }
+
+    // Register with Enter key
+    public void onEnterRegister(KeyEvent e){
+        if (e.getCode() == KeyCode.ENTER){
+            registerBtn.fire();
+        }
+    }
+
 }
+
