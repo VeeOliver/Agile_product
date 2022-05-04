@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class InsertFeaturesIT {
+public class DataInsertIT {
     @BeforeEach
     public void init() {
         DatabaseConnection.getInstance("127.0.0.1:5000");

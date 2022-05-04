@@ -24,7 +24,6 @@ public class Authentication {
     // --- Login methods ---
 
     public Boolean checkLoginCredentials(String email, String password) throws SQLException {
-        boolean value = false;
         Connection con = DatabaseConnection.getInstance().connect();
         PreparedStatement stmt = con.prepareStatement(DatabaseApiSelect.getLogin);
         stmt.setString(1, email);
