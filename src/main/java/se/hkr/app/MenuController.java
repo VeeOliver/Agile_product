@@ -122,7 +122,8 @@ public class MenuController {
         User user = User.getInstance("", "", "");
         Data.insertJournal(savedJournalEntry, user);
         Data.journalSubmittedNote();
-        Data.clearOutJournalEntry(journalEntry);
+        journalEntry.setText("");
+
     }
 
     // Charts
