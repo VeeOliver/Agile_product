@@ -43,8 +43,6 @@ import static se.hkr.app.DatabaseApiSelect.RetrieveMode.MOOD_TENSION;
 
 public class MenuController {
 
-
-
     @FXML
     public void tensionChart() {
         Platform.runLater(new Runnable() {
@@ -74,7 +72,6 @@ public class MenuController {
     @FXML
     private AnchorPane chartArea;
 
-
     public void onLogoutBtnClick(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -89,54 +86,60 @@ public class MenuController {
         double mood = moodSlider.getValue();
         double tension = tensionSlider.getValue();
         User user = User.getInstance();
-        Data.insertMood(mood,user);
+        Data.insertMood(mood, user);
         Data.insertTension(tension, user);
         Data.submissionCompleteNote();
 
-        /* LineChart test
-        graph.getData().clear();
-
-        XYChart.Series<String, Number> moodSeries = new XYChart.Series<String, Number>();
-        moodSeries.getData().add(new XYChart.Data<String, Number>("January", 7));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("February", 6));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("March", 8));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("April", 8));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("May", 7));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("June", 5));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("July", 6));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("September", 4));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("October", 3));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("November", 7));
-        moodSeries.getData().add(new XYChart.Data<String, Number>("December", 8));
-        moodSeries.setName("Mood");
-        graph.getData().add(moodSeries);
-
-        XYChart.Series<String, Number> tensionSeries = new XYChart.Series<String, Number>();
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("January", 7));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("February", 10));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("March", 10));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("April", 8));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("May", 6));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("June", 2));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("July", 3));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("September", 4));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("October", 3));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("November", 5));
-        tensionSeries.getData().add(new XYChart.Data<String, Number>("December", 8));
-        tensionSeries.setName("Tension");
-        graph.getData().add(tensionSeries); */
+        /*
+         * LineChart test
+         * graph.getData().clear();
+         * 
+         * XYChart.Series<String, Number> moodSeries = new XYChart.Series<String,
+         * Number>();
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("January", 7));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("February", 6));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("March", 8));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("April", 8));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("May", 7));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("June", 5));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("July", 6));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("September", 4));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("October", 3));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("November", 7));
+         * moodSeries.getData().add(new XYChart.Data<String, Number>("December", 8));
+         * moodSeries.setName("Mood");
+         * graph.getData().add(moodSeries);
+         * 
+         * XYChart.Series<String, Number> tensionSeries = new XYChart.Series<String,
+         * Number>();
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("January", 7));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("February",
+         * 10));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("March", 10));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("April", 8));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("May", 6));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("June", 2));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("July", 3));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("September",
+         * 4));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("October", 3));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("November", 5));
+         * tensionSeries.getData().add(new XYChart.Data<String, Number>("December", 8));
+         * tensionSeries.setName("Tension");
+         * graph.getData().add(tensionSeries);
+         */
 
     }
 
-
     public void onSubmitJournalEntry(ActionEvent event) throws IOException {
         String savedJournalEntry = journalEntry.getText().replaceAll("\n", System.getProperty("line.separator"));
-        User user = User.getInstance("","","");
+        User user = User.getInstance("", "", "");
         Data.insertJournal(savedJournalEntry, user);
         Data.journalSubmittedNote();
         Data.clearOutJournalEntry(journalEntry);
-        }
-// Charts
+    }
+
+    // Charts
     private void showChart(Chart chart) {
         JPanel chartPanel = new XChartPanel<>(chart);
 
@@ -157,7 +160,8 @@ public class MenuController {
 
     private void buildPieChart() throws SQLException, IOException {
         // Create Chart
-        XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.XChart).width(766).height(516).title("Day Scale").build();
+        XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.XChart).width(766).height(516).title("Day Scale")
+                .build();
         // Colors
         Color DarkBlue = new Color(50, 168, 140, 171);
         Color lightGreen = new Color(0, 255, 0, 124);
@@ -165,11 +169,11 @@ public class MenuController {
         // Customize Chart
         chart.getStyler().setLegendVisible(true);
         chart.getStyler().setToolTipsEnabled(false);
-        Color[] colorsSeries = new Color[]{DarkBlue,purple, lightGreen, Color.CYAN};
+        Color[] colorsSeries = new Color[] { DarkBlue, purple, lightGreen, Color.CYAN };
         chart.getStyler().setSeriesColors(colorsSeries);
 
         // Series
-        Connection con = DatabaseConnection.getInstance().getCon();
+        Connection con = DatabaseConnection.getInstance().connect();
         ArrayList<ArrayList> data = DatabaseApiSelect.getMTDataChart(con, User.getInstance().getPersonnummer());
         ArrayList<ArrayList> dataAvg = DatabaseApiSelect.getAvgMTDataChart(con, User.getInstance().getPersonnummer());
         ArrayList<Double> mood = data.get(0);
@@ -179,28 +183,22 @@ public class MenuController {
         ArrayList<Double> AvgTension = dataAvg.get(1);
         ArrayList<Date> AvgDates = dataAvg.get(2);
 
-
-
-
-        XYSeries tensionSeries = chart.addSeries("Tension",dates, tension);
-        XYSeries moodSeries = chart.addSeries("Mood",dates, mood);
-        XYSeries AvgtensionSeries = chart.addSeries("Average Tension",AvgDates, AvgTension);
-        XYSeries AvgmoodSeries = chart.addSeries("Average Mood",AvgDates, AvgMood);
+        XYSeries tensionSeries = chart.addSeries("Tension", dates, tension);
+        XYSeries moodSeries = chart.addSeries("Mood", dates, mood);
+        XYSeries AvgtensionSeries = chart.addSeries("Average Tension", AvgDates, AvgTension);
+        XYSeries AvgmoodSeries = chart.addSeries("Average Mood", AvgDates, AvgMood);
 
         tensionSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Scatter);
         moodSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Scatter);
         AvgtensionSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Area);
         AvgmoodSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Line);
 
+        // Save chart to img
+        // BitmapEncoder.saveBitmapWithDPI(chart,
+        // "./src/main/resources/se/hkr/app/imgs/chart", BitmapEncoder.BitmapFormat.PNG,
+        // 300);
 
-
-
-    // Save chart to img
-        // BitmapEncoder.saveBitmapWithDPI(chart, "./src/main/resources/se/hkr/app/imgs/chart", BitmapEncoder.BitmapFormat.PNG, 300);
-
-
-       showChart(chart);
+        showChart(chart);
     }
-
 
 }
