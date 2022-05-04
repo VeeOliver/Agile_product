@@ -1,16 +1,26 @@
 package se.hkr.app;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.lang.reflect.Array;
+import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.assertj.core.util.Arrays;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-
-import se.hkr.app.Authentication;
 
 public class AuthenticationTest {
     Authentication auth = new Authentication();
+
+    @BeforeEach
+    public void init() {
+        User.resetUserInstance();
+    }
 
     @Test
     @DisplayName("Test the checkLoginCredential method. With incorrect input")
@@ -19,6 +29,7 @@ public class AuthenticationTest {
         String password = "incorrectPassword";
         Boolean res = auth.checkLoginCredentials(email, password);
         assertTrue(!res);
+        assertEquals(null, User.getInstance());
     }
 
     @Test
@@ -28,12 +39,16 @@ public class AuthenticationTest {
         String password = "alabama";
         Boolean res = auth.checkLoginCredentials(email, password);
         assertTrue(res);
+        assertNotNull(User.getInstance());
     }
 
     @Test
-    @DisplayName("Test the logError method")
-    public void testLogError() throws SQLException {
-        
+    @DisplayName("Test the checkAvailability method")
+    public void testCheckAvailability() throws SQLException {
+        Boolean[] req = auth.checkAvailability("280201-4999", "enzotiberghien28@gmail.com");
+        Boolean res = Arrays.asList(req).contains(false);
+        assertTrue(res);
+        assertNotNull(DatabaseConnection.getInstance());
     }
 
 

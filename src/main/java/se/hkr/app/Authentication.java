@@ -41,7 +41,6 @@ public class Authentication {
             user.setName(Name);
             user.setPersonnummer(Personnummer);
             return true;
-
         }
     }
 
