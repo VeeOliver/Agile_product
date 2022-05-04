@@ -134,8 +134,8 @@ public class MenuController {
         User user = User.getInstance("","","");
         Data.insertJournal(savedJournalEntry, user);
         Data.journalSubmittedNote();
-        Data.clearOutJournalEntry(journalEntry);
-        }
+        journalEntry.setText("");
+    }
 // Charts
     private void showChart(Chart chart) {
         JPanel chartPanel = new XChartPanel<>(chart);
