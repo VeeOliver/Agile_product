@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
-import se.hkr.app.Data;
 
 public class DatabaseApiSelect {
 
@@ -57,7 +56,7 @@ public class DatabaseApiSelect {
                     DATE(Journal_entry.date) AS date
                 FROM Journal_entry
                 WHERE DATE(Journal_entry.date) LIKE ? AND Journal_entry.personnummer LIKE ?
-                ORDER BY Journal_entry.date;
+                ORDER BY timeOfDay;
                 """;
                 break;
             case MOOD_TENSION:
@@ -70,7 +69,8 @@ public class DatabaseApiSelect {
                 FROM Mood
                 JOIN Tension ON Mood.date = Tension.date
                 WHERE DATE(Tension.date) = ? AND Mood.personnummer LIKE ?
-                GROUP BY timeOfDay;
+                GROUP BY timeOfDay
+                ORDER BY timeOfDay;
                 """;
                 break;
             default:
@@ -83,6 +83,7 @@ public class DatabaseApiSelect {
         return parseToDataList(rs);
     }
 
+    //Does not work for MoodTension!
     public static ArrayList<Data> getData(Connection con, RetrieveMode mode, LocalDate startDate, LocalDate endDate, String personnummer) throws SQLException {
         String sql;
         switch (mode) {
@@ -94,7 +95,7 @@ public class DatabaseApiSelect {
                     DATE(Journal_entry.date) AS date
                 FROM Journal_entry
                 WHERE DATE(Journal_entry.date) >= ? AND DATE(Journal_entry.date) <= ? AND Journal_entry.personnummer LIKE ?
-                ORDER BY Journal_entry.date;
+                ORDER BY DATE(date), timeOfDay;
                 """;
                 break;
             case MOOD_TENSION:
@@ -107,7 +108,8 @@ public class DatabaseApiSelect {
                 FROM Mood
                 JOIN Tension ON Mood.date = Tension.date
                 WHERE DATE(Tension.date) >= ? AND DATE(Tension.date) <= ? AND Mood.personnummer LIKE ?
-                GROUP BY timeOfDay;
+                GROUP BY timeOfDay
+                ORDER BY MAX(DATE(Mood.date)), timeOfDay;
                 """;
                 break;
             default:
@@ -131,7 +133,7 @@ public class DatabaseApiSelect {
                 FROM Journal_entry
                 JOIN Mood ON DATE(Journal_entry.date) = DATE(Mood.date) AND Journal_entry.personnummer = Mood.personnummer
                 WHERE Mood.rating >= ? AND Mood.rating <= ? AND Journal_entry.personnummer LIKE ?
-                ORDER BY Journal_entry.date;
+                ORDER BY DATE(Journal_entry.date), timeOfDay;
                 """;
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, moodLower);
