@@ -18,8 +18,8 @@
                <font>
                   <Font name="Lucida Grande" size="18.0" />
                </font></Label>
-            <TextField fx:id="emailField" focusTraversable="false" layoutX="471.0" layoutY="225.0" onKeyTyped="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Email" />
-            <PasswordField fx:id="passwordField" focusTraversable="false" layoutX="470.0" layoutY="270.0" onAction="#onEnterKeyLogin" prefHeight="25.0" prefWidth="195.0" promptText="Password" />
+            <TextField fx:id="emailField" focusTraversable="false" layoutX="471.0" layoutY="225.0" onAction="#onTabKeySwitchField" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Email" />
+            <PasswordField fx:id="passwordField" focusTraversable="false" layoutX="470.0" layoutY="270.0" onKeyPressed="#onEnterKeyLogin" prefHeight="25.0" prefWidth="195.0" promptText="Password" />
             <Button fx:id="loginBtn" layoutX="617.0" layoutY="314.0" mnemonicParsing="false" onAction="#onLoginBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Login" textFill="#f8f6f5" />
             <Button fx:id="registerBtn" layoutX="537.0" layoutY="314.0" mnemonicParsing="false" onAction="#onRegisterBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Register" textFill="#fcf5f5" />
             <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="30.0" prefHeight="62.0" prefWidth="345.0" style="-fx-background-color: white;" text="Welcome!">

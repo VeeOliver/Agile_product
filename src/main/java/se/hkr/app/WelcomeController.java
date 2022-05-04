@@ -33,6 +33,10 @@ public class WelcomeController {
     @FXML
     Label factOfTheDay;
 
+    @FXML
+    Button loginBtn;
+
+
 
     Authentication auth = new Authentication();
 
@@ -63,15 +67,21 @@ public class WelcomeController {
         stage.show();
     }
 
-    public void onEnterKeyLogin() throws IOException, SQLException {
-        System.out.printf("Enter key has been pressed");
+    // login with Enter button
+    public void onEnterKeyLogin(KeyEvent e) throws IOException, SQLException {
+        if (e.getCode() == KeyCode.ENTER) {
+            loginBtn.fire();
+        }
     }
 
-    public void onTabKeySwitchField() throws IOException {
-        System.out.printf("TAB key has been pressed");
-
+    //change fields with tab button
+    public void onTabKeySwitchField(KeyEvent e) throws IOException {
+        if (e.getCode() == KeyCode.TAB) {
+            passwordField.requestFocus();
+        }
     }
 
+    // random fact generator
     public void showFactOfTheDay(ActionEvent event) throws IOException, FileNotFoundException {
         File file = new File("facts.txt");
         final RandomAccessFile f = new RandomAccessFile(file, "r");
