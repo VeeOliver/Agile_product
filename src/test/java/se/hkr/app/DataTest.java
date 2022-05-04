@@ -1,11 +1,5 @@
 package se.hkr.app;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.TextArea;
-import net.sf.saxon.functions.ConstantFunction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -27,7 +21,7 @@ class DataTest {
     @Test
     @DisplayName("Test instantiation and getters of Data object.")
     public void testDataInstantiationAndGetters() {
-        LocalDate date = LocalDate.of(2022, 01, 01);
+        LocalDate date = LocalDate.of(2022, 1, 1);
         String daytime = "Morning";
         Data testData = new Data(date, daytime);
         assertInstanceOf(Data.class, testData);
@@ -82,7 +76,7 @@ class DataTest {
     @Test
     void submissionCompleteNoteWorks() {
         try (MockedStatic<Data> msAlert = Mockito.mockStatic(Data.class)) {
-            msAlert.when(() -> Data.submissionCompleteNote()).thenAnswer((Answer<Void>) invocation -> null);
+            msAlert.when(Data::submissionCompleteNote).thenAnswer((Answer<Void>) invocation -> null);
         }
 
     }
@@ -90,7 +84,7 @@ class DataTest {
     @Test
     void journalSubmittedNoteWorks() {
         try (MockedStatic<Data> msAlert = Mockito.mockStatic(Data.class)) {
-            msAlert.when(() -> Data.submissionCompleteNote()).thenAnswer((Answer<Void>) invocation -> null);
+            msAlert.when(Data::submissionCompleteNote).thenAnswer((Answer<Void>) invocation -> null);
         }
     }
 
