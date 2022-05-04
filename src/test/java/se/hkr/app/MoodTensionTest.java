@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import java.time.LocalDate;
 
-import org.junit.Test;
+
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class MoodTensionTest {
     @Test
