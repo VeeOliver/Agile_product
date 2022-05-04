@@ -21,6 +21,10 @@ public class User {
         return single_instance;
     }
 
+    public static void resetInstance() {
+        User.single_instance = null;
+    }
+
     public static User getInstance() {
         return single_instance;
     }
@@ -48,4 +52,9 @@ public class User {
     public void setName(String name) {
         this.Name = name;
     }
+
+    public static void resetUserInstance() {
+        User.single_instance = null;
+    }
+
 }

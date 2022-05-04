@@ -1,7 +1,8 @@
 module Myrmidon {
-    requires javafx.controls;
+    requires transitive javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires transitive javafx.base;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -9,7 +10,6 @@ module Myrmidon {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires transitive java.sql;
-    requires javatuples;
     requires org.knowm.xchart;
     requires javafx.swing;
     exports se.hkr.app;

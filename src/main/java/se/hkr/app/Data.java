@@ -2,6 +2,8 @@ package se.hkr.app;
 
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

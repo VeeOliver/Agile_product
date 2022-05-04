@@ -1,7 +1,6 @@
 package se.hkr.app;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,10 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -51,7 +46,7 @@ public class WelcomeController {
             stage.setScene(scene);
             stage.show();
         } else {
-            auth.logError();
+            Authentication.logError();
             auth.resetLogFields(emailField, passwordField);
         }
     }

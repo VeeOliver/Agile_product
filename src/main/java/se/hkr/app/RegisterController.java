@@ -9,7 +9,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
-import java.lang.annotation.Target;
 import java.sql.SQLException;
 
 public class RegisterController {
@@ -43,16 +42,16 @@ public class RegisterController {
 
         // Check format errors
         if (formatError) {
-            auth.showFormatError(registerPersonnummer.getText(), registerName.getText(), registerEmailField.getText(),
+            Authentication.showFormatError(registerPersonnummer.getText(), registerName.getText(), registerEmailField.getText(),
                     registerPasswordField.getText(), registerRepPasswordField.getText());
         } else {
             // Check availability
             if (isAvailable) {
-                auth.registerUser(registerPersonnummer, registerName, registerEmailField, registerPasswordField);
-                auth.successRegistration();
+                auth.registerUser(registerPersonnummer.getText(), registerName.getText(), registerEmailField.getText(), registerPasswordField.getText());
+                Authentication.successRegistration();
                 auth.switchToWelcome(event);
             } else {
-                auth.registerError();
+                Authentication.registerError();
             }
             auth.resetRegField(registerPersonnummer, registerName, registerEmailField, registerPasswordField,
                     registerRepPasswordField);

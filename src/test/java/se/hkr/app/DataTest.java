@@ -1,14 +1,13 @@
 package se.hkr.app;
 
+import javafx.scene.control.Alert;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-
-
 import org.mockito.stubbing.Answer;
-
 
 import java.sql.Connection;
 import java.time.LocalDate;
