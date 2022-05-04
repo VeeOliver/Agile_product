@@ -48,7 +48,7 @@ public class RegisterController {
         } else {
             // Check availability
             if (isAvailable) {
-                auth.registerUser(registerPersonnummer, registerName, registerEmailField, registerPasswordField);
+                auth.registerUser(registerPersonnummer.getText(), registerName.getText(), registerEmailField.getText(), registerPasswordField.getText());
                 auth.successRegistration();
                 auth.switchToWelcome(event);
             } else {

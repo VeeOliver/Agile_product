@@ -24,7 +24,6 @@ public class Authentication {
     // --- Login methods ---
 
     public Boolean checkLoginCredentials(String email, String password) throws SQLException {
-        boolean value = false;
         Connection con = DatabaseConnection.getInstance().connect();
         PreparedStatement stmt = con.prepareStatement(DatabaseApiSelect.getLogin);
         stmt.setString(1, email);
@@ -42,11 +41,10 @@ public class Authentication {
             user.setName(Name);
             user.setPersonnummer(Personnummer);
             return true;
-
         }
     }
 
-    public void logError() {
+    public static void logError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Authentication error");
         alert.setHeaderText("Username or password incorrect");
@@ -74,14 +72,14 @@ public class Authentication {
         return arr;
     }
 
-    public void registerUser(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
-                             PasswordField registerPasswordField) {
+    public void registerUser(String registerPersonnummer, String registerName, String registerEmailField,
+                             String registerPasswordField) {
         Connection con = DatabaseConnection.getInstance().connect();
-        DatabaseApiInsert.createUserEntry(con, registerPersonnummer.getText(), registerName.getText(),
-                registerEmailField.getText(), registerPasswordField.getText());
+        DatabaseApiInsert.createUserEntry(con, registerPersonnummer, registerName,
+                registerEmailField, registerPasswordField);
     }
 
-    public void successRegistration() {
+    public static void successRegistration() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Registration Successful!");
         alert.setHeaderText("Registration Successful!");
@@ -89,7 +87,7 @@ public class Authentication {
         alert.showAndWait();
     }
 
-    public void registerError() {
+    public static void registerError() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Registration error");
         alert.setHeaderText("Registration error");
@@ -114,23 +112,23 @@ public class Authentication {
 
     // Registration Fields RegEx
 
-    public Boolean validEmail(String Email) {
+    public static Boolean validEmail(String Email) {
         return Email.matches("^(.+)@(.+)$");
     }
 
-    public Boolean validPersonnummer(String personnummer) {
+    public static Boolean validPersonnummer(String personnummer) {
         return personnummer.matches("^(19|20)?[0-9]{6}[- ]?[0-9]{4}$");
     }
 
-    public Boolean validPassword(String password) {
+    public static Boolean validPassword(String password) {
         return password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()-[{}]:;',?/*~$^+=<>]).{8,20}$");
     }
 
-    public Boolean equalPassword(String pass1, String pass2) {
+    public static Boolean equalPassword(String pass1, String pass2) {
         return Objects.equals(pass1, pass2);
     }
 
-    public boolean validName(String name) {
+    public static Boolean validName(String name) {
         return name.matches("^[a-zA-Z]{4,}(?: [a-zA-Z]+){0,2}$");
     }
 
@@ -145,7 +143,7 @@ public class Authentication {
         return fields.contains(false);
     }
 
-    public void showFormatError(String personnummer, String name, String email, String password, String repPassword) {
+    public static void showFormatError(String personnummer, String name, String email, String password, String repPassword) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Registration error");
         alert.setHeaderText("Registration error");
@@ -183,4 +181,5 @@ public class Authentication {
         stage.setScene(scene);
         stage.show();
     }
+
 }
