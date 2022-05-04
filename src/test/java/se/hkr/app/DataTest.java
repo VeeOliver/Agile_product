@@ -3,11 +3,14 @@ package se.hkr.app;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Labeled;
+import net.sf.saxon.functions.ConstantFunction;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
+
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
 import org.testfx.api.FxAssert;
@@ -98,6 +101,7 @@ class DataTest {
 
     @Test
     void clearOutJournalEntryWorks() {
+
 
     }
 }
