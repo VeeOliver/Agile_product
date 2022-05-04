@@ -59,13 +59,13 @@ RETURNS VARCHAR(20)
 DETERMINISTIC
 BEGIN
 IF TIME(entry_time) >= '05:00:00' && TIME(entry_time) < '10:00:00' THEN
-    RETURN ("Morning");
+    RETURN ("1-Morning");
 ELSEIF TIME(entry_time) >= '10:00:00' && TIME(entry_time) < '14:00:00' THEN
-    RETURN ("Noon");
+    RETURN ("2-Noon");
 ELSEIF TIME(entry_time) >= '14:00:00' && TIME(entry_time) < '19:00:00' THEN
-    RETURN ("Afternoon");
+    RETURN ("3-Afternoon");
 ELSEIF TIME(entry_time) >= '19:00:00' || TIME(entry_time) < '5:00:00' THEN
-    RETURN ("Evening");
+    RETURN ("4-Evening");
 END IF;
 END$$
 DELIMITER ;

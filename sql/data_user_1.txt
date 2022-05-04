@@ -17,7 +17,7 @@ Date		Time		 Mood : Tension (Journal_entry)
 
 			17:22:44 ->     2 : 4
 
-
+2022-03-05
 			08:14:34 ->     8 : 4
 
 			12:20:34 ->     7 : 2 		(J)

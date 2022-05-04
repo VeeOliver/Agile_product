@@ -6,30 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.sql.SQLException;
 
-import org.antlr.v4.runtime.Vocabulary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-
-public class AuthenticationFeaturesIT {
-    @Mock
-    TextField registerPersonnummer;
-
-    @Mock
-    TextField registerName;
-
-    @Mock
-    TextField registerEmailField;
-
-    @Mock
-    PasswordField registerPasswordField;
-
-    @Mock
-    PasswordField registerRepPasswordField;
-
+public class AuthenticationIT {
     private Authentication auth = new Authentication();
     
     @BeforeEach
@@ -103,8 +83,45 @@ public class AuthenticationFeaturesIT {
         assertTrue(res[1]);
     }
 
+    /*
+    Test can not be run because of dependency on GUI fields -> Refactor to enable tests
 
-    //Tests for features in RegisterController.java
-    
-    
+    @Disabled("Mocking TextFields is not possible -> Refactor to enable testing")
+    @Test
+    public void validInputRegisterUserCreatesUserInDB() throws SQLException {
+        //Prepare test arguments and call the method
+        String personnummer = "999999-9999";
+        String name = "Test register";
+        String email = "testRegister@myrmidon.com";
+        String password = "11111";
+        String passwordHashed = "7b21848ac9af35be0ddb2d6b9fc3851934db8420";
+        auth.registerUser(personnummer,name, email, password);
+
+        //Check if insert was done correctly
+        String personnummerInserted = "";
+        String nameInserted = "";
+        String emailInserted = "";
+        String passwordInserted = ""; 
+        String sql = """
+                SELECT *
+                FROM User
+                ORDER BY personnummer DESC
+                LIMIT 1;
+                """;
+        PreparedStatement stmt = DatabaseConnection.getInstance().connect().prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            personnummerInserted = rs.getString(1);
+            nameInserted = rs.getString(2);
+            emailInserted = rs.getString(3);
+            passwordInserted = rs.getString(4);
+        }
+        DatabaseConnection.getInstance().disconnect();
+        assertEquals(null, DatabaseConnection.getInstance().getCon());
+        assertEquals(personnummer, personnummerInserted);
+        assertEquals(name, nameInserted);
+        assertEquals(email, emailInserted);
+        assertEquals(passwordHashed, passwordInserted);
+    }*/
 }
