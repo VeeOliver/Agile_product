@@ -10,7 +10,7 @@
     <children>
         <TabPane layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab style="-fx-background-radius: 0;" text="Mood">
+                <Tab style="-fx-background-radius: 0;" text="Mood" >
                     <content>
                         <AnchorPane fx:id="moodContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                             <children>
