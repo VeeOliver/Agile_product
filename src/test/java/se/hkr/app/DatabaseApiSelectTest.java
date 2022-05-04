@@ -33,59 +33,7 @@ class DatabaseApiSelectTest {
     private ResultSet rs;
 
     @Mock
-    ResultSetMetaData rsmd;
-
-    /*@Test
-    @DisplayName("Test if getDataByDay returns a ResultSet after successful db access.")
-    void getDataByDaySuccessfulReturnsResultSet() throws SQLException {
-        when(con.prepareStatement(any(String.class))).thenReturn(stmt);
-        when(stmt.executeQuery()).thenReturn(rs);
-        ResultSet res = DatabaseApiSelect.getDataByDay(con, "sql", LocalDate.now(), "12345678?1234");
-        assertInstanceOf(ResultSet.class, res);
-    }
-
-    @Test
-    @DisplayName("Test if getDataByDay returns null after failed database access")
-    void getDataByDayFailsReturnsNull() {
-        ResultSet res = DatabaseApiSelect.getDataByDay(null,"sql", LocalDate.now(), "12345678?1234");
-        assertNull(res);
-    }
-
-    @Test
-    @DisplayName("Test if getDataByTimePeriod returns a ResultSet after successful db access.")
-    void getDataByTimePeriodSuccessfulReturnsResultSet() throws SQLException {
-        when(con.prepareStatement(any(String.class))).thenReturn(stmt);
-        when(stmt.executeQuery()).thenReturn(rs);
-        ResultSet res = DatabaseApiSelect.getDataByTimePeriod(con, "sql", LocalDate.now(), LocalDate.now(),
-                "12345678?1234");
-        assertInstanceOf(ResultSet.class, res);
-    }
-
-    @Test
-    @DisplayName("Test if getDataByTimePeriod returns null after failed database access")
-    void getDataByTimePeriodFailsReturnsNull() {
-        ResultSet res = DatabaseApiSelect.getDataByTimePeriod(null,"sql", LocalDate.now(), LocalDate.now(),
-                "12345678?1234");
-        assertNull(res);
-    }
-
-    @Test
-    @DisplayName("Test if getDataByRatingRange returns a ResultSet after successful db access.")
-    void getDataByRatingRangeSuccessfulReturnsResultSet() throws SQLException {
-        when(con.prepareStatement(any(String.class))).thenReturn(stmt);
-        when(stmt.executeQuery()).thenReturn(rs);
-        ResultSet res = DatabaseApiSelect.getDataByRatingRange(con, "sql", 2, 4,
-                "12345678?1234");
-        assertInstanceOf(ResultSet.class, res);
-    }
-
-    @Test
-    @DisplayName("Test if getDataByRatingRange returns null after failed database access.")
-    void getDataByRatingRangeFailsReturnsNull() {
-        ResultSet res = DatabaseApiSelect.getDataByRatingRange(null,"sql", 2, 4,
-                "12345678?1234");
-        assertNull(res);
-    }*/
+    ResultSetMetaData rsmd; 
 
     @Test
     @DisplayName("Test if parseToDataList returns an empty ArrayList in case of empty ResultSet.")
