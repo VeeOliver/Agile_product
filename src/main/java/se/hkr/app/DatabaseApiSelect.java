@@ -6,12 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.Date;
+import se.hkr.app.Data;
 
 public class DatabaseApiSelect {
 
     public enum RetrieveMode {JOURNAL_ENTRY, MOOD_TENSION}
 
-    // Convert ResultSet to List of Data obects
+    // Convert ResultSet to List of Data objects
     public static ArrayList<Data> parseToDataList (ResultSet rs) {
         ArrayList<Data> returnList = new ArrayList<>();
         try {
@@ -166,4 +168,85 @@ public class DatabaseApiSelect {
             """;
 
 
+
+
+
+    public static Date getDateDaysAgo(int days){
+        long dayInMs= 1000 * 60 * 60 * 24;
+        return new Date(System.currentTimeMillis()-(days*dayInMs));
+    };
+    public static ArrayList<ArrayList> getMTDataChart(Connection con, String personnummer) throws SQLException {
+    ArrayList<Double> Mood = new ArrayList<>();
+    ArrayList<Double> Tension = new ArrayList<>();
+    ArrayList<java.util.Date> Dates = new ArrayList<>();
+    ArrayList<ArrayList> Data = new ArrayList<>();
+    String weekDate = getDateDaysAgo(7).toString();
+        String sql;
+
+                sql = """
+                            SELECT
+                            Mood.rating, Tension.rating, Mood.Date 
+                            FROM Mood 
+                            JOIN Tension ON Mood.date = Tension.date WHERE Mood.personnummer = ? AND Mood.date >= ?;
+                            """;
+
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, personnummer);
+        stmt.setString(2, weekDate);
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            Double mood = rs.getDouble(1);
+            Double tension = rs.getDouble(2);
+            java.util.Date date = rs.getDate(3);
+
+
+            Mood.add(mood);
+            Tension.add(tension);
+            Dates.add(date);
+        }
+        Data.add(Mood);
+        Data.add(Tension);
+        Data.add(Dates);
+
+        return Data;
+    }
+
+    public static ArrayList<ArrayList> getAvgMTDataChart(Connection con, String personnummer) throws SQLException {
+        ArrayList<Double> Mood = new ArrayList<>();
+        ArrayList<Double> Tension = new ArrayList<>();
+        ArrayList<java.util.Date> Dates = new ArrayList<>();
+        ArrayList<ArrayList> Data = new ArrayList<>();
+        String weekDate = getDateDaysAgo(7).toString();
+        String sql;
+
+        sql = """
+                            SELECT
+                            AVG(Mood.rating), AVG(Tension.rating), DATE(Mood.Date)
+                            FROM Mood 
+                            JOIN Tension ON Mood.date = Tension.date WHERE Mood.personnummer = ? AND Mood.date >= ?
+                            GROUP BY DATE(Mood.Date);
+                            """;
+
+
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, personnummer);
+        stmt.setString(2, weekDate);
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            Double mood = rs.getDouble(1);
+            Double tension = rs.getDouble(2);
+            java.util.Date date = rs.getDate(3);
+
+
+            Mood.add(mood);
+            Tension.add(tension);
+            Dates.add(date);
+        }
+        Data.add(Mood);
+        Data.add(Tension);
+        Data.add(Dates);
+
+        return Data;
+    }
 }

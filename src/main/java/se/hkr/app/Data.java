@@ -4,6 +4,8 @@ package se.hkr.app;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import org.controlsfx.control.action.Action;
 
 import java.time.LocalDate;
@@ -12,7 +14,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 
+
+
 public class Data {
+
     private LocalDate date;
     private String daytime;
 
@@ -31,13 +36,15 @@ public class Data {
 
     static public ArrayList<User> users = new ArrayList<>();
 
-    public static void insertMood(double moodRating,  User user) {
+    // connects GUI value for Mood to the Database
+    public static void insertMood(double moodRating, User user) {
         int moodNum = (int) moodRating;
         String userId = user.getPersonnummer();
         DatabaseApiInsert.createMoodEntry(DatabaseConnection.getInstance().connect(), moodNum, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
     }
 
+    // connects GUI value for Tension to the Database
     public static void insertTension(double tensionRating, User user) {
         int tensionNum = (int) tensionRating;
         String userId = user.getPersonnummer();
@@ -45,13 +52,15 @@ public class Data {
         DatabaseConnection.getInstance().disconnect();
     }
 
+    // connects GUI Journal Entry to the Database
     public static void insertJournal(String journalText, User user) {
         String userId = user.getPersonnummer();
         DatabaseApiInsert.createJournalEntry(DatabaseConnection.getInstance().connect(), journalText, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
     }
 
-    public static void submissionCompleteNote(){
+    // Sends a pop-up message for submission of Mood and Tension
+    public static void submissionCompleteNote() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Submitted");
         alert.setHeaderText("Mood and Tension results have been submitted");
@@ -60,7 +69,8 @@ public class Data {
 
     }
 
-    public static void journalSubmittedNote(){
+    // Sends a pop-up message for submission of Journal Entry
+    public static void journalSubmittedNote() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Submitted");
         alert.setHeaderText("Your journal has been saved!");
@@ -68,7 +78,8 @@ public class Data {
         alert.showAndWait();
     }
 
-    public static void clearOutJournalEntry(TextArea journalEntry){
+    // Clears out the journal window
+    public static void clearOutJournalEntry(TextArea journalEntry) {
         journalEntry.setText("");
     }
 
