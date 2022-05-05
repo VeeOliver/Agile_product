@@ -128,6 +128,7 @@ public class MenuController {
         Data.insertJournal(savedJournalEntry, user);
         Data.journalSubmittedNote();
         journalEntry.setText("");
+        prompts.setValue("Select a prompt:");
 
     }
 
