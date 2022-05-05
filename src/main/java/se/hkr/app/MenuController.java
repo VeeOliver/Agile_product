@@ -1,6 +1,7 @@
 package se.hkr.app;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -54,6 +56,9 @@ public class MenuController {
 
     @FXML
     LineChart<String, Number> graph;
+
+    @FXML
+    ChoiceBox prompts;
 
     @FXML
     private AnchorPane chartArea;
@@ -123,6 +128,22 @@ public class MenuController {
         Data.insertJournal(savedJournalEntry, user);
         Data.journalSubmittedNote();
         journalEntry.setText("");
+
+    }
+
+    public void initializeChoicebox(Event e){
+
+        prompts.setValue("Select a prompt:");
+        prompts.getItems().addAll( "How did you sleep last night?",
+                "What was the high and the low of your day",
+                "What are some things you are looking forward to?",
+                "How are you feeling about your work/studies?",
+                "What has been the biggest struggle of the past week?",
+                "How would you describe yourself to a stranger?",
+                "What is your best quality?",
+                "What would you like to achieve in the near future?",
+                "What has helped you the most during your difficult days?",
+                "Write a message to your past self:");
 
     }
 

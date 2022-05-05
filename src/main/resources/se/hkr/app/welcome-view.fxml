@@ -32,7 +32,7 @@
                   <Image url="@imgs/Graphic_Achilles.png" />
                </image>
             </ImageView>
-            <Label fx:id="factOfTheDay" alignment="CENTER" layoutX="35.0" layoutY="140.0" prefHeight="222.0" prefWidth="322.0" text="Did you know?" textAlignment="CENTER" wrapText="true">
+            <Label fx:id="factOfTheDay" alignment="CENTER" layoutX="24.0" layoutY="140.0" prefHeight="222.0" prefWidth="322.0" text="Did you know?" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="Lucida Grande" size="18.0" />
                </font>
