@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="568.0" prefWidth="766.0" style="-fx-background-color: #32328E;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.MenuController">
+<AnchorPane prefHeight="568.0" prefWidth="766.0" style="-fx-background-color: #32328E;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.MenuController">
     <children>
         <TabPane layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="766.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab style="-fx-background-radius: 0;" text="Mood" >
+                <Tab style="-fx-background-radius: 0;" text="Mood">
                     <content>
                         <AnchorPane fx:id="moodContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                             <children>
@@ -21,13 +30,13 @@
                                 </Label>
                                 <Slider fx:id="moodSlider" layoutX="166.0" layoutY="174.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="435.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
                                 <Slider fx:id="tensionSlider" layoutX="170.0" layoutY="332.0" majorTickUnit="1.0" max="10.0" min="1.0" minorTickCount="0" prefHeight="26.0" prefWidth="428.0" showTickLabels="false" showTickMarks="true" snapToTicks="true" value="1.0" />
-                                <Button fx:id="submitMT" layoutX="301.0" layoutY="437.0" mnemonicParsing="false" onAction="#onSubmitMT" prefHeight="45.0" prefWidth="177.0" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Submit" textFill="#fcfaf8" />
-                                <Label fx:id="moodLabel" layoutX="354.0" layoutY="119.0" text="Mood">
+                                <Button fx:id="submitMT" layoutX="288.0" layoutY="436.0" mnemonicParsing="false" onAction="#onSubmitMT" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Submit" textFill="#fcfaf8" />
+                                <Label fx:id="moodLabel" layoutX="350.0" layoutY="120.0" text="Mood">
                                     <font>
                                         <Font name="Lucida Grande" size="24.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="tensionLabel" layoutX="343.0" layoutY="288.0" text="Tension" textFill="#0a0a0a">
+                                <Label fx:id="tensionLabel" layoutX="337.0" layoutY="288.0" text="Tension" textFill="#0a0a0a">
                                     <font>
                                         <Font name="Lucida Grande" size="24.0" />
                                     </font>
@@ -47,18 +56,19 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab style="-fx-background-radius: 0;" text="Journal">
+                <Tab fx:id="journalTab" onSelectionChanged="#initializeChoicebox" style="-fx-background-radius: 0;" text="Journal">
                     <content>
                         <AnchorPane fx:id="journalContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                             <children>
-                                <Label fx:id="journalTitle" layoutX="335.0" layoutY="22.0" text="Journal">
+                                <Label fx:id="journalTitle" layoutX="324.0" layoutY="24.0" text="Journal">
                                     <font>
                                         <Font size="30.0" />
                                     </font>
                                 </Label>
-                                <TextArea fx:id="journalEntry" layoutX="115.0" layoutY="78.0" prefHeight="301.0" prefWidth="536.0" promptText="Write your thoughts here..." />
-                                <Button fx:id="journalSubmit" layoutX="287.0" layoutY="401.0" mnemonicParsing="false" onAction="#onSubmitJournalEntry" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Submit" textFill="WHITE" />
+                                <TextArea fx:id="journalEntry" layoutX="114.0" layoutY="107.0" prefHeight="301.0" prefWidth="536.0" promptText="Write your thoughts here..." />
+                                <Button fx:id="journalSubmit" layoutX="288.0" layoutY="436.0" mnemonicParsing="false" onAction="#onSubmitJournalEntry" prefHeight="40.0" prefWidth="191.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Submit" textFill="WHITE" />
                                 <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Logout" textFill="WHITE" />
+                        <ChoiceBox fx:id="prompts" layoutX="114.0" layoutY="74.0" prefHeight="26.0" prefWidth="538.0" style="-fx-background-radius: 0; -fx-background-color: white;" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -85,7 +95,7 @@
                     <content>
                         <AnchorPane fx:id="ChartContainer" minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="400.0" style="-fx-background-color: white;">
                         <children>
-                            <ImageView fx:id="Chart" fitHeight="518.0"  layoutX="0.0" pickOnBounds="true" preserveRatio="true">
+                            <ImageView fx:id="Chart" fitHeight="518.0" layoutX="0.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
                                     <Image url="@imgs/chart.png" />
                                 </image>
