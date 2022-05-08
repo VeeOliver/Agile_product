@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -83,10 +85,6 @@ public class AuthenticationIT {
         assertTrue(res[1]);
     }
 
-    /*
-    Test can not be run because of dependency on GUI fields -> Refactor to enable tests
-
-    @Disabled("Mocking TextFields is not possible -> Refactor to enable testing")
     @Test
     public void validInputRegisterUserCreatesUserInDB() throws SQLException {
         //Prepare test arguments and call the method
@@ -123,5 +121,5 @@ public class AuthenticationIT {
         assertEquals(name, nameInserted);
         assertEquals(email, emailInserted);
         assertEquals(passwordHashed, passwordInserted);
-    }*/
+    }
 }
