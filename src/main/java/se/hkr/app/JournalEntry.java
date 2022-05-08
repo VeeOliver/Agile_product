@@ -19,13 +19,10 @@ public class JournalEntry extends Data {
         return this.entry;
     }
 
-    public static String retrieveJournalEntry(LocalDate date, String personnummer) throws SQLException {
+    public static String retrieveJournalEntry(Connection con, LocalDate date, String personnummer) throws SQLException {
         String returnValue = "";
-        DatabaseConnection dbCon = DatabaseConnection.getInstance();
-        Connection con = dbCon.connect();
         RetrieveMode mode = RetrieveMode.JOURNAL_ENTRY;
         ArrayList<Data> listOfEntries = DatabaseApiSelect.getData(con, mode, date, personnummer);
-        dbCon.disconnect();
         if (listOfEntries.isEmpty()) {
             returnValue = "No journal entries on this day";
         } else {

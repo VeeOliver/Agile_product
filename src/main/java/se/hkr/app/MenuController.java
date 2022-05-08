@@ -223,15 +223,15 @@ public class MenuController {
     }
 
     //Code for journal entry retirival
-    public void displayJournalEntry(String entry) {
-        journalEntryDisplay.setText(entry);
-    }
-
+    
     public void onDisplayJournalButtonBtnClick(ActionEvent event) throws IOException, SQLException{
         LocalDate date = journalDate.getValue();
         String personnummer = User.getInstance().getPersonnummer();
-        String entries = JournalEntry.retrieveJournalEntry(date, personnummer);
-        displayJournalEntry(entries);
+        DatabaseConnection dbCon = DatabaseConnection.getInstance();
+        Connection con = dbCon.connect();
+        String entries = JournalEntry.retrieveJournalEntry(con, date, personnummer);
+        dbCon.disconnect();
+        journalEntryDisplay.setText(entries);
     }
 
 }

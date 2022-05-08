@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -252,5 +253,51 @@ public class DataRetrievalIT {
         assertEquals(LocalDate.parse("2022-03-08"), entry5.getDate());
         assertEquals("User 1 on 2022-03-08 Afternoon", entry5.getEntry());
         assertEquals("3-Afternoon", entry5.getDaytime());
+    }
+
+    // Tests for journal entry retrieval
+    @Test
+    public void testUser1JournalEntryRetrievalForMarch01ReturnsTwoEntries() throws SQLException {
+        DatabaseConnection dbCon = DatabaseConnection.getInstance();
+        Connection con = dbCon.connect();
+        String exp = "User 1 on 2022-03-01 Afternoon\nUser 1 on 2022-03-01 Afternoon\n";
+        LocalDate date = LocalDate.parse("2022-03-01");
+        String personnummer = "111111-1111";
+        var res = JournalEntry.retrieveJournalEntry(con, date, personnummer);
+        dbCon.disconnect();
+
+        assertEquals(null, dbCon.getCon());
+
+        assertEquals(exp, res);
+    }
+
+    @Test
+    public void testUser1JournalEntryRetrievalForMarch02ReturnsOneEntry() throws SQLException {
+        DatabaseConnection dbCon = DatabaseConnection.getInstance();
+        Connection con = dbCon.connect();
+        String exp = "User 1 on 2022-03-02 Noon\n";
+        LocalDate date = LocalDate.parse("2022-03-02");
+        String personnummer = "111111-1111";
+        var res = JournalEntry.retrieveJournalEntry(con, date, personnummer);
+        dbCon.disconnect();
+
+        assertEquals(null, dbCon.getCon());
+
+        assertEquals(exp, res);
+    }
+
+    @Test
+    public void testUser1JournalEntryRetrievalForMarch03ReturnsNoEntries() throws SQLException {
+        DatabaseConnection dbCon = DatabaseConnection.getInstance();
+        Connection con = dbCon.connect();
+        String exp = "No journal entries on this day";
+        LocalDate date = LocalDate.parse("2022-03-03");
+        String personnummer = "111111-1111";
+        var res = JournalEntry.retrieveJournalEntry(con, date, personnummer);
+        dbCon.disconnect();
+
+        assertEquals(null, dbCon.getCon());
+
+        assertEquals(exp, res);
     }
 }
