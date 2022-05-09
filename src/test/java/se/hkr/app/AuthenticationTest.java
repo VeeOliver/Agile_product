@@ -37,7 +37,7 @@ public class AuthenticationTest {
 
     @BeforeEach
     public void init() {
-        User.resetUserInstance();
+        User.resetInstance();
     }
 
     // Login methods tests

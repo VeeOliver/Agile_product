@@ -77,4 +77,8 @@ public class DatabaseConnection {
             "&password=" + instance.password;
         return dsn;
     }
+
+    public static void resetInstance() {
+        DatabaseConnection.instance = null;
+    }
 }

@@ -2,7 +2,6 @@ package se.hkr.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
 import java.sql.SQLException;

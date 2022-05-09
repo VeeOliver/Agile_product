@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;

@@ -52,9 +52,4 @@ public class User {
     public void setName(String name) {
         this.Name = name;
     }
-
-    public static void resetUserInstance() {
-        User.single_instance = null;
-    }
-
 }

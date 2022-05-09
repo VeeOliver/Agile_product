@@ -1,7 +1,5 @@
 package se.hkr.app;
 
-import javafx.scene.control.Alert;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

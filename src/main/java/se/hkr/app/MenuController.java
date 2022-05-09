@@ -26,6 +26,7 @@ import org.knowm.xchart.internal.chartpart.Chart;
 import org.knowm.xchart.style.Styler;
 
 import javax.swing.*;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -61,7 +62,7 @@ public class MenuController {
     LineChart<String, Number> graph;
 
     @FXML
-    ChoiceBox prompts;
+    ChoiceBox<String> prompts;
 
     @FXML
     private AnchorPane chartArea;
@@ -76,6 +77,7 @@ public class MenuController {
     private DatePicker journalDate;
 
     public void onLogoutBtnClick(ActionEvent event) throws IOException {
+        User.resetInstance();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -222,7 +224,72 @@ public class MenuController {
         showChart(chart);
     }
 
-    //Code for journal entry retirival
+    // private void buildDayChart() throws SQLException, IOException {
+    //     // Create Chart
+    //     XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.XChart).width(766).height(516).title("Mood and tension over the day")
+    //             .build();
+    //     // Colors
+    //     Color DarkBlue = new Color(50, 168, 140, 171);
+    //     Color lightGreen = new Color(0, 255, 0, 124);
+    //     Color purple = new Color(239, 7, 239, 151);
+    //     // Customize Chart
+    //     chart.getStyler().setLegendVisible(true);
+    //     chart.getStyler().setToolTipsEnabled(false);
+    //     Color[] colorsSeries = new Color[] { DarkBlue, purple, lightGreen, Color.CYAN };
+    //     chart.getStyler().setSeriesColors(colorsSeries);
+
+    //     // Series
+    //     DatabaseConnection.resetInstance();
+    //     Connection con = DatabaseConnection.getInstance("127.0.0.1:5000").connect();
+    //     RetrieveMode mode = RetrieveMode.MOOD_TENSION;
+    //     LocalDate date = LocalDate.parse("2022-03-01");
+    //     String personnummer = "111111-1111";
+    //     ArrayList<Data> mTList = DatabaseApiSelect.getData(con, mode, date, personnummer);
+    //     DatabaseConnection.getInstance().disconnect();
+    //     DatabaseConnection.resetInstance();
+
+    //     // Parse data into two ArrayLists
+    //     ArrayList<Integer> daytimes = new ArrayList<>();
+    //     ArrayList<Integer> moods = new ArrayList<>();
+    //     ArrayList<Integer> tensions = new ArrayList<>();
+    //     for (Data entryData : mTList) {
+    //         MoodTension entry = (MoodTension) entryData;
+    //         System.out.println(entry);
+    //         switch (entry.getDaytime()) {
+    //             case "1-Morning":
+    //                 daytimes.add(1);
+    //                 break;
+    //             case "2-Noon":
+    //                 daytimes.add(2);
+    //                 break;
+    //             case "3-Afternoon":
+    //                 daytimes.add(3);
+    //                 break;
+    //             case "4-Evening":
+    //                 daytimes.add(4);
+    //                 break;
+    //             default:
+    //                 break;
+    //         };
+    //         moods.add(entry.getMood());
+    //         tensions.add(entry.getTension());
+    //         System.out.println(entry);
+    //     }
+
+    //     XYSeries tensionSeries = chart.addSeries("Tension", daytimes, tensions);
+    //     XYSeries moodSeries = chart.addSeries("Mood", daytimes, moods);
+    //     tensionSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Area);
+    //     moodSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Line);
+
+    //     // Save chart to img
+    //     // BitmapEncoder.saveBitmapWithDPI(chart,
+    //     // "./src/main/resources/se/hkr/app/imgs/chart", BitmapEncoder.BitmapFormat.PNG,
+    //     // 300);
+
+    //     showChart(chart);
+    // }
+
+    //Code for journal entry retrieval
     
     public void onDisplayJournalButtonBtnClick(ActionEvent event) throws IOException, SQLException{
         LocalDate date = journalDate.getValue();
