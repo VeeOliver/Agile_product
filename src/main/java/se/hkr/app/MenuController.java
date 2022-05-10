@@ -13,20 +13,25 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import java.awt.Color;
 import javafx.stage.Stage;
+import se.hkr.app.DatabaseApiSelect.RetrieveMode;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingNode;
 
 import org.knowm.xchart.*;
+import org.knowm.xchart.CategorySeries.CategorySeriesRenderStyle;
 import org.knowm.xchart.XYSeries.XYSeriesRenderStyle;
 import org.knowm.xchart.internal.chartpart.Chart;
 import org.knowm.xchart.style.Styler;
 
 import javax.swing.*;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -76,6 +81,15 @@ public class MenuController {
     @FXML
     private DatePicker journalDate;
 
+    @FXML
+    private Button displayMTOneDay;
+
+    @FXML
+    private DatePicker dateMTOneday;
+
+    @FXML
+    private ImageView dailyMTGraph;
+
     public void onLogoutBtnClick(ActionEvent event) throws IOException {
         User.resetInstance();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
@@ -87,6 +101,7 @@ public class MenuController {
         stage.show();
     }
 
+    // Mood tab
     public void onSubmitMT(ActionEvent event) throws IOException {
         double mood = moodSlider.getValue();
         double tension = tensionSlider.getValue();
@@ -136,6 +151,7 @@ public class MenuController {
 
     }
 
+    // Journal entry tab
     public void onSubmitJournalEntry(ActionEvent event) throws IOException {
         String savedJournalEntry = journalEntry.getText().replaceAll("\n", System.getProperty("line.separator"));
         User user = User.getInstance("", "", "");
@@ -162,7 +178,7 @@ public class MenuController {
 
     }
 
-    // Charts
+    // Chart tab
     private void showChart(Chart chart) {
         JPanel chartPanel = new XChartPanel<>(chart);
 
@@ -178,7 +194,6 @@ public class MenuController {
 
         // add chart to the chart area
         chartArea.getChildren().add(swingNode);
-
     }
 
     private void buildPieChart() throws SQLException, IOException {
@@ -224,73 +239,7 @@ public class MenuController {
         showChart(chart);
     }
 
-    // private void buildDayChart() throws SQLException, IOException {
-    //     // Create Chart
-    //     XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.XChart).width(766).height(516).title("Mood and tension over the day")
-    //             .build();
-    //     // Colors
-    //     Color DarkBlue = new Color(50, 168, 140, 171);
-    //     Color lightGreen = new Color(0, 255, 0, 124);
-    //     Color purple = new Color(239, 7, 239, 151);
-    //     // Customize Chart
-    //     chart.getStyler().setLegendVisible(true);
-    //     chart.getStyler().setToolTipsEnabled(false);
-    //     Color[] colorsSeries = new Color[] { DarkBlue, purple, lightGreen, Color.CYAN };
-    //     chart.getStyler().setSeriesColors(colorsSeries);
-
-    //     // Series
-    //     DatabaseConnection.resetInstance();
-    //     Connection con = DatabaseConnection.getInstance("127.0.0.1:5000").connect();
-    //     RetrieveMode mode = RetrieveMode.MOOD_TENSION;
-    //     LocalDate date = LocalDate.parse("2022-03-01");
-    //     String personnummer = "111111-1111";
-    //     ArrayList<Data> mTList = DatabaseApiSelect.getData(con, mode, date, personnummer);
-    //     DatabaseConnection.getInstance().disconnect();
-    //     DatabaseConnection.resetInstance();
-
-    //     // Parse data into two ArrayLists
-    //     ArrayList<Integer> daytimes = new ArrayList<>();
-    //     ArrayList<Integer> moods = new ArrayList<>();
-    //     ArrayList<Integer> tensions = new ArrayList<>();
-    //     for (Data entryData : mTList) {
-    //         MoodTension entry = (MoodTension) entryData;
-    //         System.out.println(entry);
-    //         switch (entry.getDaytime()) {
-    //             case "1-Morning":
-    //                 daytimes.add(1);
-    //                 break;
-    //             case "2-Noon":
-    //                 daytimes.add(2);
-    //                 break;
-    //             case "3-Afternoon":
-    //                 daytimes.add(3);
-    //                 break;
-    //             case "4-Evening":
-    //                 daytimes.add(4);
-    //                 break;
-    //             default:
-    //                 break;
-    //         };
-    //         moods.add(entry.getMood());
-    //         tensions.add(entry.getTension());
-    //         System.out.println(entry);
-    //     }
-
-    //     XYSeries tensionSeries = chart.addSeries("Tension", daytimes, tensions);
-    //     XYSeries moodSeries = chart.addSeries("Mood", daytimes, moods);
-    //     tensionSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Area);
-    //     moodSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Line);
-
-    //     // Save chart to img
-    //     // BitmapEncoder.saveBitmapWithDPI(chart,
-    //     // "./src/main/resources/se/hkr/app/imgs/chart", BitmapEncoder.BitmapFormat.PNG,
-    //     // 300);
-
-    //     showChart(chart);
-    // }
-
-    //Code for journal entry retrieval
-    
+    // Journal history tab
     public void onDisplayJournalButtonBtnClick(ActionEvent event) throws IOException, SQLException{
         LocalDate date = journalDate.getValue();
         String personnummer = User.getInstance().getPersonnummer();
@@ -301,4 +250,92 @@ public class MenuController {
         journalEntryDisplay.setText(entries);
     }
 
+    // Daily chart tab -> Works only with updated database schema!
+    // public void onDisplayMTOneDayButtonClick(ActionEvent event) {
+    //     try {
+    //         Connection con = DatabaseConnection.getInstance().connect();
+    //         LocalDate date = dateMTOneday.getValue();
+    //         String personnummer = User.getInstance().getPersonnummer();
+    //         boolean noData = buildDayChart(con, date, personnummer);
+    //         DatabaseConnection.getInstance().disconnect();
+    //         String imageURL = noData
+    //             ? "./src/main/resources/se/hkr/app/imgs/AchillesInforms.png"
+    //             : "./src/main/resources/se/hkr/app/imgs/chartMTday.png";
+    //         FileInputStream stream = new FileInputStream(imageURL);
+    //         dailyMTGraph.setImage(new Image(stream));
+    //     } catch (SQLException e) {
+    //         System.out.println(e.getMessage());
+    //     } catch (IOException e) {
+    //         System.out.println(e.getMessage());
+    //     } catch (Exception e) {
+    //         System.out.println(e.getMessage());
+    //     }
+    // }
+
+    // private static boolean buildDayChart(Connection con, LocalDate date,
+    //     String personnummer) throws SQLException, IOException {
+
+    //     boolean noData = true;
+
+    //     // Retrieve and parse data if there is data for the chosen date
+    //     RetrieveMode mode = RetrieveMode.MOOD_TENSION;
+    //     ArrayList<Data> mTList = DatabaseApiSelect.getData(con, mode, date,
+    //         personnummer);
+    //     if (!mTList.isEmpty()) {
+    //         noData = false;
+    //         ArrayList<String> daytimes = new ArrayList<>();
+    //         ArrayList<Integer> moods = new ArrayList<>();
+    //         ArrayList<Integer> tensions = new ArrayList<>();
+    //         for (Data entryData : mTList) {
+    //             MoodTension entry = (MoodTension) entryData;
+    //             switch (entry.getDaytime()) {
+    //                 case "1-Morning":
+    //                     daytimes.add(entry.getDaytime());
+    //                     break;
+    //                 case "2-Noon":
+    //                     daytimes.add(entry.getDaytime());
+    //                     break;
+    //                 case "3-Afternoon":
+    //                     daytimes.add(entry.getDaytime());
+    //                     break;
+    //                 case "4-Evening":
+    //                     daytimes.add(entry.getDaytime());
+    //                     break;
+    //                 default:
+    //                     break;
+    //             };
+    //             moods.add(entry.getMood());
+    //             tensions.add(entry.getTension());
+    //         }
+
+    //         // Create and customize Chart
+    //         CategoryChart chart = new CategoryChartBuilder()
+    //             .theme(Styler.ChartTheme.XChart).width(766)
+    //             .height(516).title("Mood and tension over the day").build();
+
+    //         Color DarkBlue = new Color(50, 168, 140, 171);
+    //         Color lightGreen = new Color(0, 255, 0, 124);
+    //         Color purple = new Color(239, 7, 239, 151);
+    //         Color[] colorsSeries = new Color[] {DarkBlue, purple, lightGreen,
+    //                 Color.CYAN};
+
+    //         chart.getStyler().setSeriesColors(colorsSeries);
+    //         chart.getStyler().setLegendVisible(true);
+    //         chart.getStyler().setToolTipsEnabled(false);
+    //         chart.getStyler().setStacked(true);
+    //         chart.getStyler().setYAxisMax(10.0);
+    //         chart.getStyler().setYAxisMin(0.0);
+
+    //         CategorySeries tenSeries = chart.addSeries("Tension", daytimes, tensions);
+    //         CategorySeries mooSeries = chart.addSeries("Mood", daytimes, moods);
+    //         tenSeries.setChartCategorySeriesRenderStyle(CategorySeriesRenderStyle.Line);
+    //         mooSeries.setChartCategorySeriesRenderStyle(CategorySeriesRenderStyle.Line);
+
+    //         // Save chart to img
+    //         BitmapEncoder.saveBitmapWithDPI(chart,
+    //             "./src/main/resources/se/hkr/app/imgs/chartMTday",
+    //             BitmapEncoder.BitmapFormat.PNG, 300);
+    //     }
+    //     return noData;
+    // }
 }
