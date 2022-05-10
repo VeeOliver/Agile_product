@@ -102,7 +102,7 @@ public class MenuController {
     }
 
     // Mood tab
-    public void onSubmitMT(ActionEvent event) throws IOException {
+    public void onSubmitMT(ActionEvent event) throws SQLException, IOException {
         double mood = moodSlider.getValue();
         double tension = tensionSlider.getValue();
         User user = User.getInstance();
@@ -152,7 +152,7 @@ public class MenuController {
     }
 
     // Journal entry tab
-    public void onSubmitJournalEntry(ActionEvent event) throws IOException {
+    public void onSubmitJournalEntry(ActionEvent event) throws SQLException, IOException {
         String savedJournalEntry = journalEntry.getText().replaceAll("\n", System.getProperty("line.separator"));
         User user = User.getInstance("", "", "");
         Data.insertJournal(savedJournalEntry, user);

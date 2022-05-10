@@ -63,20 +63,24 @@ public class Authentication {
         if (!queryResult.next()) {
             personnummerAvailable = true;
         }
+
         queryResult = DatabaseApiSelect.checkEmail(con, email);
         if (!queryResult.next()) {
             emailAvailable = true;
         }
+
+        DatabaseConnection.getInstance().disconnect();
 
         Boolean arr[] = {emailAvailable, personnummerAvailable};
         return arr;
     }
 
     public void registerUser(String registerPersonnummer, String registerName, String registerEmailField,
-                             String registerPasswordField) {
+                             String registerPasswordField) throws SQLException {
         Connection con = DatabaseConnection.getInstance().connect();
         DatabaseApiInsert.createUserEntry(con, registerPersonnummer, registerName,
                 registerEmailField, registerPasswordField);
+        DatabaseConnection.getInstance().disconnect();
     }
 
     public static void successRegistration() {
@@ -95,9 +99,9 @@ public class Authentication {
         alert.showAndWait();
     }
 
-    public void resetRegField(TextField registerPersonnummer, TextField registerName, TextField registerEmailField,
-                              PasswordField registerPasswordField,
-                              PasswordField registerRepPasswordField) {
+    public void resetRegField(TextField registerPersonnummer, TextField registerName,
+            TextField registerEmailField, PasswordField registerPasswordField,
+            PasswordField registerRepPasswordField) {
         registerPersonnummer.setText("");
         registerName.setText("");
         registerEmailField.setText("");
@@ -181,5 +185,4 @@ public class Authentication {
         stage.setScene(scene);
         stage.show();
     }
-
 }

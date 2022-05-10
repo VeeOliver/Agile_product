@@ -8,6 +8,7 @@ import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -31,7 +32,7 @@ class DataTest {
 
     @Test
     @DisplayName("Testing to see if the mood rating is sent to the Database")
-    void insertMoodWorks() {
+    void insertMoodWorks() throws SQLException {
         int testMoodNum = 2;
         short returnValue = 1;
         User testUser = User.getInstance("test", "test", "test");
@@ -45,7 +46,7 @@ class DataTest {
     }
 
     @Test
-    void insertTensionWorks() {
+    void insertTensionWorks() throws SQLException {
         int testTensionNum = 2;
         short returnValue = 1;
         User testUser = User.getInstance("test", "test", "test");
@@ -58,7 +59,7 @@ class DataTest {
     }
 
     @Test
-    void insertJournalWorks() {
+    void insertJournalWorks() throws SQLException {
         String testEntry = "test";
         short returnValue = 1;
         User testUser = User.getInstance("test", "test", "test");

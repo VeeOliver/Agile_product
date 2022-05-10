@@ -94,7 +94,7 @@ public class AuthenticationTest {
 
     @Test
     @DisplayName("Test the registerUser method")
-    public void testRegisterUser() {
+    public void testRegisterUser() throws SQLException {
         short returnValue = 1;
         String personnummer = "010101-0001";
         String name = "test";
