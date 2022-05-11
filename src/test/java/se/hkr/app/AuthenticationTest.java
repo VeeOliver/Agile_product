@@ -1,8 +1,12 @@
 package se.hkr.app;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.times;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,9 +22,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-
 public class AuthenticationTest {
     Authentication auth = new Authentication();
+
+    @Mock
+    private DatabaseConnection dbCon;
 
     @Mock
     private Connection con;
@@ -95,16 +101,22 @@ public class AuthenticationTest {
     @Test
     @DisplayName("Test the registerUser method")
     public void testRegisterUser() throws SQLException {
-        short returnValue = 1;
         String personnummer = "010101-0001";
         String name = "test";
         String email = "testuser@gmail.com";
         String password = "alabama";
-        auth.registerUser(personnummer, name, email, password);
-        assertNotNull(DatabaseConnection.getInstance());
-        try (MockedStatic<DatabaseApiInsert> ms = Mockito.mockStatic(DatabaseApiInsert.class)) {
-            ms.when(() -> DatabaseApiInsert.createUserEntry((con), personnummer, name, email, password))
-                    .thenReturn(returnValue);
+        try (MockedStatic<DatabaseApiInsert> msIns = mockStatic(DatabaseApiInsert.class)) {
+            msIns
+                .when(() -> DatabaseApiInsert
+                .createUserEntry(con, personnummer, name, email, password))
+                .then(answer -> null);
+            auth.registerUser(personnummer, name, email, password);
+            msIns
+                .verify(() -> DatabaseApiInsert
+                .createUserEntry(any(Connection.class), any(String.class),
+                any(String.class), any(String.class), any(String.class)), times(1));
+            assertNotNull(DatabaseConnection.getInstance());
+            assertEquals(null, DatabaseConnection.getInstance().getCon());
         }
     }
 

@@ -77,10 +77,11 @@ public class Authentication {
 
     public void registerUser(String registerPersonnummer, String registerName, String registerEmailField,
                              String registerPasswordField) throws SQLException {
-        Connection con = DatabaseConnection.getInstance().connect();
+        DatabaseConnection dbCon = DatabaseConnection.getInstance();
+        Connection con = dbCon.connect();
         DatabaseApiInsert.createUserEntry(con, registerPersonnummer, registerName,
                 registerEmailField, registerPasswordField);
-        DatabaseConnection.getInstance().disconnect();
+        dbCon.disconnect();
     }
 
     public static void successRegistration() {

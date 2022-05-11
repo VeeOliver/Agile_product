@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -90,79 +91,115 @@ public class MenuController {
     @FXML
     private ImageView dailyMTGraph;
 
-    public void onLogoutBtnClick(ActionEvent event) throws IOException {
-        User.resetInstance();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        String css = this.getClass().getResource("welcome.css").toExternalForm();
-        scene.getStylesheets().add(css);
-        stage.setScene(scene);
-        stage.show();
+    public void onLogoutBtnClick(ActionEvent event) {
+        try {
+            User.resetInstance();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("welcome-view.fxml")));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            String css = this.getClass().getResource("welcome.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            configExceptionPopup();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            unknownExceptionPopup();
+        }
     }
 
     // Mood tab
-    public void onSubmitMT(ActionEvent event) throws SQLException, IOException {
-        double mood = moodSlider.getValue();
-        double tension = tensionSlider.getValue();
-        User user = User.getInstance();
-        Data.insertMood(mood, user);
-        Data.insertTension(tension, user);
-        Data.submissionCompleteNote();
+    public void onSubmitMT(ActionEvent event) {
+        try {
+            double mood = moodSlider.getValue();
+            double tension = tensionSlider.getValue();
+            User user = User.getInstance();
+            Data.insertMood(mood, user);
+            Data.insertTension(tension, user);
+            Data.submissionCompleteNote();
 
-        
-        //  LineChart test;
-          //graph.getData().clear();
-          
-        //   XYChart.Series<String, Number> moodSeries = new XYChart.Series<String,
-        //  Number>();
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("January", 7));
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("February", 6));
-        //  moodSeries.getData().add(new XYChart.Data<String, Number>("March", 8));
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("April", 8));
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("May", 7));
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("June", 5));
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("July", 6));
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("September", 4));
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("October", 3));
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("November", 7));
-        //   moodSeries.getData().add(new XYChart.Data<String, Number>("December", 8));
-        //  moodSeries.setName("Mood");
-        //  graph.getData().add(moodSeries);
-          
-        //   XYChart.Series<String, Number> tensionSeries = new XYChart.Series<String,
-        //   Number>();
-        //   tensionSeries.getData().add(new XYChart.Data<String, Number>("January", 7));
-        //   tensionSeries.getData().add(new XYChart.Data<String, Number>("February",
-        //   10));
-        //   tensionSeries.getData().add(new XYChart.Data<String, Number>("March", 10));
-        //   tensionSeries.getData().add(new XYChart.Data<String, Number>("April", 8));
-        //   tensionSeries.getData().add(new XYChart.Data<String, Number>("May", 6));
-        //   tensionSeries.getData().add(new XYChart.Data<String, Number>("June", 2));
-        //   tensionSeries.getData().add(new XYChart.Data<String, Number>("July", 3));
-        //   tensionSeries.getData().add(new XYChart.Data<String, Number>("September",
-        //   4));
-        //  tensionSeries.getData().add(new XYChart.Data<String, Number>("October", 3));
-        //  tensionSeries.getData().add(new XYChart.Data<String, Number>("November", 5));
-        //   tensionSeries.getData().add(new XYChart.Data<String, Number>("December", 8));
-        //   tensionSeries.setName("Tension");
-        //   graph.getData().add(tensionSeries);
-         
-
+            //  LineChart test;
+            //graph.getData().clear();
+            
+            //   XYChart.Series<String, Number> moodSeries = new XYChart.Series<String,
+            //  Number>();
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("January", 7));
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("February", 6));
+            //  moodSeries.getData().add(new XYChart.Data<String, Number>("March", 8));
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("April", 8));
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("May", 7));
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("June", 5));
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("July", 6));
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("September", 4));
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("October", 3));
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("November", 7));
+            //   moodSeries.getData().add(new XYChart.Data<String, Number>("December", 8));
+            //  moodSeries.setName("Mood");
+            //  graph.getData().add(moodSeries);
+            
+            //   XYChart.Series<String, Number> tensionSeries = new XYChart.Series<String,
+            //   Number>();
+            //   tensionSeries.getData().add(new XYChart.Data<String, Number>("January", 7));
+            //   tensionSeries.getData().add(new XYChart.Data<String, Number>("February",
+            //   10));
+            //   tensionSeries.getData().add(new XYChart.Data<String, Number>("March", 10));
+            //   tensionSeries.getData().add(new XYChart.Data<String, Number>("April", 8));
+            //   tensionSeries.getData().add(new XYChart.Data<String, Number>("May", 6));
+            //   tensionSeries.getData().add(new XYChart.Data<String, Number>("June", 2));
+            //   tensionSeries.getData().add(new XYChart.Data<String, Number>("July", 3));
+            //   tensionSeries.getData().add(new XYChart.Data<String, Number>("September",
+            //   4));
+            //  tensionSeries.getData().add(new XYChart.Data<String, Number>("October", 3));
+            //  tensionSeries.getData().add(new XYChart.Data<String, Number>("November", 5));
+            //   tensionSeries.getData().add(new XYChart.Data<String, Number>("December", 8));
+            //   tensionSeries.setName("Tension");
+            //   graph.getData().add(tensionSeries);   
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            sqlExceptionPopup();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            unknownExceptionPopup();
+        } finally {
+            if (DatabaseConnection.getInstance().getCon() != null) {
+                try {
+                    DatabaseConnection.getInstance().getCon().close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     // Journal entry tab
-    public void onSubmitJournalEntry(ActionEvent event) throws SQLException, IOException {
-        String savedJournalEntry = journalEntry.getText().replaceAll("\n", System.getProperty("line.separator"));
-        User user = User.getInstance("", "", "");
-        Data.insertJournal(savedJournalEntry, user);
-        Data.journalSubmittedNote();
-        journalEntry.setText("");
-        prompts.setValue("Select a prompt:");
-
+    public void onSubmitJournalEntry(ActionEvent event) {
+        try {
+            String savedJournalEntry = journalEntry.getText().replaceAll("\n", System.getProperty("line.separator"));
+            User user = User.getInstance("", "", "");
+            Data.insertJournal(savedJournalEntry, user);
+            Data.journalSubmittedNote();
+            journalEntry.setText("");
+            prompts.setValue("Select a prompt:");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            sqlExceptionPopup();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            unknownExceptionPopup();
+        } finally {
+            if (DatabaseConnection.getInstance().getCon() != null) {
+                try {
+                    DatabaseConnection.getInstance().getCon().close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    public void initializeChoicebox(Event e){
+    public void initializeChoicebox(Event e) {
 
         prompts.setValue("Select a prompt:");
         prompts.getItems().addAll( "How did you sleep last night?",
@@ -240,102 +277,153 @@ public class MenuController {
     }
 
     // Journal history tab
-    public void onDisplayJournalButtonBtnClick(ActionEvent event) throws IOException, SQLException{
-        LocalDate date = journalDate.getValue();
-        String personnummer = User.getInstance().getPersonnummer();
-        DatabaseConnection dbCon = DatabaseConnection.getInstance();
-        Connection con = dbCon.connect();
-        String entries = JournalEntry.retrieveJournalEntry(con, date, personnummer);
-        dbCon.disconnect();
-        journalEntryDisplay.setText(entries);
+    public void onDisplayJournalButtonBtnClick(ActionEvent event) throws SQLException{
+        try (Connection con = DatabaseConnection.getInstance().connect()) {
+            LocalDate date = journalDate.getValue();
+            String personnummer = User.getInstance().getPersonnummer();
+            String entries = JournalEntry.retrieveJournalEntry(con, date, personnummer);
+            DatabaseConnection.getInstance().disconnect();
+            journalEntryDisplay.setText(entries);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            sqlExceptionPopup();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            unknownExceptionPopup();
+        }
     }
 
     // Daily chart tab -> Works only with updated database schema!
-    // public void onDisplayMTOneDayButtonClick(ActionEvent event) {
-    //     try {
-    //         Connection con = DatabaseConnection.getInstance().connect();
-    //         LocalDate date = dateMTOneday.getValue();
-    //         String personnummer = User.getInstance().getPersonnummer();
-    //         boolean noData = buildDayChart(con, date, personnummer);
-    //         DatabaseConnection.getInstance().disconnect();
-    //         String imageURL = noData
-    //             ? "./src/main/resources/se/hkr/app/imgs/AchillesInforms.png"
-    //             : "./src/main/resources/se/hkr/app/imgs/chartMTday.png";
-    //         FileInputStream stream = new FileInputStream(imageURL);
-    //         dailyMTGraph.setImage(new Image(stream));
-    //     } catch (SQLException e) {
-    //         System.out.println(e.getMessage());
-    //     } catch (IOException e) {
-    //         System.out.println(e.getMessage());
-    //     } catch (Exception e) {
-    //         System.out.println(e.getMessage());
-    //     }
-    // }
+    public void onDisplayMTOneDayButtonClick(ActionEvent event) {
+        try (Connection con = DatabaseConnection.getInstance().connect()) {
+            LocalDate date = dateMTOneday.getValue();
+            String personnummer = User.getInstance().getPersonnummer();
+            boolean noData = buildDayChart(con, date, personnummer);
+            DatabaseConnection.getInstance().disconnect();
+            String imageURL = noData
+                ? "./src/main/resources/se/hkr/app/imgs/AchillesInforms.png"
+                : "./src/main/resources/se/hkr/app/imgs/chartMTday.png";
+            try (FileInputStream stream = new FileInputStream(imageURL)) {
+                dailyMTGraph.setImage(new Image(stream));
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                ioExceptionPopup(imageURL);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            sqlExceptionPopup();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-    // private static boolean buildDayChart(Connection con, LocalDate date,
-    //     String personnummer) throws SQLException, IOException {
+    private static boolean buildDayChart(Connection con, LocalDate date,
+        String personnummer) throws SQLException {
 
-    //     boolean noData = true;
+        boolean noData = true;
 
-    //     // Retrieve and parse data if there is data for the chosen date
-    //     RetrieveMode mode = RetrieveMode.MOOD_TENSION;
-    //     ArrayList<Data> mTList = DatabaseApiSelect.getData(con, mode, date,
-    //         personnummer);
-    //     if (!mTList.isEmpty()) {
-    //         noData = false;
-    //         ArrayList<String> daytimes = new ArrayList<>();
-    //         ArrayList<Integer> moods = new ArrayList<>();
-    //         ArrayList<Integer> tensions = new ArrayList<>();
-    //         for (Data entryData : mTList) {
-    //             MoodTension entry = (MoodTension) entryData;
-    //             switch (entry.getDaytime()) {
-    //                 case "1-Morning":
-    //                     daytimes.add(entry.getDaytime());
-    //                     break;
-    //                 case "2-Noon":
-    //                     daytimes.add(entry.getDaytime());
-    //                     break;
-    //                 case "3-Afternoon":
-    //                     daytimes.add(entry.getDaytime());
-    //                     break;
-    //                 case "4-Evening":
-    //                     daytimes.add(entry.getDaytime());
-    //                     break;
-    //                 default:
-    //                     break;
-    //             };
-    //             moods.add(entry.getMood());
-    //             tensions.add(entry.getTension());
-    //         }
+        // Retrieve and parse data if there is data for the chosen date
+        RetrieveMode mode = RetrieveMode.MOOD_TENSION;
+        ArrayList<Data> mTList = DatabaseApiSelect.getData(con, mode, date,
+            personnummer);
+        if (!mTList.isEmpty()) {
+            noData = false;
+            ArrayList<String> daytimes = new ArrayList<>();
+            ArrayList<Integer> moods = new ArrayList<>();
+            ArrayList<Integer> tensions = new ArrayList<>();
+            for (Data entryData : mTList) {
+                MoodTension entry = (MoodTension) entryData;
+                switch (entry.getDaytime()) {
+                    case "1-Morning":
+                        daytimes.add(entry.getDaytime());
+                        break;
+                    case "2-Noon":
+                        daytimes.add(entry.getDaytime());
+                        break;
+                    case "3-Afternoon":
+                        daytimes.add(entry.getDaytime());
+                        break;
+                    case "4-Evening":
+                        daytimes.add(entry.getDaytime());
+                        break;
+                    default:
+                        break;
+                };
+                moods.add(entry.getMood());
+                tensions.add(entry.getTension());
+            }
 
-    //         // Create and customize Chart
-    //         CategoryChart chart = new CategoryChartBuilder()
-    //             .theme(Styler.ChartTheme.XChart).width(766)
-    //             .height(516).title("Mood and tension over the day").build();
+            // Create and customize Chart
+            CategoryChart chart = new CategoryChartBuilder()
+                .theme(Styler.ChartTheme.XChart).width(766)
+                .height(516).title("Mood and tension over the day").build();
 
-    //         Color DarkBlue = new Color(50, 168, 140, 171);
-    //         Color lightGreen = new Color(0, 255, 0, 124);
-    //         Color purple = new Color(239, 7, 239, 151);
-    //         Color[] colorsSeries = new Color[] {DarkBlue, purple, lightGreen,
-    //                 Color.CYAN};
+            Color DarkBlue = new Color(50, 168, 140, 171);
+            Color lightGreen = new Color(0, 255, 0, 124);
+            Color purple = new Color(239, 7, 239, 151);
+            Color[] colorsSeries = new Color[] {DarkBlue, purple, lightGreen,
+                    Color.CYAN};
 
-    //         chart.getStyler().setSeriesColors(colorsSeries);
-    //         chart.getStyler().setLegendVisible(true);
-    //         chart.getStyler().setToolTipsEnabled(false);
-    //         chart.getStyler().setStacked(true);
-    //         chart.getStyler().setYAxisMax(10.0);
-    //         chart.getStyler().setYAxisMin(0.0);
+            chart.getStyler().setSeriesColors(colorsSeries);
+            chart.getStyler().setLegendVisible(true);
+            chart.getStyler().setToolTipsEnabled(false);
+            chart.getStyler().setStacked(true);
+            chart.getStyler().setYAxisMax(10.0);
+            chart.getStyler().setYAxisMin(0.0);
 
-    //         CategorySeries tenSeries = chart.addSeries("Tension", daytimes, tensions);
-    //         CategorySeries mooSeries = chart.addSeries("Mood", daytimes, moods);
-    //         tenSeries.setChartCategorySeriesRenderStyle(CategorySeriesRenderStyle.Line);
-    //         mooSeries.setChartCategorySeriesRenderStyle(CategorySeriesRenderStyle.Line);
+            CategorySeries tenSeries = chart.addSeries("Tension", daytimes, tensions);
+            CategorySeries mooSeries = chart.addSeries("Mood", daytimes, moods);
+            tenSeries.setChartCategorySeriesRenderStyle(CategorySeriesRenderStyle.Line);
+            mooSeries.setChartCategorySeriesRenderStyle(CategorySeriesRenderStyle.Line);
 
-    //         // Save chart to img
-    //         BitmapEncoder.saveBitmapWithDPI(chart,
-    //             "./src/main/resources/se/hkr/app/imgs/chartMTday",
-    //             BitmapEncoder.BitmapFormat.PNG, 300);
-    //     }
-    //     return noData;
-    // }
+            // Save chart to img
+            try {
+                BitmapEncoder.saveBitmapWithDPI(chart,
+                    "./src/main/resources/se/hkr/app/imgs/chartMTday",
+                    BitmapEncoder.BitmapFormat.PNG, 300);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                chartBuildExceptionPopup();
+            }
+        }
+        return noData;
+    }
+
+    //Alerts for error handling
+    public static void sqlExceptionPopup() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error when connecting to database");
+        alert.setContentText("Please check your internet connection and try again later\n"
+            + "Please check the error message in the terminal for more information");
+        alert.showAndWait();
+    }
+
+    public static void ioExceptionPopup(String url) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error when opening a resource");
+        alert.setContentText("Resource at " + url + " not found"
+            + "\nPlease check the error message in the terminal for more information");
+        alert.showAndWait();
+    }
+
+    public static void configExceptionPopup() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error in the confguration file");
+        alert.setContentText("Please check the error message in the terminal for more information");
+        alert.showAndWait();
+    }
+
+    public static void unknownExceptionPopup() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("An unknown error occurred");
+        alert.setContentText("Please check the error message in the terminal for more information");
+        alert.showAndWait();
+    }
+
+    public static void chartBuildExceptionPopup() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error when creating the chart");
+        alert.setContentText("Please check the error message in the terminal for more information");
+        alert.showAndWait();
+    }
 }
