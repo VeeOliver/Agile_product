@@ -21,7 +21,10 @@
             <TextField fx:id="emailField" focusTraversable="false" layoutX="471.0" layoutY="225.0" onAction="#onTabKeySwitchField" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Email" />
             <PasswordField fx:id="passwordField" focusTraversable="false" layoutX="470.0" layoutY="270.0" onKeyPressed="#onEnterKeyLogin" prefHeight="25.0" prefWidth="195.0" promptText="Password" />
             <Button fx:id="loginBtn" layoutX="617.0" layoutY="314.0" mnemonicParsing="false" onAction="#onLoginBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Login" textFill="#f8f6f5" />
-            <Button fx:id="registerBtn" layoutX="537.0" layoutY="314.0" mnemonicParsing="false" onAction="#onRegisterBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Register" textFill="#fcf5f5" />
+            <Button fx:id="registerBtn" layoutX="534.0" layoutY="315.0" mnemonicParsing="false" onAction="#onRegisterBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Register" textFill="#fcf5f5">
+               <font>
+                  <Font name="Lucida Grande" size="13.0" />
+               </font></Button>
             <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="30.0" prefHeight="62.0" prefWidth="345.0" style="-fx-background-color: white;" text="Welcome!">
                <font>
                   <Font name="Lucida Grande" size="37.0" />
@@ -37,11 +40,12 @@
                   <Font name="Lucida Grande" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="factButton" layoutX="115.0" layoutY="108.0" mnemonicParsing="false" onAction="#showFactOfTheDay" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Fact Generator" textFill="WHITE">
+            <Button fx:id="factButton" layoutX="70.0" layoutY="110.0" mnemonicParsing="false" onAction="#showFactOfTheDay" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Fact Generator" textFill="WHITE">
                <font>
                   <Font name="Lucida Grande" size="13.0" />
                </font>
             </Button>
+            <Button fx:id="aboutBtn" layoutX="226.0" layoutY="109.0" mnemonicParsing="false" onAction="#showAboutUs" prefHeight="23.0" prefWidth="83.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="About  Us" textFill="WHITE" />
          </children>
       </Pane>
       <Pane fx:id="header" nodeOrientation="LEFT_TO_RIGHT" prefHeight="77.0" prefWidth="766.0" style="-fx-background-color: #32328E;" stylesheets="@welcome.css">
