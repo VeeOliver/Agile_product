@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="766.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.Authentication">
+   <children>
+      <Pane layoutX="-5.0" prefHeight="77.0" prefWidth="774.0" style="-fx-background-color: #32328E;">
+         <children>
+            <ImageView fitHeight="74.0" fitWidth="223.0" layoutX="25.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imgs/Myrmidon_full_trailing.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button fx:id="backBtn" layoutX="629.0" layoutY="408.0" mnemonicParsing="false" onAction="#switchToWelcome" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="Lucida Grande" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="30.0" layoutY="92.0" text="About Us">
+         <font>
+            <Font name="Lucida Grande" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="126.0" prefHeight="97.0" prefWidth="479.0" text="Looking to better understand your personal moods and habits? Wondering where all your tension is coming from? Myrmidon can help! Designed to help track your mood and tension levels throughout the day, week, month or even year, Myrmidon can help you visualize just how your mood changes over a period of time. Myrmidon also provides a space to write down your thoughts to give a bit more context to how you're feeling at that moment. " wrapText="true">
+         <font>
+            <Font name="Lucida Grande" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="265.0" prefHeight="20.0" prefWidth="230.0" text="What’s with the name? ">
+         <font>
+            <Font name="Lucida Grande" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="295.0" prefHeight="140.0" prefWidth="408.0" text="The name Myrmidon stems from a Greek myth in which Zeus transformed a legion of ants into the Myrmidons, soldiers designed to follow Achilles into battle and obey his every command. Our own mascot, Achilles the ant, is pictured in our logo and inspires us to provide the best service to our users as we possibly can. Myrmidon is here for you, to be your personal assistant and helper, organizing your entries into something easy to see and understand." wrapText="true">
+         <font>
+            <Font name="Lucida Grande" size="13.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="249.0" fitWidth="230.0" layoutX="529.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/Achilles_arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="175.0" fitWidth="197.0" layoutX="454.0" layoutY="228.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imgs/Graphic_Achilles.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
