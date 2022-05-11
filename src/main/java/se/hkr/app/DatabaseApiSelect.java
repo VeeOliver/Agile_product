@@ -83,46 +83,6 @@ public class DatabaseApiSelect {
         return parseToDataList(rs);
     }
 
-    //Does not work for MoodTension!
-    public static ArrayList<Data> getData(Connection con, RetrieveMode mode, LocalDate startDate, LocalDate endDate, String personnummer) throws SQLException {
-        String sql;
-        switch (mode) {
-            case JOURNAL_ENTRY:
-                sql = """
-                SELECT
-                    determineTimeOfDay(Journal_entry.date) AS timeOfDay,
-                    Journal_entry.journal_entry,
-                    DATE(Journal_entry.date) AS date
-                FROM Journal_entry
-                WHERE DATE(Journal_entry.date) >= ? AND DATE(Journal_entry.date) <= ? AND Journal_entry.personnummer LIKE ?
-                ORDER BY DATE(date), timeOfDay;
-                """;
-                break;
-            case MOOD_TENSION:
-                sql = """
-                SELECT
-                    determineTimeOfDay(Tension.date) AS timeOfDay,
-                    AVG(Mood.rating) AS mood,
-                    AVG(Tension.rating) AS tension,
-                    MAX(DATE(Mood.date)) AS date
-                FROM Mood
-                JOIN Tension ON Mood.date = Tension.date
-                WHERE DATE(Tension.date) >= ? AND DATE(Tension.date) <= ? AND Mood.personnummer LIKE ?
-                GROUP BY timeOfDay
-                ORDER BY MAX(DATE(Mood.date)), timeOfDay;
-                """;
-                break;
-            default:
-                sql = "";
-        }
-        PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(1, startDate.toString());
-        stmt.setString(2, endDate.toString());
-        stmt.setString(3, personnummer);
-        ResultSet rs = stmt.executeQuery();
-        return parseToDataList(rs);
-    }
-
     // Retrieve journal entries by rating range
     public static ArrayList<Data> getJournalEntriesByMoodRange(Connection con, int moodLower, int moodUpper, String personnummer) throws SQLException {
         String sql = """

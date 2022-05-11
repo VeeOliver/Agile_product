@@ -3,10 +3,9 @@ package se.hkr.app;
 
 import javafx.scene.control.Alert;
 
-
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 
 public class Data {
@@ -27,10 +26,8 @@ public class Data {
         return this.daytime;
     }
 
-    static public ArrayList<User> users = new ArrayList<>();
-
     // connects GUI value for Mood to the Database
-    public static void insertMood(double moodRating, User user) {
+    public static void insertMood(double moodRating, User user) throws SQLException {
         int moodNum = (int) moodRating;
         String userId = user.getPersonnummer();
         DatabaseApiInsert.createMoodEntry(DatabaseConnection.getInstance().connect(), moodNum, LocalDateTime.now(), userId);
@@ -38,7 +35,7 @@ public class Data {
     }
 
     // connects GUI value for Tension to the Database
-    public static void insertTension(double tensionRating, User user) {
+    public static void insertTension(double tensionRating, User user) throws SQLException {
         int tensionNum = (int) tensionRating;
         String userId = user.getPersonnummer();
         DatabaseApiInsert.createTensionEntry(DatabaseConnection.getInstance().connect(), tensionNum, LocalDateTime.now(), userId);
@@ -46,7 +43,7 @@ public class Data {
     }
 
     // connects GUI Journal Entry to the Database
-    public static void insertJournal(String journalText, User user) {
+    public static void insertJournal(String journalText, User user) throws SQLException {
         String userId = user.getPersonnummer();
         DatabaseApiInsert.createJournalEntry(DatabaseConnection.getInstance().connect(), journalText, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
@@ -70,5 +67,4 @@ public class Data {
         alert.setContentText("You're a wonderful author!");
         alert.showAndWait();
     }
-
 }

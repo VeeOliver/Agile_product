@@ -1,7 +1,5 @@
 package se.hkr.app;
 
-import javafx.scene.control.Alert;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -10,10 +8,15 @@ import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
 
 class DataTest {
 
@@ -33,41 +36,52 @@ class DataTest {
 
     @Test
     @DisplayName("Testing to see if the mood rating is sent to the Database")
-    void insertMoodWorks() {
+    void insertMoodWorks() throws SQLException {
         int testMoodNum = 2;
-        short returnValue = 1;
         User testUser = User.getInstance("test", "test", "test");
         try (MockedStatic<DatabaseApiInsert> ms = Mockito.mockStatic(DatabaseApiInsert.class)) {
-            ms.when(() -> DatabaseApiInsert.createMoodEntry(con, testMoodNum, LocalDateTime.now(), "test"))
-                    .thenReturn(returnValue);
+            ms.when(() -> DatabaseApiInsert.createMoodEntry(con, testMoodNum,
+                    LocalDateTime.now(), "test"))
+                .thenAnswer(answer -> null);
+
             Data.insertMood(testMoodNum, testUser);
+
+            ms.verify(() -> DatabaseApiInsert.createMoodEntry(any(Connection.class),
+                anyInt(), any(LocalDateTime.class), anyString()), times(1));
             assertNull(DatabaseConnection.getInstance().getCon());
         }
-
     }
 
     @Test
-    void insertTensionWorks() {
+    void insertTensionWorks() throws SQLException {
         int testTensionNum = 2;
-        short returnValue = 1;
         User testUser = User.getInstance("test", "test", "test");
         try (MockedStatic<DatabaseApiInsert> ms = Mockito.mockStatic(DatabaseApiInsert.class)) {
-            ms.when(() -> DatabaseApiInsert.createTensionEntry((con), testTensionNum, LocalDateTime.now(), "test"))
-                    .thenReturn(returnValue);
+            ms.when(() -> DatabaseApiInsert.createTensionEntry((con), testTensionNum,
+                    LocalDateTime.now(), "test"))
+                .thenAnswer(answer -> null);
+
             Data.insertTension(testTensionNum, testUser);
+
+            ms.verify(() -> DatabaseApiInsert.createTensionEntry(any(Connection.class),
+                anyInt(), any(LocalDateTime.class), anyString()), times(1));
             assertNull(DatabaseConnection.getInstance().getCon());
         }
     }
 
     @Test
-    void insertJournalWorks() {
+    void insertJournalWorks() throws SQLException {
         String testEntry = "test";
-        short returnValue = 1;
         User testUser = User.getInstance("test", "test", "test");
         try (MockedStatic<DatabaseApiInsert> ms = Mockito.mockStatic(DatabaseApiInsert.class)) {
-            ms.when(() -> DatabaseApiInsert.createJournalEntry((con), testEntry, LocalDateTime.now(), "test"))
-                    .thenReturn(returnValue);
+            ms.when(() -> DatabaseApiInsert.createJournalEntry((con), testEntry,
+                    LocalDateTime.now(), "test"))
+                .thenAnswer(answer -> null);
+
             Data.insertJournal(testEntry, testUser);
+
+            ms.verify(() -> DatabaseApiInsert.createJournalEntry(any(Connection.class),
+                anyString(), any(LocalDateTime.class), anyString()), times(1));
             assertNull(DatabaseConnection.getInstance().getCon());
         }
     }
@@ -86,5 +100,4 @@ class DataTest {
             msAlert.when(Data::submissionCompleteNote).thenAnswer((Answer<Void>) invocation -> null);
         }
     }
-
 }
