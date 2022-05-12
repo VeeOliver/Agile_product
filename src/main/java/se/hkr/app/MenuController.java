@@ -190,11 +190,7 @@ public class MenuController {
             unknownExceptionPopup();
         } finally {
             if (DatabaseConnection.getInstance().getCon() != null) {
-                try {
-                    DatabaseConnection.getInstance().getCon().close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                    DatabaseConnection.getInstance().disconnect();
             }
         }
     }
@@ -269,16 +265,17 @@ public class MenuController {
         AvgmoodSeries.setXYSeriesRenderStyle(XYSeriesRenderStyle.Line);
 
         // Save chart to img
-        // BitmapEncoder.saveBitmapWithDPI(chart,
-        // "./src/main/resources/se/hkr/app/imgs/chart", BitmapEncoder.BitmapFormat.PNG,
-        // 300);
+        BitmapEncoder.saveBitmapWithDPI(chart,
+        "./src/main/resources/se/hkr/app/imgs/chart", BitmapEncoder.BitmapFormat.PNG,
+        300);
 
-        showChart(chart);
+        // showChart(chart);
     }
 
     // Journal history tab
     public void onDisplayJournalButtonBtnClick(ActionEvent event) throws SQLException{
-        try (Connection con = DatabaseConnection.getInstance().connect()) {
+        try {
+            Connection con = DatabaseConnection.getInstance().connect();
             LocalDate date = journalDate.getValue();
             String personnummer = User.getInstance().getPersonnummer();
             String entries = JournalEntry.retrieveJournalEntry(con, date, personnummer);
@@ -290,12 +287,17 @@ public class MenuController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             unknownExceptionPopup();
+        } finally {
+            if (DatabaseConnection.getInstance().getCon() != null) {
+                DatabaseConnection.getInstance().disconnect();
+            }
         }
     }
 
     // Daily chart tab -> Works only with updated database schema!
     public void onDisplayMTOneDayButtonClick(ActionEvent event) {
-        try (Connection con = DatabaseConnection.getInstance().connect()) {
+        try {
+            Connection con = DatabaseConnection.getInstance().connect();
             LocalDate date = dateMTOneday.getValue();
             String personnummer = User.getInstance().getPersonnummer();
             boolean noData = buildDayChart(con, date, personnummer);
@@ -314,6 +316,10 @@ public class MenuController {
             sqlExceptionPopup();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            if (DatabaseConnection.getInstance().getCon() != null) {
+                DatabaseConnection.getInstance().disconnect();
+            }
         }
     }
 
