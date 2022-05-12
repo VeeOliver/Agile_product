@@ -75,23 +75,6 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab style="-fx-background-radius: 0;" text="History">
-                    <content>
-                        <AnchorPane fx:id="historyContainer" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
-                            <children>
-                                <Button layoutX="14.0" layoutY="476.0" mnemonicParsing="false" onAction="#onLogoutBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Logout" textFill="#fcfcfc" />
-                        <LineChart fx:id="graph" layoutX="133.0" layoutY="34.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </LineChart>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
 
                 <Tab onSelectionChanged="#tensionChart" text="Chart">
                     <content>
