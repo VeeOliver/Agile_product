@@ -8,9 +8,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="766.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.WelcomeController">
+<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="766.0" style="-fx-background-color: white;" stylesheets="@welcome.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.WelcomeController">
    <children>
       <Pane fx:id="formContainer" layoutY="77.0" prefHeight="416.0" prefWidth="766.0">
          <children>
@@ -18,10 +19,10 @@
                <font>
                   <Font name="Lucida Grande" size="18.0" />
                </font></Label>
-            <TextField fx:id="emailField" focusTraversable="false" layoutX="471.0" layoutY="225.0" onAction="#onTabKeySwitchField" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Email" />
-            <PasswordField fx:id="passwordField" focusTraversable="false" layoutX="470.0" layoutY="270.0" onKeyPressed="#onEnterKeyLogin" prefHeight="25.0" prefWidth="195.0" promptText="Password" />
-            <Button fx:id="loginBtn" layoutX="617.0" layoutY="314.0" mnemonicParsing="false" onAction="#onLoginBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Login" textFill="#f8f6f5" />
-            <Button fx:id="registerBtn" layoutX="534.0" layoutY="315.0" mnemonicParsing="false" onAction="#onRegisterBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Register" textFill="#fcf5f5">
+            <TextField fx:id="emailField" focusTraversable="false" layoutX="471.0" layoutY="225.0" onAction="#onTabKeySwitchField" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Email" styleClass="input" />
+            <PasswordField fx:id="passwordField" focusTraversable="false" layoutX="470.0" layoutY="270.0" onKeyPressed="#onEnterKeyLogin" prefHeight="25.0" prefWidth="195.0" promptText="Password" styleClass="input" />
+            <Button fx:id="loginBtn" layoutX="577.0" layoutY="315.0" mnemonicParsing="false" onAction="#onLoginBtnClick" prefHeight="27.0" prefWidth="89.0" styleClass="btns" text="Login" textFill="#f8f6f5" />
+            <Button fx:id="registerBtn" layoutX="472.0" layoutY="315.0" mnemonicParsing="false" onAction="#onRegisterBtnClick" prefHeight="27.0" prefWidth="100.0" styleClass="btns" text="Register" textFill="#fcf5f5">
                <font>
                   <Font name="Lucida Grande" size="13.0" />
                </font></Button>
@@ -40,12 +41,14 @@
                   <Font name="Lucida Grande" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="factButton" layoutX="70.0" layoutY="110.0" mnemonicParsing="false" onAction="#showFactOfTheDay" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Fact Generator" textFill="WHITE">
+            <Button fx:id="factButton" layoutX="70.0" layoutY="110.0" mnemonicParsing="false" onAction="#showFactOfTheDay" prefHeight="27.0" prefWidth="125.0" styleClass="btns" text="Fact Generator" textFill="WHITE">
                <font>
                   <Font name="Lucida Grande" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="aboutBtn" layoutX="226.0" layoutY="109.0" mnemonicParsing="false" onAction="#showAboutUs" prefHeight="23.0" prefWidth="83.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="About  Us" textFill="WHITE" />
+            <Button fx:id="aboutBtn" layoutX="199.0" layoutY="110.0" mnemonicParsing="false" onAction="#showAboutUs" prefHeight="27.0" prefWidth="110.0" styleClass="btns" text="About  Us" textFill="WHITE" />
+            <SVGPath content="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" layoutX="428.0" layoutY="226.0" styleClass="icons" />
+            <SVGPath content="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" layoutX="428.0" layoutY="271.0" styleClass="icons" />
          </children>
       </Pane>
       <Pane fx:id="header" nodeOrientation="LEFT_TO_RIGHT" prefHeight="77.0" prefWidth="766.0" style="-fx-background-color: #32328E;" stylesheets="@welcome.css">

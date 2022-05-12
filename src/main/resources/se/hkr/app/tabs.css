@@ -1,6 +1,5 @@
-
 #headerMenu {
- -fx-font-family: "Optima Regular";
+    -fx-font-family: "Optima Regular";
 }
 
 #moodContainer {
@@ -13,13 +12,13 @@
     -fx-font-size: 30px;
 }
 
-#moodLabel{
--fx-font-family: "Lucida Grande";
+#moodLabel {
+    -fx-font-family: "Lucida Grande";
     -fx-text-fill: black;
     -fx-font-size: 24px;
 }
 
-#tensionLabel{
+#tensionLabel {
     -fx-font-family: "Lucida Grande";
     -fx-text-fill: black;
     -fx-font-size: 24px;
@@ -37,4 +36,62 @@
 
 #historyContainer {
     -fx-background-color: white;
+}
+
+.btns {
+    -fx-background-color: #32328E;
+    -fx-background-radius: 5px;
+    -fx-text-fill: white;
+}
+
+.btns:hover {
+    -fx-background-color: #1e025f;
+    -fx-scale-y: 1.1;
+    -fx-cursor: hand;
+}
+
+.btns:pressed {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+
+.tab-pane {
+    -fx-tab-min-width: 90px;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1, 0, 0;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #e6e6e6;
+
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #828282;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #32328E;
+}
+
+.input {
+    -fx-focus-color: #32328E;
+}
+
+.icons {
+    -fx-fill: #32328E;
 }
