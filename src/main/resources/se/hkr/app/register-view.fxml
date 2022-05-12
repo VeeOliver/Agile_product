@@ -8,9 +8,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="484.0" prefWidth="766.0" stylesheets="@register.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.RegisterController">
    <children>
       <Pane fx:id="formContainer" layoutY="77.0" onKeyPressed="#onEnterRegister" prefHeight="407.0" prefWidth="766.0">
          <children>
@@ -18,19 +19,24 @@
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <TextField fx:id="registerEmailField" focusTraversable="false" layoutX="284.0" layoutY="187.0" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Email" />
-            <Button fx:id="registerBtn" layoutX="417.0" layoutY="330.0" mnemonicParsing="false" onAction="#onRegisterBtnClick" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Register" textFill="#f8f6f5" />
-            <PasswordField fx:id="registerPasswordField" focusTraversable="false" layoutX="284.0" layoutY="225.0" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Password" />
-            <PasswordField fx:id="registerRepPasswordField" focusTraversable="false" layoutX="284.0" layoutY="262.0" prefHeight="25.0" prefWidth="195.0" promptText="Repeat password" />
+            <TextField fx:id="registerEmailField" focusTraversable="false" layoutX="284.0" layoutY="187.0" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Email" styleClass="input" />
+            <Button fx:id="registerBtn" layoutX="383.0" layoutY="318.0" mnemonicParsing="false" onAction="#onRegisterBtnClick" prefHeight="25.0" prefWidth="96.0" styleClass="btns" text="Register" textFill="#f8f6f5" />
+            <PasswordField fx:id="registerPasswordField" focusTraversable="false" layoutX="284.0" layoutY="225.0" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Password" styleClass="input" />
+            <PasswordField fx:id="registerRepPasswordField" focusTraversable="false" layoutX="284.0" layoutY="262.0" prefHeight="25.0" prefWidth="195.0" promptText="Repeat password" styleClass="input" />
             <ImageView fitHeight="27.0" fitWidth="29.0" layoutX="118.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
-            <Button layoutX="343.0" layoutY="330.0" mnemonicParsing="false" onAction="#onBackBtnClick" prefHeight="25.0" prefWidth="59.0" style="-fx-background-color: #32328E; -fx-background-radius: 0em;" text="Back" textFill="#f8f6f5" />
-            <TextField fx:id="registerPersonnummer" focusTraversable="false" layoutX="284.0" layoutY="106.0" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Personnummer" />
-            <TextField fx:id="registerName" focusTraversable="false" layoutX="284.0" layoutY="146.0" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Name" />
-            <ImageView fitHeight="204.0" fitWidth="195.0" layoutX="65.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+            <Button layoutX="284.0" layoutY="318.0" mnemonicParsing="false" onAction="#onBackBtnClick" prefHeight="25.0" prefWidth="96.0" styleClass="btns" text="Back" textFill="#f8f6f5" />
+            <TextField fx:id="registerPersonnummer" focusTraversable="false" layoutX="284.0" layoutY="106.0" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Personnummer" styleClass="input" />
+            <TextField fx:id="registerName" focusTraversable="false" layoutX="284.0" layoutY="146.0" onKeyPressed="#onTabKeySwitchField" prefHeight="25.0" prefWidth="195.0" promptText="Name" styleClass="input" />
+            <ImageView fitHeight="204.0" fitWidth="195.0" layoutX="21.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imgs/Graphic_Achilles.png" />
                </image>
             </ImageView>
+            <SVGPath content="M4,4H20A2,2 0 0,1 22,6V18A2,2 0 0,1 20,20H4A2,2 0 0,1 2,18V6A2,2 0 0,1 4,4M4,6V18H11V6H4M20,18V6H18.76C19,6.54 18.95,7.07 18.95,7.13C18.88,7.8 18.41,8.5 18.24,8.75L15.91,11.3L19.23,11.28L19.24,12.5L14.04,12.47L14,11.47C14,11.47 17.05,8.24 17.2,7.95C17.34,7.67 17.91,6 16.5,6C15.27,6.05 15.41,7.3 15.41,7.3L13.87,7.31C13.87,7.31 13.88,6.65 14.25,6H13V18H15.58L15.57,17.14L16.54,17.13C16.54,17.13 17.45,16.97 17.46,16.08C17.5,15.08 16.65,15.08 16.5,15.08C16.37,15.08 15.43,15.13 15.43,15.95H13.91C13.91,15.95 13.95,13.89 16.5,13.89C19.1,13.89 18.96,15.91 18.96,15.91C18.96,15.91 19,17.16 17.85,17.63L18.37,18H20M8.92,16H7.42V10.2L5.62,10.76V9.53L8.76,8.41H8.92V16Z" layoutX="248.0" layoutY="107.0" styleClass="icons" />
+            <SVGPath content="M18,17H10.5L12.5,15H18M6,17V14.5L13.88,6.65C14.07,6.45 14.39,6.45 14.59,6.65L16.35,8.41C16.55,8.61 16.55,8.92 16.35,9.12L8.47,17M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" layoutX="248.0" layoutY="147.0" styleClass="icons" />
+            <SVGPath content="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" layoutX="248.0" layoutY="188.0" styleClass="icons" />
+            <SVGPath content="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" layoutX="248.0" layoutY="226.0" styleClass="icons" />
+            <SVGPath content="M12.63,2C18.16,2 22.64,6.5 22.64,12C22.64,17.5 18.16,22 12.63,22C9.12,22 6.05,20.18 4.26,17.43L5.84,16.18C7.25,18.47 9.76,20 12.64,20A8,8 0 0,0 20.64,12A8,8 0 0,0 12.64,4C8.56,4 5.2,7.06 4.71,11H7.47L3.73,14.73L0,11H2.69C3.19,5.95 7.45,2 12.63,2M15.59,10.24C16.09,10.25 16.5,10.65 16.5,11.16V15.77C16.5,16.27 16.09,16.69 15.58,16.69H10.05C9.54,16.69 9.13,16.27 9.13,15.77V11.16C9.13,10.65 9.54,10.25 10.04,10.24V9.23C10.04,7.7 11.29,6.46 12.81,6.46C14.34,6.46 15.59,7.7 15.59,9.23V10.24M12.81,7.86C12.06,7.86 11.44,8.47 11.44,9.23V10.24H14.19V9.23C14.19,8.47 13.57,7.86 12.81,7.86Z" layoutX="248.0" layoutY="263.0" styleClass="icons" />
          </children>
       </Pane>
       <Pane fx:id="header" nodeOrientation="LEFT_TO_RIGHT" prefHeight="77.0" prefWidth="766.0" style="-fx-background-color: #32328E;" stylesheets="@welcome.css">

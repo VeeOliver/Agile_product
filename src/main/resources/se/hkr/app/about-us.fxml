@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="766.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.Authentication">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="766.0" style="-fx-background-color: #ffffff;" stylesheets="@register.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="se.hkr.app.Authentication">
    <children>
       <Pane layoutX="-5.0" prefHeight="77.0" prefWidth="774.0" style="-fx-background-color: #32328E;">
          <children>
@@ -19,7 +19,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Button fx:id="backBtn" layoutX="629.0" layoutY="408.0" mnemonicParsing="false" onAction="#switchToWelcome" prefHeight="35.0" prefWidth="99.0" style="-fx-background-color: #32328E; -fx-background-radius: 0;" text="Back" textFill="WHITE">
+      <Button fx:id="backBtn" layoutX="629.0" layoutY="408.0" mnemonicParsing="false" onAction="#switchToWelcome" prefHeight="35.0" prefWidth="99.0" styleClass="btns" text="Back" textFill="WHITE">
          <font>
             <Font name="Lucida Grande" size="14.0" />
          </font>

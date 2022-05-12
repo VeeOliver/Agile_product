@@ -178,7 +178,7 @@ public class MenuController {
 
     private void buildPieChart() throws SQLException, IOException {
         // Create Chart
-        XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.XChart).width(766).height(516).title("Day Scale")
+        XYChart chart = new XYChartBuilder().theme(Styler.ChartTheme.Matlab).width(766).height(516).title("Day Scale")
                 .build();
         // Colors
         Color DarkBlue = new Color(50, 168, 140, 171);
@@ -219,7 +219,7 @@ public class MenuController {
         try (FileInputStream stream = new FileInputStream(imageURL)) {
             Chart.setImage(new Image(stream));
        }
-    }
+    } 
 
     // Journal history tab
     public void onDisplayJournalButtonBtnClick(ActionEvent event) throws SQLException{
