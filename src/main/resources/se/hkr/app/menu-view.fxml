@@ -102,8 +102,6 @@
                                     <Image url="@imgs/chart.png" />
                                 </image>
                             </ImageView>
-                            
-                            <AnchorPane fx:id="chartArea" />
                         </children>
                         </AnchorPane>
                     </content>
