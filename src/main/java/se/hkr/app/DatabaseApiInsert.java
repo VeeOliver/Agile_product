@@ -6,10 +6,20 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
-public class DatabaseApiInsert {
 
-    public static void createUserEntry(Connection con, String personnummer,
-            String name, String email, String password) throws SQLException {
+public abstract class DatabaseApiInsert {
+    /**
+     * Insert user entry into database.
+     * @param con
+     * @param personnummer
+     * @param name
+     * @param email
+     * @param password
+     * @throws SQLException
+     */
+    public static void createUserEntry(final Connection con,
+            final String personnummer, final String name,
+            final String email, final String password) throws SQLException {
         String newUserSql = """
                 INSERT INTO User
                 VALUES (
@@ -27,8 +37,17 @@ public class DatabaseApiInsert {
         stmt.executeUpdate();
     }
 
-    public static void createMoodEntry(Connection con, int rating,
-            LocalDateTime dateTime, String personnummer) throws SQLException {
+    /**
+     * Insert mood entry into database.
+     * @param con
+     * @param rating
+     * @param dateTime
+     * @param personnummer
+     * @throws SQLException
+     */
+    public static void createMoodEntry(final Connection con,
+            final int rating, final LocalDateTime dateTime,
+            final String personnummer) throws SQLException {
         String newMoodSql = """
                 INSERT INTO Mood (
                     rating,
@@ -48,8 +67,17 @@ public class DatabaseApiInsert {
         stmt.executeUpdate();
     }
 
-    public static void createTensionEntry(Connection con, int rating,
-            LocalDateTime dateTime, String personnummer) throws SQLException {
+    /**
+     * Insert tension entry into database.
+     * @param con
+     * @param rating
+     * @param dateTime
+     * @param personnummer
+     * @throws SQLException
+     */
+    public static void createTensionEntry(final Connection con,
+            final int rating, final LocalDateTime dateTime,
+            final String personnummer) throws SQLException {
         String newTensionSql = """
                 INSERT INTO Tension (
                     rating,
@@ -69,8 +97,17 @@ public class DatabaseApiInsert {
         stmt.executeUpdate();
     }
 
-    public static void createJournalEntry(Connection con, String text,
-            LocalDateTime dateTime, String personnummer) throws SQLException {
+    /**
+     * Insert journal entry into database.
+     * @param con
+     * @param text
+     * @param dateTime
+     * @param personnummer
+     * @throws SQLException
+     */
+    public static void createJournalEntry(final Connection con,
+            final String text, final LocalDateTime dateTime,
+            final String personnummer) throws SQLException {
         String newJournalEntrySql = """
                 INSERT INTO Journal_entry (
                     journal_entry,

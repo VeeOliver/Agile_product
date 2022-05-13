@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class DataInsertIT {
     @BeforeEach
-    public void init() {
+    public void init() throws SQLException {
         DatabaseConnection.getInstance("127.0.0.1:5000");
         DatabaseConnection.getInstance().disconnect();
         User.getInstance("111111-1111", "Test User 1", "test1@myrmidon.com");

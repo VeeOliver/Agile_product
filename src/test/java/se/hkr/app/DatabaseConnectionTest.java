@@ -23,7 +23,7 @@ class DatabaseConnectionTest {
     
     @BeforeEach
     public void init() {
-        DatabaseConnection.instance = null;
+        DatabaseConnection.resetInstance();;
     }
 
     @Test
@@ -78,7 +78,7 @@ class DatabaseConnectionTest {
 
     @Test
     @DisplayName("Test if connect() returns existing connection.")
-    void testConnectWithExistingConnection() {
+    void testConnectWithExistingConnection() throws SQLException {
         var instance = DatabaseConnection.getInstance();
         instance.setCon(con);
         var actual = instance.connect();
@@ -99,18 +99,6 @@ class DatabaseConnectionTest {
     }
 
     @Test
-    @DisplayName("Test if connect returns null when an exception is thrown.")
-    void testConnectThrowsExceptionReturnNull() {
-        var instance = DatabaseConnection.getInstance();
-        try (MockedStatic<DriverManager> dm = Mockito.mockStatic(DriverManager.class)) {
-            dm.when(() -> DriverManager.getConnection(anyString()))
-            .thenThrow(SQLException.class);
-            var actual = instance.connect();
-            assertNull(actual);
-        }
-    }
-
-    @Test
     @DisplayName("Test if disconnect() closes existing connection and resets instance connection.")
     void testDisconnectWithConnectionClosesAndResetsConnection() throws SQLException {
         var instance = DatabaseConnection.getInstance();
@@ -123,7 +111,7 @@ class DatabaseConnectionTest {
 
     @Test
     @DisplayName("Test if diconnect does nothing when connection is null.")
-    void testDisconnectWithoutConnectionDoesNothing() {
+    void testDisconnectWithoutConnectionDoesNothing() throws SQLException {
         var instance = DatabaseConnection.getInstance();
         instance.setCon(con);
         instance.setCon(null);

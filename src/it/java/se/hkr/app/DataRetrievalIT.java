@@ -15,7 +15,7 @@ import se.hkr.app.DatabaseApiSelect.RetrieveMode;
 
 public class DataRetrievalIT {
     @BeforeEach
-    public void init() {
+    public void init() throws SQLException {
         DatabaseConnection.getInstance("127.0.0.1:5000");
         DatabaseConnection.getInstance().disconnect();
         User.resetInstance();
@@ -105,43 +105,6 @@ public class DataRetrievalIT {
         assertEquals(null, dbCon.getCon());
         assertInstanceOf(ArrayList.class, res);
         assertEquals(0, res.size());
-    }
-
-    @Test
-    public void testUser1JournalEntriesMoodRating6to9ForGetJournalEntriesByMoodRangeReturnsCorrectData() throws SQLException {
-        DatabaseConnection dbCon = DatabaseConnection.getInstance();
-        Connection con = dbCon.connect();
-        String personnummer = "111111-1111";
-        int moodLower = 6;
-        int moodUpper = 9;
-        var res = DatabaseApiSelect.getJournalEntriesByMoodRange(con, moodLower, moodUpper, personnummer);
-        dbCon.disconnect();
-
-        assertEquals(null, dbCon.getCon());
-        assertEquals(5, res.size());
-
-        JournalEntry entry1 = (JournalEntry) res.get(0);
-        JournalEntry entry2 = (JournalEntry) res.get(1);
-        JournalEntry entry3 = (JournalEntry) res.get(2);
-        JournalEntry entry4 = (JournalEntry) res.get(3);
-        JournalEntry entry5 = (JournalEntry) res.get(4);
-
-        assertInstanceOf(JournalEntry.class, entry1);
-        assertEquals(LocalDate.parse("2022-03-01"), entry1.getDate());
-        assertEquals("User 1 on 2022-03-01 Afternoon", entry1.getEntry());
-        assertEquals("3-Afternoon", entry1.getDaytime());
-        assertEquals(LocalDate.parse("2022-03-05"), entry2.getDate());
-        assertEquals("User 1 on 2022-03-05 Noon", entry2.getEntry());
-        assertEquals("2-Noon", entry2.getDaytime());
-        assertEquals(LocalDate.parse("2022-03-05"), entry3.getDate());
-        assertEquals("User 1 on 2022-03-05 Evening", entry3.getEntry());
-        assertEquals("4-Evening", entry3.getDaytime());
-        assertEquals(LocalDate.parse("2022-03-08"), entry4.getDate());
-        assertEquals("User 1 on 2022-03-08 Noon", entry4.getEntry());
-        assertEquals("2-Noon", entry4.getDaytime());
-        assertEquals(LocalDate.parse("2022-03-08"), entry5.getDate());
-        assertEquals("User 1 on 2022-03-08 Afternoon", entry5.getEntry());
-        assertEquals("3-Afternoon", entry5.getDaytime());
     }
 
     // Tests for journal entry retrieval

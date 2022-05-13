@@ -1,5 +1,6 @@
 package se.hkr.app;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,78 +12,127 @@ import javafx.scene.input.KeyEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
 public class RegisterController {
-
+    /**
+     * Personnummer text field.
+     */
     @FXML
-    TextField registerPersonnummer;
+    private TextField registerPersonnummer;
 
+    /**
+     * Name text field.
+     */
     @FXML
-    TextField registerName;
+    private TextField registerName;
 
+    /**
+     * Email text field.
+     */
     @FXML
-    TextField registerEmailField;
+    private TextField registerEmailField;
 
+    /**
+     * Password text field.
+     */
     @FXML
-    PasswordField registerPasswordField;
+    private PasswordField registerPasswordField;
 
+    /**
+     * Password repetition text field.
+     */
     @FXML
-    PasswordField registerRepPasswordField;
+    private PasswordField registerRepPasswordField;
 
+    /**
+     * Register button.
+     */
     @FXML
-    Button registerBtn;
+    private Button registerBtn;
 
-    Authentication auth = new Authentication();
+    /**
+     * Authentication object to access methods.
+     */
+    private Authentication auth = new Authentication();
 
-    // Register Button
-    public void onRegisterBtnClick(ActionEvent event) throws IOException, SQLException {
-        Boolean[] availability = auth.checkAvailability(registerPersonnummer.getText(), registerEmailField.getText());
-        Boolean formatError = auth.checkFormatError(registerPersonnummer.getText(), registerName.getText(),
-                registerEmailField.getText(), registerPasswordField.getText(), registerRepPasswordField.getText());
+    /**
+     * Check input and register new User in database if valid.
+     * @param event
+     * @throws IOException
+     * @throws SQLException
+     */
+    public void onRegisterBtnClick(final ActionEvent event)
+            throws IOException, SQLException {
+        Boolean[] availability =
+            auth.checkAvailability(registerPersonnummer.getText(),
+            registerEmailField.getText());
+        Boolean formatError =
+            auth.checkFormatError(registerPersonnummer.getText(),
+            registerName.getText(),
+            registerEmailField.getText(), registerPasswordField.getText(),
+            registerRepPasswordField.getText());
         Boolean isAvailable = availability[0] && availability[1];
 
         // Check format errors
         if (formatError) {
-            Authentication.showFormatError(registerPersonnummer.getText(), registerName.getText(), registerEmailField.getText(),
-                    registerPasswordField.getText(), registerRepPasswordField.getText());
+            Authentication.showFormatError(registerPersonnummer.getText(),
+            registerName.getText(), registerEmailField.getText(),
+            registerPasswordField.getText(),
+            registerRepPasswordField.getText());
         } else {
             // Check availability
             if (isAvailable) {
-                auth.registerUser(registerPersonnummer.getText(), registerName.getText(), registerEmailField.getText(), registerPasswordField.getText());
+                auth.registerUser(registerPersonnummer.getText(),
+                    registerName.getText(), registerEmailField.getText(),
+                    registerPasswordField.getText());
                 Authentication.successRegistration();
                 auth.switchToWelcome(event);
             } else {
                 Authentication.registerError();
             }
-            auth.resetRegField(registerPersonnummer, registerName, registerEmailField, registerPasswordField,
-                    registerRepPasswordField);
+            auth.resetRegField(registerPersonnummer, registerName,
+                registerEmailField, registerPasswordField,
+                registerRepPasswordField);
         }
     }
 
-    // Back Button
-    public void onBackBtnClick(ActionEvent event) throws IOException {
+    /**
+     * Change to Welcome screen when back button is clicked.
+     * @param event
+     * @throws IOException
+     */
+    public void onBackBtnClick(final ActionEvent event) throws IOException {
         auth.switchToWelcome(event);
     }
 
-    // change field with tab
-    public void onTabKeySwitchField(KeyEvent e) throws IOException {
+    /**
+     * Enable switching fields with tab key.
+     * @param e
+     * @throws IOException
+     */
+    public void onTabKeySwitchField(final KeyEvent e) throws IOException {
         TextField t = (TextField) e.getSource();
         boolean correctKey = (e.getCode() == KeyCode.TAB);
         if (correctKey) {
             switch (t.getId()) {
                 case "registerPersonnummer" -> registerName.requestFocus();
                 case "registerName" -> registerEmailField.requestFocus();
-                case "registerEmailField" -> registerPasswordField.requestFocus();
-                case "registerPasswordField" -> registerRepPasswordField.requestFocus();
+                case "registerEmailField" -> registerPasswordField
+                    .requestFocus();
+                case "registerPasswordField" -> registerRepPasswordField
+                    .requestFocus();
+                default -> registerPersonnummer.requestFocus();
             }
         }
     }
 
-    // Register with Enter key
-    public void onEnterRegister(KeyEvent e){
-        if (e.getCode() == KeyCode.ENTER){
+    /**
+     * Enable enter key in Register screen.
+     * @param e
+     */
+    public void onEnterRegister(final KeyEvent e) {
+        if (e.getCode() == KeyCode.ENTER) {
             registerBtn.fire();
         }
     }
-
 }
-

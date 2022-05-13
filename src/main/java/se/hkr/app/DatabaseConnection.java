@@ -1,25 +1,56 @@
 package se.hkr.app;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DatabaseConnection {
-    private final String userName = "myrmidon_admin";
-    private final String password = "myr_ADM123";
-    private final String databaseName = "myrmidon";
-    private String host;
-    private Connection con;
-    public static DatabaseConnection instance;
 
+public final class DatabaseConnection {
+    /**
+     * String: Username for database access.
+     */
+    private final String userName = "myrmidon_admin";
+    /**
+     * String: Password for database access.
+     */
+    private final String password = "myr_ADM123";
+    /**
+     * String: Database name for database access.
+     */
+    private final String databaseName = "myrmidon";
+    /**
+     * String: Hostname for database access.
+     */
+    private String host;
+    /**
+     * Connection: Singleton instance for connection to database.
+     */
+    private Connection con;
+    /**
+     * DatabaseConnection: Singleton class instance.
+     */
+    private static DatabaseConnection instance;
+
+    /**
+     * Instance contructor with default host.
+     */
     private DatabaseConnection() {
         this.host = "project-myrmidon.duckdns.org";
     }
 
-    private DatabaseConnection(String host) {
-        this.host = host;
+    /**
+     * Instance contructor with custom host.
+     * @param customHost
+     */
+    private DatabaseConnection(final String customHost) {
+        this.host = customHost;
     }
 
+    /**
+     * Instantiate singleton instance with default host if necessary.
+     * @return Singleton instance with default host
+     */
     public static DatabaseConnection getInstance() {
         if (instance == null) {
             instance = new DatabaseConnection();
@@ -27,57 +58,77 @@ public class DatabaseConnection {
         return instance;
     }
 
-    public static DatabaseConnection getInstance(String host) {
+    /**
+     * Instantiate singleton instance with custom host if necessary.
+     * @param host
+     * @return Singleton instance with custom host
+     */
+    public static DatabaseConnection getInstance(final String host) {
         if (instance == null) {
             instance = new DatabaseConnection(host);
         }
         return instance;
     }
 
-    public Connection connect() {
-        DatabaseConnection instance = getInstance();
+    /**
+     * Connect to remote database with default settings.
+     * @return Connection to remote database
+     * @throws SQLException
+     */
+    public Connection connect() throws SQLException {
+        getInstance();
         if (instance.getCon() == null) {
-            try {
-                instance.setCon(DriverManager.getConnection(instance.getDsn()));
-            } catch (SQLException e) {
-                System.out.println("An error occurred when connecting to the database.");
-                return null;
-            }
+            instance.setCon(DriverManager.getConnection(instance.getDsn()));
         }
         return instance.getCon();
     }
 
-    public void disconnect() {
-        DatabaseConnection instance = getInstance();
+    /**
+     * Close database connection and reset filed con to null.
+     * @throws SQLException
+     */
+    public void disconnect() throws SQLException {
+        getInstance();
         if (instance.getCon() != null) {
-            try {
-                getInstance().con.close();               
-                getInstance().setCon(null);
-            } catch (SQLException e) {
-                System.out.println("An error occurred when disconnecting from the database");
-            }
+            getInstance().con.close();
+            getInstance().setCon(null);
         }
     }
 
+    /**
+     * Getter for field con.
+     * @return Connection con
+     */
     public Connection getCon() {
         return getInstance().con;
     }
 
-    public void setCon(Connection con) {
-        this.con = con;
+    /**
+     * Setter for field con.
+     * @param newCon
+     */
+    public void setCon(final Connection newCon) {
+        this.con = newCon;
     }
 
+    /**
+     * Create a dsn from connection details.
+     * @return String: Dsn for database connection
+     */
     public String getDsn() {
-        DatabaseConnection instance = getInstance();
-        String dsn = "jdbc:mariadb://" +
-            instance.host +
-            "/" +
-            instance.databaseName +
-            "?user=" + instance.userName +
-            "&password=" + instance.password;
+        DatabaseConnection.getInstance();
+        String dsn = "jdbc:mariadb://"
+            + instance.host
+            + "/"
+            + instance.databaseName
+            + "?user=" + instance.userName
+            + "&password=" + instance.password;
         return dsn;
     }
 
+    /**
+     * Reset the singleton class instance.
+     */
     public static void resetInstance() {
         DatabaseConnection.instance = null;
     }

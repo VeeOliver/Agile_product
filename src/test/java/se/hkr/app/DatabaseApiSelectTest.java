@@ -46,15 +46,6 @@ class DatabaseApiSelectTest {
     }
 
     @Test
-    @DisplayName("Test if parseToDataList returns null in case of a SQLException.")
-    void parseToDataListClosedResultSet() throws SQLException {
-        when(rs.next()).thenThrow(SQLException.class);
-        rs.close();
-        var res = DatabaseApiSelect.parseToDataList(rs);
-        assertNull(res);
-    }
-
-    @Test
     @DisplayName("Test if parseToDataList returns an ArrayList with two correct Journal entries.")
     void parseToDataListReturnsJournalEntryList() throws SQLException {
         LocalDate date1 = LocalDate.of(2022, 01, 01);
