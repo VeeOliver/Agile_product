@@ -61,8 +61,8 @@ public class AuthenticationTest {
     @Test
     @DisplayName("Test the checkLoginCredential method. With correct input")
     public void testCheckLoginCredentials() throws SQLException {
-        String email = "enzotiberghien28@gmail.com";
-        String password = "alabama";
+        String email = "test1@myrmidon.com";
+        String password = "11111";
         Boolean res = auth.checkLoginCredentials(email, password);
         assertTrue(res);
         assertNotNull(User.getInstance());
@@ -83,7 +83,7 @@ public class AuthenticationTest {
     @Test
     @DisplayName("Test the checkAvailability method, not available")
     public void testCheckAvailabilityNo() throws SQLException {
-        Boolean[] req = auth.checkAvailability("280201-4999", "enzotiberghien28@gmail.com");
+        Boolean[] req = auth.checkAvailability("111111-1111", "test1@myrmidon.com");
         Boolean res = Arrays.asList(req).contains(false);
         assertTrue(res);
         assertNotNull(DatabaseConnection.getInstance());
