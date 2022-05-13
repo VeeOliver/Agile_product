@@ -15,7 +15,7 @@ public class AuthenticationIT {
     private Authentication auth = new Authentication();
     
     @BeforeEach
-    public void init() {
+    public void init() throws SQLException {
         DatabaseConnection.getInstance("127.0.0.1:5000");
         DatabaseConnection.getInstance().disconnect();
         User.resetInstance();
@@ -104,7 +104,7 @@ public class AuthenticationIT {
                 SELECT *
                 FROM User
                 ORDER BY personnummer DESC
-                LIMIT 1;
+                LIMIT 2;
                 """;
         PreparedStatement stmt = DatabaseConnection.getInstance().connect().prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();

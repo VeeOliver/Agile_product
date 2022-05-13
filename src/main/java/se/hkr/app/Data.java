@@ -9,46 +9,92 @@ import java.time.LocalDateTime;
 
 
 public class Data {
-
+    /**
+     * LocalDate: Date when data was entered to database.
+     */
     private LocalDate date;
+
+    /**
+     * String: Daytime when entry was made in database.
+     */
     private String daytime;
 
-    public Data(LocalDate date, String daytime) {
-        this.date = date;
-        this.daytime = daytime;
+    /**
+     * Create a data object with date and daytime.
+     * @param newDate
+     * @param newDaytime
+     */
+    public Data(final LocalDate newDate, final String newDaytime) {
+        this.date = newDate;
+        this.daytime = newDaytime;
     }
 
+    /**
+     * Getter for field date.
+     * @return LocalDate: Date when data was entered to database
+     */
     public LocalDate getDate() {
         return this.date;
     }
 
+    /**
+     * Getter for field daytime.
+     * @return String: Daytime when entry was made in database
+     */
     public String getDaytime() {
         return this.daytime;
     }
 
+    /**
+     * Enter a mood entry to the remote database.
+     * @param moodRating
+     * @param user
+     * @throws SQLException
+     */
     // connects GUI value for Mood to the Database
-    public static void insertMood(double moodRating, User user) throws SQLException {
+    public static void insertMood(final double moodRating,
+            final User user) throws SQLException {
         int moodNum = (int) moodRating;
         String userId = user.getPersonnummer();
-        DatabaseApiInsert.createMoodEntry(DatabaseConnection.getInstance().connect(), moodNum, LocalDateTime.now(), userId);
+        DatabaseApiInsert.createMoodEntry(DatabaseConnection.getInstance()
+            .connect(), moodNum, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
     }
 
+    /**
+     * Enter a tension entry to the remote database.
+     * @param tensionRating
+     * @param user
+     * @throws SQLException
+     */
     // connects GUI value for Tension to the Database
-    public static void insertTension(double tensionRating, User user) throws SQLException {
+    public static void insertTension(final double tensionRating,
+            final User user) throws SQLException {
         int tensionNum = (int) tensionRating;
         String userId = user.getPersonnummer();
-        DatabaseApiInsert.createTensionEntry(DatabaseConnection.getInstance().connect(), tensionNum, LocalDateTime.now(), userId);
+        DatabaseApiInsert.createTensionEntry(DatabaseConnection.getInstance()
+            .connect(), tensionNum, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
     }
 
+    /**
+     * Enter a journal entry to the remote database.
+     * @param journalText
+     * @param user
+     * @throws SQLException
+     */
     // connects GUI Journal Entry to the Database
-    public static void insertJournal(String journalText, User user) throws SQLException {
+    public static void insertJournal(final String journalText,
+            final User user) throws SQLException {
         String userId = user.getPersonnummer();
-        DatabaseApiInsert.createJournalEntry(DatabaseConnection.getInstance().connect(), journalText, LocalDateTime.now(), userId);
+        DatabaseApiInsert.createJournalEntry(DatabaseConnection.getInstance()
+            .connect(), journalText, LocalDateTime.now(), userId);
         DatabaseConnection.getInstance().disconnect();
     }
 
+    /**
+     * Display message after successfull mood and tension entry submission.
+     */
     // Sends a pop-up message for submission of Mood and Tension
     public static void submissionCompleteNote() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -59,6 +105,9 @@ public class Data {
 
     }
 
+    /**
+     * Display message after successfull journal entry submission.
+     */
     // Sends a pop-up message for submission of Journal Entry
     public static void journalSubmittedNote() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
