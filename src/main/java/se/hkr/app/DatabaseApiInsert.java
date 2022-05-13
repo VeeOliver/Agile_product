@@ -66,7 +66,6 @@ public class DatabaseApiInsert {
         stmt.setInt(1, rating);
         stmt.setString(2, dateTime.toString());
         stmt.setString(3, personnummer);
-        System.out.println(personnummer);
         stmt.executeUpdate();
     }
 
