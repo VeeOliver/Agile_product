@@ -1,5 +1,168 @@
 USE myrmidon;
 
+-- Create test user
+INSERT INTO User
+VALUES (
+    'Blank' , -- Personnummer
+    'Test User blank' , -- Name
+    '' , -- Email
+    SHA1( '' ) -- Password in hashed form
+);
+
+INSERT INTO Mood (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    5 , -- Rating
+    '2022-05-06 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Tension (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    7 , -- Rating
+    '2022-05-06 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Mood (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    3 , -- Rating
+    '2022-05-07 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Tension (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    8 , -- Rating
+    '2022-05-07 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Mood (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    6 , -- Rating
+    '2022-05-07 16:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Tension (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    3 , -- Rating
+    '2022-05-07 16:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Mood (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    7 , -- Rating
+    '2022-05-08 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Tension (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    7 , -- Rating
+    '2022-05-08 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Mood (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    3 , -- Rating
+    '2022-05-09 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Tension (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    4 , -- Rating
+    '2022-05-09 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Mood (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    7 , -- Rating
+    '2022-05-10 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Tension (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    3 , -- Rating
+    '2022-05-10 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Mood (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    5 , -- Rating
+    '2022-05-11 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
+INSERT INTO Tension (
+    rating,
+    date,
+    personnummer
+)
+VALUES (
+    7 , -- Rating
+    '2022-05-11 06:00:00' , -- Date and time at insertion
+    'Blank' -- Personnummer of current user
+);
+
 -- Create sample user 1
 INSERT INTO User
 VALUES (

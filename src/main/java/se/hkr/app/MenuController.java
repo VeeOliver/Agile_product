@@ -189,6 +189,8 @@ public class MenuController {
         chart.getStyler().setToolTipsEnabled(false);
         Color[] colorsSeries = new Color[] { DarkBlue, purple, lightGreen, Color.CYAN };
         chart.getStyler().setSeriesColors(colorsSeries);
+        chart.getStyler().setYAxisMax(10.0);
+        chart.getStyler().setYAxisMin(0.0);
 
         // Series
         Connection con = DatabaseConnection.getInstance().connect();
