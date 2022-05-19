@@ -15,12 +15,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 
 public class WelcomeController {
@@ -143,14 +143,18 @@ public class WelcomeController {
     public void showFactOfTheDay(final ActionEvent event)
             throws IOException, FileNotFoundException {
         File file = new File("facts.txt");
-        final RandomAccessFile f = new RandomAccessFile(file, "r");
-        final long randomLocation = (long) (Math.random() * (f.length() - 1));
-        f.seek(randomLocation);
-        f.readLine();
-        String randomLine = f.readLine();
-        f.close();
-        String fact = randomLine;
-        factOfTheDay.setText(fact);
+        FileReader reader= new FileReader(file);
+        BufferedReader r = new BufferedReader(reader);
+        List<String> allFacts = new ArrayList<>();
+        while (r.readLine() != null) {
+            String fact = r.readLine();
+            allFacts.add(fact);
+        }
+        r.close();
+        Random random = new Random();
+        int listIndex = random.nextInt(allFacts.size());
+        String randomFact = allFacts.get(listIndex);
+        factOfTheDay.setText(randomFact);
     }
 
     /**
