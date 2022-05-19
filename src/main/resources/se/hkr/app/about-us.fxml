@@ -29,7 +29,7 @@
             <Font name="Lucida Grande" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="126.0" prefHeight="97.0" prefWidth="479.0" text="Looking to better understand your personal moods and habits? Wondering where all your tension is coming from? Myrmidon can help! Designed to help track your mood and tension levels throughout the day, week, month or even year, Myrmidon can help you visualize just how your mood changes over a period of time. Myrmidon also provides a space to write down your thoughts to give a bit more context to how you're feeling at that moment. " wrapText="true">
+      <Label layoutX="30.0" layoutY="126.0" prefHeight="119.0" prefWidth="479.0" text="Looking to better understand your personal moods and habits? Wondering where all your tension is coming from? Myrmidon can help! Designed to help track your mood and tension levels throughout the day, week, month or even year, Myrmidon can help you visualize just how your mood changes over a period of time. Myrmidon also provides a space to write down your thoughts to give a bit more context to how you're feeling at that moment. " wrapText="true">
          <font>
             <Font name="Lucida Grande" size="13.0" />
          </font>

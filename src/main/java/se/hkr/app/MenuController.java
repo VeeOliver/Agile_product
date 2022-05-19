@@ -395,7 +395,7 @@ public class MenuController {
 
             // Create and customize Chart
             CategoryChart chart = new CategoryChartBuilder()
-                .theme(Styler.ChartTheme.XChart).width(766)
+                .theme(Styler.ChartTheme.Matlab).width(766)
                 .height(516).title("Mood and tension over the day").build();
 
             Color darkBlue = new Color(50, 168, 140, 171);
