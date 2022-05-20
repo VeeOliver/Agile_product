@@ -146,9 +146,15 @@ public class WelcomeController {
         FileReader reader= new FileReader(file);
         BufferedReader r = new BufferedReader(reader);
         List<String> allFacts = new ArrayList<>();
-        while (r.readLine() != null) {
+        boolean keepReading = true;
+        while (keepReading) {
             String fact = r.readLine();
-            allFacts.add(fact);
+            if (fact == null) {
+                keepReading = false;
+            }
+            else {
+                allFacts.add(fact);
+            }
         }
         r.close();
         Random random = new Random();
